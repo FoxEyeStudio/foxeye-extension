@@ -6,7 +6,8 @@ module.exports = {
   entry: {
     popup: './src/index.js',
     content: './src/content/index.js',
-    background: './src/background/index.js'
+    background: './src/background/index.js',
+    foxeyeProxy: './src/proxy/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

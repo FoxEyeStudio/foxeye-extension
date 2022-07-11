@@ -21,7 +21,10 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["/images/logo.png"],
+      "resources": [
+        "/images/logo.png",
+        "foxeyeProxy.js"
+      ],
       "matches": ["<all_urls>"]
     }],
   "action": {
