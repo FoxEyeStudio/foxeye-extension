@@ -1,46 +1,45 @@
 {
-  "name": "Foxeye",
-  "description": "Foxeye Des",
-  "version": "1.0",
-  "manifest_version": 3,
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "run_at": "document_start",
-      "js": ["content.js"]
-    }
-  ],
-  "permissions": [
-    "storage",
-    "declarativeContent"
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "/images/logo.png",
-        "foxeyeProxy.js"
-      ],
-      "matches": ["<all_urls>"]
-    }],
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "/images/logo.png",
-      "32": "/images/logo.png",
-      "48": "/images/logo.png",
-      "128": "/images/logo.png"
+    "name": "Foxeye",
+    "description": "Foxeye Des",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
     },
-    "default_title": "React CRX MV3"
-  },
-  "icons": {
-    "16": "/images/logo.png",
-    "32": "/images/logo.png",
-    "48": "/images/logo.png",
-    "128": "/images/logo.png"
-  }
+    "content_scripts": [
+        {
+            "matches": [
+              "<all_urls>"
+            ],
+            "run_at": "document_start",
+            "js": ["content.js"]
+        }
+    ],
+    "permissions": [
+        "storage",
+        "declarativeContent"
+    ],
+    "web_accessible_resources": [{
+        "resources": [
+            "images/*",
+            "foxeyeProxy.js"
+        ],
+        "matches": ["<all_urls>"]
+    }],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "/icons/logo.png",
+            "32": "/icons/logo.png",
+            "48": "/icons/logo.png",
+            "128": "/icons/logo.png"
+        },
+        "default_title": "Foxeye"
+    },
+    "icons": {
+        "16": "/icons/logo.png",
+        "32": "/icons/logo.png",
+        "48": "/icons/logo.png",
+        "128": "/icons/logo.png"
+    }
 }
