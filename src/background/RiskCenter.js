@@ -35,31 +35,28 @@ class RiskCenter {
     * */
     async parseTransaction(chain_id, transaction) {
         console.log(tag, chain_id, transaction);
-        const { method } = transaction;
-        if (method == 'eth_sendTransaction') {
-            try {
-                const { data, to, from } = transaction.params[0];
-                const options = {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        chain_id, data, to, from
-                    }),
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'Connection': 'keep-alive'
-                    },
-                };
-                const url = `${api_host}parse_tx`;
-                let result = await fetch(url, options).then(ret => ret.json()).catch(err => {
-                    return undefined;
-                });
-                if (result && result.status == '1') {
-                    return result.result;
-                }
-            } catch (e) {
-                console.log(tag, chain_id, transaction, e);
+        try {
+            const { data, to, from } = transaction;
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    chain_id, data, to, from
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Connection': 'keep-alive'
+                },
+            };
+            const url = `${api_host}parse_tx`;
+            let result = await fetch(url, options).then(ret => ret.json()).catch(err => {
+                return undefined;
+            });
+            if (result && result.status == '1') {
+                return result.result;
             }
+        } catch (e) {
+            console.log(tag, chain_id, transaction, e);
         }
         return {
             type: RiskType_Safe

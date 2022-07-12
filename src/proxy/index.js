@@ -13,8 +13,11 @@ class FoxeyeProxy {
         const proxyHandler = {
             async apply(target, thisArg, argArray) {
                 const transaction = [...argArray][0];
-                const result = await RiskCenter.get().parseTransaction(Number(window.ethereum.chainId).toString(), transaction);
-                console.log(tag, result);
+                const { method } = transaction;
+                if (method == 'eth_sendTransaction') {
+                    const result = await RiskCenter.get().parseTransaction(Number(window.ethereum.chainId).toString(), transaction.params[0]);
+                    console.log(tag, result);
+                }
                 return target(...argArray);
             }
         };
