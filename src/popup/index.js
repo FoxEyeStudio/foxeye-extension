@@ -5,8 +5,8 @@ import Home from './home'
 import Setting from './setting'
 import Detection from './detection'
 import titleLogo from "../../public/images/title_logo.png";
-import doubtIcon from "../../public/images/ic_doubt.png";
-import doubtHoverIcon from "../../public/images/ic_doubt_hover.png";
+import aboutIcon from "../../public/images/ic_about.png";
+import aboutHoverIcon from "../../public/images/ic_about_hover.png";
 import '../css/popup.css'
 import '../css/common.css'
 
@@ -15,7 +15,7 @@ function Popup() {
         <div className='popup-base'>
             <div className='title-wrap'>
                 <img src={titleLogo} className='title-logo' />
-                <div style={{ '--ic-doubt-normal': 'url(' + doubtIcon + ')', '--ic-doubt-hover': 'url(' + doubtHoverIcon + ')'}} className='title-doubt'/>
+                <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about'/>
             </div>
             <HashRouter>
                 <Routes>

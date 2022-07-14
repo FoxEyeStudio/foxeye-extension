@@ -1,7 +1,7 @@
 import React from "react";
-// import '../css/content.css'
 import ReactDOM from 'react-dom/client';
 import AlertView from './AlertView'
+import {postMessage} from "../proxy/ProxyMessage";
 
 class Content {
 	constructor() {
@@ -36,14 +36,26 @@ class Content {
 	}
 
 	initListener() {
+		const theThis = this;
 		const containerRoot = ReactDOM.createRoot(this.container)
-		chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-			if (request.action === 'clickContent') {
-				this.showContainer();
-				containerRoot.render(<AlertView />);
+
+		window.addEventListener('message', async (e) => { // 监听 message 事件
+			if (e.origin !== window.location.origin) { // 验证消息来源地址
+				return;
 			}
-			sendResponse({status: "true"})
-			return true;
+			if (typeof e.data.foxeye_extension_action === 'undefined') {
+				return;
+			}
+			if (e.data.foxeye_extension_action === 'foxeye_sendTransaction') {
+				chrome.runtime.sendMessage(e.data, function (res) {
+					const backMsg = {foxeye_extension_action: 'foxeye_parse_transaction', ...res};
+					postMessage(backMsg)
+					if (backMsg.type !== 0) {
+						theThis.showContainer();
+						containerRoot.render(<AlertView />);
+					}
+				});
+			}
 		});
 	}
 

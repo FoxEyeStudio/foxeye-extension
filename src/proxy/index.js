@@ -1,5 +1,5 @@
 import React from 'react';
-import RiskCenter from "../background/RiskCenter";
+import {listenMessage, postMessage} from "./ProxyMessage";
 
 const tag = 'FoxeyeProxy: ';
 
@@ -16,14 +16,18 @@ class FoxeyeProxy {
                 const { method } = transaction;
                 if (method == 'eth_sendTransaction') {
                     let args = { }; // set malicious_contract_off, token_safety_off, target_correctness_off = 1 to turn oooooooof
-                    const result = await RiskCenter.get().parseTransaction(Number(window.ethereum.chainId).toString(), transaction.params[0], args);
-                    console.log(tag, result);
+                    postMessage({foxeye_extension_action: 'foxeye_sendTransaction', chainId: Number(window.ethereum.chainId).toString(), params: transaction.params[0], args})
+                    const result = await listenMessage('foxeye_parse_transaction')
+                    if (result.type === 0) {
+                        return target(...argArray);
+                    } else {
+                        const result = await listenMessage('foxeye_alert_callback')
+                    }
                 }
                 return target(...argArray);
             }
         };
 
-        const proxyInterval = setInterval(insertProxy(), 1000);
         function insertProxy() {
             if (typeof window.ethereum !== 'undefined') {
                 const proxy = new Proxy(window.ethereum.request, proxyHandler);
@@ -33,6 +37,7 @@ class FoxeyeProxy {
                 console.log(tag, '@cyh: No Found window.ethereum');
             }
         }
+        const proxyInterval = setInterval(insertProxy(), 1000);
         setTimeout(() => { clearInterval(proxyInterval); }, 10000);
     }
 }

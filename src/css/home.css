@@ -78,6 +78,9 @@
     height: 18px;
     background-color: #06A130;
     border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 .security-text {
@@ -88,7 +91,6 @@
     white-space: nowrap;
     line-height: 12px;
     text-align: center;
-    margin: 3px 0 0 5px;
 }
 
 .line {

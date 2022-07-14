@@ -12,14 +12,14 @@ export const RiskType_SwapMediumRiskToken = 7; // buy token on uniswap-like dex
 // const api_host = 'http://localhost:6699/v1/';
 const api_host = 'https://api.foxeye.io/v1/';
 const tag = 'RiskCenter: ';
-let instance = null;
+// let instance = null;
 class RiskCenter {
-    static get = () => {
-        if (!instance) {
-            instance = new RiskCenter();
-        }
-        return instance;
-    }
+    // static get = () => {
+    //     if (!instance) {
+    //         instance = new RiskCenter();
+    //     }
+    //     return instance;
+    // }
 
     /*
     * method: "eth_sendTransaction"
@@ -66,5 +66,5 @@ class RiskCenter {
     }
 }
 
-
-export default RiskCenter;
+const riskCenter = new RiskCenter();
+export default riskCenter;

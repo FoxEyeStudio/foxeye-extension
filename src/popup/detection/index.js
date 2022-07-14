@@ -62,6 +62,7 @@ function Detection() {
                         <div className="search-img" style={{ '--ic-search-normal': 'url(' + searchIcon + ')', '--ic-search-hover': 'url(' + searchHoverIcon + ')'}} onClick={handleSubmit}></div>
                     </div>
                 </div>
+                <iframe src="https://gopluslabs.io/token-security/56/0x27B880865395DA6cdA9C407E5eDFCc32184CF429" style={{width:600, height:600, overflowX: 'hidden', overflowY: 'auto'}}></iframe>
                 <div className='security-no-info-wrap flex-col align-center'>
                     <img src={detectionImg} className='search-no-info-img'/>
                     <div className="search-no-info-text">Full&nbsp;security&nbsp;report&nbsp;for&nbsp;any&nbsp;token</div>

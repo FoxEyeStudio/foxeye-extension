@@ -22,16 +22,16 @@ body {
     margin-left: 16px
 }
 
-.title-doubt {
+.title-about {
     width: 22px;
     height: 22px;
     margin-right: 16px;
-    background-image: var(--ic-doubt-normal);
+    background-image: var(--ic-about-normal);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
 }
 
-.title-doubt:hover {
-    background-image: var(--ic-doubt-hover);
+.title-about:hover {
+    background-image: var(--ic-about-hover);
 }
