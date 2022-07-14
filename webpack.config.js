@@ -52,10 +52,9 @@ module.exports = {
             patterns: [
                 { from: "public/manifest.json" },
                 { from: "public/images", to: 'images', force: true},
-                { from: "public/icons", to: 'icons', force: true}
+                { from: "public/icons", to: 'icons', force: true},
+                { from: "src/css/content.css", to: 'css/foxeye-chrome-extension-content.css', force: true}
             ],
         })
     ],
 };
-
-//1: babel is a tool that transform jsx into js code that webapck can understand.

@@ -22,12 +22,12 @@ function Popup() {
                     <Route exact path="/home" element={<Home />} />
                     <Route exact path="/setting" element={<Setting />} />
                     <Route exact path="/detection" element={<Detection />} />
-                    <Route path="*" element={<Navigate to="/detection" />} />
+                    <Route path="*" element={<Navigate to="/home" />} />
                 </Routes>
             </HashRouter>
         </div>
     )
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Popup />);
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(<Popup />)

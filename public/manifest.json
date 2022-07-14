@@ -22,7 +22,8 @@
     "web_accessible_resources": [{
         "resources": [
             "images/*",
-            "foxeyeProxy.js"
+            "foxeyeProxy.js",
+            "css/*"
         ],
         "matches": ["<all_urls>"]
     }],
