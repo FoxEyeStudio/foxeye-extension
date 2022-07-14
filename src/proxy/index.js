@@ -15,7 +15,8 @@ class FoxeyeProxy {
                 const transaction = [...argArray][0];
                 const { method } = transaction;
                 if (method == 'eth_sendTransaction') {
-                    const result = await RiskCenter.get().parseTransaction(Number(window.ethereum.chainId).toString(), transaction.params[0]);
+                    let args = { }; // set malicious_contract_off, token_safety_off, target_correctness_off = 1 to turn oooooooof
+                    const result = await RiskCenter.get().parseTransaction(Number(window.ethereum.chainId).toString(), transaction.params[0], args);
                     console.log(tag, result);
                 }
                 return target(...argArray);

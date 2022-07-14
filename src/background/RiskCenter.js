@@ -33,14 +33,16 @@ class RiskCenter {
     * maxPriorityFeePerGas: "0x3B9ACA00"
     * to: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
     * */
-    async parseTransaction(chain_id, transaction) {
+    // malicious_contract_off, token_safety_off, target_correctness_off
+    async parseTransaction(chain_id, transaction, args) {
         console.log(tag, chain_id, transaction);
         try {
             const { data, to, from } = transaction;
+            const { malicious_contract_off, token_safety_off, target_correctness_off } = args;
             const options = {
                 method: 'POST',
                 body: JSON.stringify({
-                    chain_id, data, to, from
+                    chain_id, data, to, from, malicious_contract_off, token_safety_off, target_correctness_off
                 }),
                 headers: {
                     'Accept': 'application/json',
