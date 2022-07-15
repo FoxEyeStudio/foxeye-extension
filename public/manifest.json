@@ -18,7 +18,7 @@
     ],
     "permissions": [
         "storage",
-        "declarativeContent"
+        "tabs"
     ],
     "web_accessible_resources": [{
         "resources": [

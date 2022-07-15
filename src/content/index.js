@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom/client';
 import AlertView from './AlertView'
-import {postMessage} from "../proxy/ProxyMessage";
+import {listenMessage, postMessage} from "../proxy/ProxyMessage";
 
 class Content {
 	constructor() {
@@ -56,6 +56,18 @@ class Content {
 					}
 				});
 			}
+		});
+
+		chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
+			if (request.foxeye_extension_action === 'foxeye_wallet_request_account') {
+				postMessage({foxeye_extension_action: 'foxeye_wallet_request_account'});
+				const result = await listenMessage('foxeye_wallet_return_account')
+				chrome.runtime.sendMessage(result, null);
+				// console.log('===result = ', result);
+				// sendResponse(result);
+				// return true;
+			}
+			return true;
 		});
 	}
 

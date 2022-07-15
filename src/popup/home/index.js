@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import webFavicon from '../../../public/images/web_favicon.png'
 import settingIcon from '../../../public/images/ic_setting.png'
 import detectionIcon from '../../../public/images/ic_detection.png'
@@ -10,21 +10,49 @@ import {useNavigate} from "react-router-dom";
 
 function Home() {
     const navigate = useNavigate()
-    const [monitoring, setMonitoring] = useState(false);
+    const [account, setAccount] = useState();
+    const [domain, setDomain] = useState();
+
+    useEffect(() => {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+            chrome.tabs.sendMessage(tabs[0].id, {foxeye_extension_action: "foxeye_wallet_request_account"}, null);
+        });
+
+        chrome.runtime.onMessage.addListener(function getAccount(request) {
+            chrome.tabs.query({ currentWindow: true, active: true }, async function (tabs) {
+                if (request.foxeye_extension_action === 'foxeye_wallet_return_account') {
+                    const { account } = request;
+                    setAccount(account);
+                    chrome.runtime.onMessage.removeListener(getAccount);
+                }
+            })
+            return true;
+        });
+
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            const tab = tabs[0];
+            const url = new URL(tab.url);
+            const domain = url.hostname;
+            setDomain(domain);
+        })
+    }, []);
 
     const openSetting = () => {
         // navigate('/setting')
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-            chrome.tabs.sendMessage(tabs[0].id, {action: "clickContent"}, function(response) {});
+            chrome.tabs.sendMessage(tabs[0].id, {foxeye_extension_action: "foxeye_wallet_request_account"}, function(response) {
+
+            });
         });
     }
+
 
     return (
         <div className='flex-col'>
             <div className="account-wrap flex-col justify-center">
-                {monitoring ? (
+                {!!account ? (
                     <div className="flex-col justify-between align-center">
-                        <span className="address-text">0x4578…1231</span>
+                        <span className="address-text">{account.substring(0, 6) + '...' + account.substring(account.length-4)}</span>
                         <div className="monitor-bg flex-row justify-center align-center">
                             <img
                                 className="monitor-img"
@@ -47,8 +75,8 @@ function Home() {
                 <div className="flex-row align-center">
                     <img src={webFavicon} className='web-favicon'/>
                     <div className="web-host-info flex-col justify-between">
-                        <div className="host-text">etherscan.io</div>
-                        <div className="website-name">Malicious&nbsp;website</div>
+                        <div className="host-text">{domain}</div>
+                        <div className="website-name">No threat detected</div>
                     </div>
                 </div>
                 <div className="security_wrap flex-col">
