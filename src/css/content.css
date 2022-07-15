@@ -1,3 +1,25 @@
+.foxeye-alert-toast {
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999999999;
+    position: fixed;
+    bottom: 3.75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0px 12px 0px;
+    font-size: 16px;
+    font-family: SFUIDisplay-Regular, SFUIDisplay;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 20px;
+    border-radius: 10px;
+    align-self: center;
+    margin:0 auto;
+    left: 0;
+    right: 0;
+    width: 162px;
+}
+
 .foxeye-content-body {
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 999999999;
@@ -11,13 +33,15 @@
     align-items: center;
 }
 
-.modal-wrap {
+
+
+.foxeye-content-body .modal-wrap {
     width: 500px;
     height: 506px;
     flex-irection: column
 }
 
-.modal-top {
+.foxeye-content-body .modal-top {
     height: 200px;
     width: 500px;
     border-top-left-radius: 16px;
@@ -27,7 +51,7 @@
     display: flex
 }
 
-.modal-bottom {
+.foxeye-content-body .modal-bottom {
     height: 306px;
     width: 500px;
     border-bottom-left-radius: 16px;
@@ -39,7 +63,7 @@
     align-items: center;
 }
 
-.foxeye-content-abort {
+.foxeye-content-body .foxeye-content-abort {
     width: 250px;
     height: 46px;
     background-color: #027DD5;
@@ -51,38 +75,40 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 30px
+    margin-top: 30px;
+    cursor: pointer;
 }
 
-.foxeye-content-abort:hover {
+.foxeye-content-body .foxeye-content-abort:hover {
     background-color: #035FA4;
 }
 
-.continue-btn {
+.foxeye-content-body .continue-btn {
     font-size: 16px;
     font-weight: 600;
     color: #027DD5;
-    margin-top: 20px
+    margin-top: 20px;
+    cursor: pointer;
 }
 
-.continue-btn:hover {
+.foxeye-content-body .continue-btn:hover {
     color: #035FA4;
 }
 
-.modal-title {
+.foxeye-content-body .modal-title {
     font-size: 30px;
     font-weight: bold;
     color: #D73A4A
 }
 
-.address-and-host {
+.foxeye-content-body .address-and-host {
     font-size: 16px;
     font-weight: 400;
     color: #535A61;
     margin-top: 10px;
 }
 
-.alert-desc {
+.foxeye-content-body .alert-desc {
     font-size: 14px;
     font-weight: 400;
     color: #24272A;
@@ -93,16 +119,30 @@
     line-height: 20px;
 }
 
-.foxeye-logo {
+.foxeye-content-body .foxeye-logo {
     width: 160px;
     height: 36px;
     margin-left: 18px;
     margin-top: 16px;
 }
 
-.alert-type-img {
+.foxeye-content-body .alert-type-img {
     width: 320px;
     height: 148px;
     margin-left: 90px;
 }
 
+.foxeye-content-body .check-report {
+    font-size: 16px;
+    font-family: SFUIDisplay-Regular;
+    color: #027DD5;
+    line-height: 24px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+}
+
+.foxeye-content-body .check-report:hover {
+    color: #035FA4;
+}

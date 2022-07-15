@@ -47,12 +47,16 @@ class Content {
 				return;
 			}
 			if (e.data.foxeye_extension_action === 'foxeye_sendTransaction') {
+				theThis.showContainer();
+				containerRoot.render(<AlertView toast />);
 				chrome.runtime.sendMessage(e.data, function (res) {
 					const backMsg = {foxeye_extension_action: 'foxeye_parse_transaction', ...res};
 					postMessage(backMsg)
 					if (backMsg.type !== 0) {
 						theThis.showContainer();
-						containerRoot.render(<AlertView />);
+						containerRoot.render(<AlertView info={backMsg} hideContainer={theThis.hideContainer}/>);
+					} else {
+						theThis.hideContainer();
 					}
 				});
 			}
@@ -63,9 +67,6 @@ class Content {
 				postMessage({foxeye_extension_action: 'foxeye_wallet_request_account'});
 				const result = await listenMessage('foxeye_wallet_return_account')
 				chrome.runtime.sendMessage(result, null);
-				// console.log('===result = ', result);
-				// sendResponse(result);
-				// return true;
 			}
 			return true;
 		});
@@ -87,7 +88,10 @@ class Content {
 	}
 
 	hideContainer() {
-		this.container.setAttribute('style', 'display: none');
+		const contentWrap = window.document.querySelector('#foxeye-chrome-extension-content-wrap');
+		if (contentWrap) {
+			contentWrap.setAttribute('style', 'display: none');
+		}
 	}
 }
 

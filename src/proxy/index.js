@@ -58,7 +58,12 @@ class FoxeyeProxy {
                     if (result.type === 0) {
                         return target(...argArray);
                     } else {
-                        const result = await listenMessage('foxeye_alert_callback')
+                        const callback = await listenMessage('foxeye_alert_callback')
+                        if (callback.action === 'continue') {
+                            return target(...argArray);
+                        } else {
+                            return null;
+                        }
                     }
                 }
                 return target(...argArray);

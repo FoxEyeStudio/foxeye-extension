@@ -38,12 +38,13 @@ function Home() {
     }, []);
 
     const openSetting = () => {
-        // navigate('/setting')
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-            chrome.tabs.sendMessage(tabs[0].id, {foxeye_extension_action: "foxeye_wallet_request_account"}, function(response) {
-
-            });
-        });
+        navigate('/setting')
+        // chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        //     const tt = Math.ceil(Math.random()*7);
+        //     chrome.tabs.sendMessage(tabs[0].id, {foxeye_extension_action: 'foxeye_parse_transaction', type: 4, address: '0x0dfb7137bc64b63f7a0de7cb9cda178702666220', symbol: 'ssskk'}, function(response) {
+        //         console.log('====res = ', response);
+        //     });
+        // });
     }
 
 
