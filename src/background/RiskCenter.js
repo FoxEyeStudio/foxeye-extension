@@ -11,6 +11,8 @@ export const RiskType_SwapMediumRiskToken = 7; // buy token on uniswap-like dex
 
 // const api_host = 'http://localhost:6699/v1/';
 const api_host = 'https://api.foxeye.io/v1/';
+const phishing_website_url = 'http://47.243.205.251:8000/api/v1/phishing_site?url=';
+
 const tag = 'RiskCenter: ';
 // let instance = null;
 class RiskCenter {
@@ -63,6 +65,30 @@ class RiskCenter {
         return {
             type: RiskType_Safe
         }
+    }
+
+    async parsePhishingWebsite(url, args) {
+        const { phishing_website_off } = args;
+        const options = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Connection': 'keep-alive'
+            }
+        };
+        const fetch_url = `${phishing_website_url}${url}`;
+        let result = await fetch(fetch_url, options).then(ret => ret.json()).catch(err => {
+            return undefined;
+        });
+        const res = {
+            url,
+            type: RiskType_Safe
+        };
+        if (result && result.code == 1 && result['result']['phishing_site'] == 1) {
+            res['type'] = RiskType_PhishingWebsite;
+        }
+        return res;
     }
 }
 
