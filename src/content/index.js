@@ -62,6 +62,7 @@ class Content {
 				});
 			} else if (e.data.foxeye_extension_action === 'foxeye_phishing_website') {
 				chrome.runtime.sendMessage(e.data, async res => {
+					// res.type = RiskType_PhishingWebsite;
 					if (res.type != 0) {
 						const domain = riskCenter.getDomain(window.location.href);
 						const _domain = riskCenter.getDomain(res.url);
@@ -89,7 +90,9 @@ class Content {
 			return true;
 		});
 
-		postMessage({ foxeye_extension_action: 'foxeye_phishing_website', url: window.location.href });
+		if (window.self == window.top) {
+			postMessage({foxeye_extension_action: 'foxeye_phishing_website', url: window.location.href});
+		}
 	}
 
 	initContainer() {
