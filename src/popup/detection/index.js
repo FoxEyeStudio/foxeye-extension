@@ -9,6 +9,9 @@ import detectionImg from "../../../public/images/img_detection.png";
 import downIcon from "../../../public/images/ic_down.png";
 
 import {useNavigate} from "react-router-dom";
+import titleLogo from "../../../public/images/title_logo.png";
+import aboutIcon from "../../../public/images/ic_about.png";
+import aboutHoverIcon from "../../../public/images/ic_about_hover.png";
 
 
 function Detection() {
@@ -33,6 +36,10 @@ function Detection() {
                 setChainSelector(false);
             }
         }}>
+            <div className='title-wrap'>
+                <img src={titleLogo} className='title-logo' />
+                <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'detection'}})}}/>
+            </div>
             <div className="detection-wrap flex-col">
                 <div className="token-detection-title flex-row align-center">
                     <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/home')}}/>
@@ -62,7 +69,6 @@ function Detection() {
                         <div className="search-img" style={{ '--ic-search-normal': 'url(' + searchIcon + ')', '--ic-search-hover': 'url(' + searchHoverIcon + ')'}} onClick={handleSubmit}></div>
                     </div>
                 </div>
-                <iframe src="https://gopluslabs.io/token-security/56/0x27B880865395DA6cdA9C407E5eDFCc32184CF429" style={{width:600, height:600, overflowX: 'hidden', overflowY: 'auto'}}></iframe>
                 <div className='security-no-info-wrap flex-col align-center'>
                     <img src={detectionImg} className='search-no-info-img'/>
                     <div className="search-no-info-text">Full&nbsp;security&nbsp;report&nbsp;for&nbsp;any&nbsp;token</div>

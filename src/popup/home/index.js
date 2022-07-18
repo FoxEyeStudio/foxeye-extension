@@ -7,6 +7,9 @@ import monitorIcon from '../../../public/images/ic_monitor.png'
 import '../../css/home.css'
 import '../../css/common.css'
 import {useNavigate} from "react-router-dom";
+import titleLogo from "../../../public/images/title_logo.png";
+import aboutIcon from "../../../public/images/ic_about.png";
+import aboutHoverIcon from "../../../public/images/ic_about_hover.png";
 
 function Home() {
     const navigate = useNavigate()
@@ -48,6 +51,10 @@ function Home() {
 
     return (
         <div className='flex-col'>
+            <div className='title-wrap'>
+                <img src={titleLogo} className='title-logo' />
+                <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'home'}})}}/>
+            </div>
             <div className="account-wrap flex-col justify-center">
                 {!!account ? (
                     <div className="flex-col justify-between align-center">
