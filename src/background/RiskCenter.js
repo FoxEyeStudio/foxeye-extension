@@ -11,17 +11,15 @@ export const RiskType_SwapMediumRiskToken = 7; // buy token on uniswap-like dex
 
 // const api_host = 'http://localhost:6699/v1/';
 const api_host = 'https://api.foxeye.io/v1/';
-const phishing_website_url = 'http://47.243.205.251:8000/api/v1/phishing_site?url=';
+const phishing_website_url = 'https://api.gopluslabs.io/api/v1/phishing_site?url=';
 
 const tag = 'RiskCenter: ';
-// let instance = null;
+
+const g_websites = {
+
+};
+
 class RiskCenter {
-    // static get = () => {
-    //     if (!instance) {
-    //         instance = new RiskCenter();
-    //     }
-    //     return instance;
-    // }
 
     /*
     * method: "eth_sendTransaction"
@@ -40,7 +38,7 @@ class RiskCenter {
         console.log(tag, chain_id, transaction);
         try {
             const { data, to, from } = transaction;
-            const { malicious_contract_off, token_safety_off, target_correctness_off } = args;
+            const { malicious_contract_off, token_safety_off, target_correctness_off } = args || {};
             const options = {
                 method: 'POST',
                 body: JSON.stringify({
@@ -68,7 +66,18 @@ class RiskCenter {
     }
 
     async parsePhishingWebsite(url, args) {
-        const { phishing_website_off } = args;
+        const domain = this.getDomain(url);
+        console.log(tag, domain, url);
+        if (!url?.startsWith('http')) {
+            return { url, type: RiskType_Safe };
+        }
+        if (domain && g_websites[domain]) {
+            const { timestamp, type } = g_websites[domain];
+            if (timestamp && Date.now() - timestamp < 1 * 60 * 1000) {
+                return { url, type }
+            }
+        }
+        const { phishing_website_off } = args || {};
         const options = {
             method: 'GET',
             headers: {
@@ -85,10 +94,32 @@ class RiskCenter {
             url,
             type: RiskType_Safe
         };
-        if (result && result.code == 1 && result['result']['phishing_site'] == 1) {
-            res['type'] = RiskType_PhishingWebsite;
+        if (result && result.code == 1) {
+            if (result['result']['phishing_site'] == 1) {
+                res['type'] = RiskType_PhishingWebsite;
+            }
+            g_websites[domain] = {
+                timestamp: Date.now(), type: res['type']
+            };
         }
         return res;
+    }
+
+    getDomain(_url) {
+        let domain;
+        try {
+            const url = new URL(_url);
+            domain = url.hostname;
+            if (domain.startsWith('www.')) {
+                domain = domain.substr(4);
+            } else if (domain.startsWith('m.')) {
+                domain = domain.substr(2);
+            } else if (domain.startsWith('app.')) {
+                domain = domain.substr(4);
+            }
+        } catch (e) {
+        }
+        return domain;
     }
 }
 

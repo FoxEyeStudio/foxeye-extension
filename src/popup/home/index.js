@@ -19,13 +19,11 @@ function Home() {
         });
 
         chrome.runtime.onMessage.addListener(function getAccount(request) {
-            chrome.tabs.query({ currentWindow: true, active: true }, async function (tabs) {
-                if (request.foxeye_extension_action === 'foxeye_wallet_return_account') {
-                    const { account } = request;
-                    setAccount(account);
-                    chrome.runtime.onMessage.removeListener(getAccount);
-                }
-            })
+            if (request.foxeye_extension_action === 'foxeye_wallet_return_account') {
+                const { account } = request;
+                setAccount(account);
+                chrome.runtime.onMessage.removeListener(getAccount);
+            }
             return true;
         });
 

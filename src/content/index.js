@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom/client';
 import AlertView from './AlertView'
 import {listenMessage, postMessage} from "../proxy/ProxyMessage";
+import riskCenter, {RiskType_PhishingWebsite} from "../background/RiskCenter";
 
 class Content {
 	constructor() {
@@ -14,7 +15,7 @@ class Content {
 			this.initContainer();
 			this.initListener();
 			this.injectScript(chrome.runtime.getURL('foxeyeProxy.js'), 'body');
-			this.injectCss(chrome.runtime.getURL('/css/foxeye-chrome-extension-content.css'), 'head')
+			this.injectCss(chrome.runtime.getURL('/css/foxeye-chrome-extension-content.css'), 'head');
 		});
 	}
 
@@ -59,6 +60,23 @@ class Content {
 						theThis.hideContainer();
 					}
 				});
+			} else if (e.data.foxeye_extension_action === 'foxeye_phishing_website') {
+				chrome.runtime.sendMessage(e.data, async res => {
+					if (res.type != 0) {
+						const domain = riskCenter.getDomain(window.location.href);
+						const _domain = riskCenter.getDomain(res.url);
+						if (domain == _domain) {
+							theThis.showContainer();
+							containerRoot.render(<AlertView info={res} hideContainer={theThis.hideContainer}/>);
+							const callback = await listenMessage('foxeye_alert_callback')
+							if (callback.action === 'abort') {
+								chrome.runtime.sendMessage({
+									foxeye_extension_action: 'foxeye_close_activetab'
+								});
+							}
+						}
+					}
+				});
 			}
 		});
 
@@ -70,6 +88,8 @@ class Content {
 			}
 			return true;
 		});
+
+		postMessage({ foxeye_extension_action: 'foxeye_phishing_website', url: window.location.href });
 	}
 
 	initContainer() {
