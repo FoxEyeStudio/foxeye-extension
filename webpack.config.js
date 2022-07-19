@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
+const rootDir = path.resolve(__dirname, '');
+
 module.exports = {
     entry: {
         popup: './src/popup',
@@ -11,7 +13,7 @@ module.exports = {
         foxeyeProxy: './src/proxy/index.js',
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(rootDir, './dist/js'),
         filename: '[name].js',
     },
     module: {
@@ -45,15 +47,31 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './public/index.html',
-            filename: 'popup.html'
+            template: path.resolve(rootDir, 'public/index.html'),
+            filename: path.resolve(rootDir, 'dist/html/popup.html'),
+            chunks: ['popup']
         }),
         new CopyPlugin({
             patterns: [
-                { from: "public/manifest.json" },
-                { from: "public/images", to: 'images', force: true},
-                { from: "public/icons", to: 'icons', force: true},
-                { from: "src/css/content.css", to: 'css/foxeye-chrome-extension-content.css', force: true}
+                {
+                    from: path.resolve(rootDir, 'public/manifest.json'),
+                    to: path.resolve(rootDir, 'dist/manifest.json')
+                },
+                {
+                    from: path.resolve(rootDir, 'public/images'),
+                    to: path.resolve(rootDir, 'dist/images')
+                },
+                {
+                    from: path.resolve(rootDir, 'public/icons'),
+                    to: path.resolve(rootDir, 'dist/icons')
+                },
+
+                {
+                    from: path.resolve(rootDir, 'src/css/content.css'),
+                    to: path.resolve(rootDir, 'dist/css/foxeye-chrome-extension-content.css')
+                },
+
+                // { from: "src/css/content.css", to: 'dist/css/foxeye-chrome-extension-content.css', force: true}
             ],
         })
     ],

@@ -6,8 +6,8 @@ export function postMessage(message) {
 
 export function listenMessage(action) {
     return new Promise((resolve) => {
-        window.addEventListener('message', (e) => { // 监听 message 事件
-            if (e.origin !== window.location.origin) { // 验证消息来源地址
+        window.addEventListener('message', (e) => {
+            if (e.origin !== window.location.origin) {
                 return;
             }
             if (typeof e.data.foxeye_extension_action === 'undefined') {

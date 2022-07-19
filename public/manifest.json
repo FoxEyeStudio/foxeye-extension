@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "manifest_version": 3,
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "js/background.js"
     },
     "content_scripts": [
         {
@@ -12,8 +12,7 @@
               "<all_urls>"
             ],
             "run_at": "document_start",
-            "js": ["content.js"],
-            "all_frames": true
+            "js": ["js/content.js"]
         }
     ],
     "permissions": [
@@ -29,7 +28,7 @@
         "matches": ["<all_urls>"]
     }],
     "action": {
-        "default_popup": "popup.html",
+        "default_popup": "html/popup.html",
         "default_icon": {
             "16": "/icons/logo.png",
             "32": "/icons/logo.png",

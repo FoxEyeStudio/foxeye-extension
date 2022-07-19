@@ -7,8 +7,7 @@ import aboutHoverIcon from "../../../public/images/ic_about_hover.png";
 import {useNavigate} from "react-router-dom";
 import backIcon from "../../../public/images/ic_back.png";
 import backHoverIcon from "../../../public/images/ic_back_hover.png";
-
-export const SWITCH_ALERT_ID = ['phishing-ebsites-switch', 'malicious-contract-switch', 'token-safety-switch', 'target-correctness-switch'];
+import {SWITCH_ALERT_ID} from "../../common/utils";
 
 function Setting() {
     const navigate = useNavigate()

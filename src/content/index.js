@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import AlertView from './AlertView'
 import {listenMessage, postMessage} from "../proxy/ProxyMessage";
 import riskCenter, {RiskType_PhishingWebsite} from "../background/RiskCenter";
+import {MaliciousContract, PhishingWebsites, SWITCH_ALERT_ID, TargetCorrectness, TokenSafety} from "../common/utils";
 
 class Content {
 	constructor() {
@@ -14,7 +15,7 @@ class Content {
 		document.addEventListener('DOMContentLoaded', () => {
 			this.initContainer();
 			this.initListener();
-			this.injectScript(chrome.runtime.getURL('foxeyeProxy.js'), 'body');
+			this.injectScript(chrome.runtime.getURL('/js/foxeyeProxy.js'), 'body');
 			this.injectCss(chrome.runtime.getURL('/css/foxeye-chrome-extension-content.css'), 'head');
 		});
 	}
@@ -48,9 +49,23 @@ class Content {
 				return;
 			}
 			if (e.data.foxeye_extension_action === 'foxeye_sendTransaction') {
+				const switchInfo = await chrome.storage.local.get(SWITCH_ALERT_ID);
+				let args = { }; // set malicious_contract_off, token_safety_off, target_correctness_off = 1 to turn oooooooof
+				if (!!switchInfo) {
+					if (switchInfo[MaliciousContract] === false) {
+						args = { ...args, malicious_contract_off: 1}
+					}
+					if (switchInfo[TokenSafety] === false) {
+						args = { ...args, token_safety_off: 1}
+					}
+					if (switchInfo[TargetCorrectness] === false) {
+						args = { ...args, target_correctness_off: 1}
+					}
+				}
+				const msg = { ...e.data, args}
 				theThis.showContainer();
 				containerRoot.render(<AlertView toast />);
-				chrome.runtime.sendMessage(e.data, function (res) {
+				chrome.runtime.sendMessage(msg, function (res) {
 					const backMsg = {foxeye_extension_action: 'foxeye_parse_transaction', ...res};
 					postMessage(backMsg)
 					if (backMsg.type !== 0) {
@@ -87,11 +102,19 @@ class Content {
 				const result = await listenMessage('foxeye_wallet_return_account')
 				chrome.runtime.sendMessage(result, null);
 			}
-			return true;
+			return false;
 		});
 
 		if (window.self == window.top) {
-			postMessage({foxeye_extension_action: 'foxeye_phishing_website', url: window.location.href});
+			chrome.storage.local.get(SWITCH_ALERT_ID, function(switchInfo){
+				let args = { };
+				if (!!switchInfo) {
+					if (switchInfo[PhishingWebsites] === false) {
+						args = { phishing_website_off: 1}
+					}
+				}
+				postMessage({foxeye_extension_action: 'foxeye_phishing_website', url: window.location.href, args});
+			});
 		}
 	}
 

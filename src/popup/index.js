@@ -5,9 +5,6 @@ import Home from './home'
 import Setting from './setting'
 import Detection from './detection'
 import About from "./about";
-import titleLogo from "../../public/images/title_logo.png";
-import aboutIcon from "../../public/images/ic_about.png";
-import aboutHoverIcon from "../../public/images/ic_about_hover.png";
 import '../css/popup.css'
 import '../css/common.css'
 
@@ -27,5 +24,5 @@ function Popup() {
     )
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById('popup-root'))
 root.render(<Popup />)

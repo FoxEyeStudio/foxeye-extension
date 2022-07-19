@@ -3,8 +3,6 @@ import '../../css/common.css'
 import '../../css/about.css'
 import {useNavigate, useLocation} from "react-router-dom";
 import titleLogo from "../../../public/images/title_logo.png";
-import aboutIcon from "../../../public/images/ic_about.png";
-import aboutHoverIcon from "../../../public/images/ic_about_hover.png";
 import backIcon from "../../../public/images/ic_back.png";
 import backHoverIcon from "../../../public/images/ic_back_hover.png";
 import aboutLogo from "../../../public/images/img_about_logo.png"

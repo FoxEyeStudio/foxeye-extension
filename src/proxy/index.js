@@ -1,6 +1,5 @@
 import React from 'react';
 import {listenMessage, postMessage} from "./ProxyMessage";
-import AlertView from "../content/AlertView";
 
 const tag = 'FoxeyeProxy: ';
 
@@ -50,11 +49,8 @@ class FoxeyeProxy {
                 const transaction = [...argArray][0];
                 const { method } = transaction;
                 if (method == 'eth_sendTransaction') {
-                    console.log('==transaction.params[0] = ', transaction.params[0]);
-                    let args = { }; // set malicious_contract_off, token_safety_off, target_correctness_off = 1 to turn oooooooof
-                    postMessage({foxeye_extension_action: 'foxeye_sendTransaction', chainId: Number(window.ethereum.chainId).toString(), params: transaction.params[0], args})
+                    postMessage({foxeye_extension_action: 'foxeye_sendTransaction', chainId: Number(window.ethereum.chainId).toString(), params: transaction.params[0]})
                     const result = await listenMessage('foxeye_parse_transaction')
-                    console.log('====result = ', result);
                     if (result.type === 0) {
                         return target(...argArray);
                     } else {
