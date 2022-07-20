@@ -17,7 +17,7 @@ class Content {
 			this.initListener();
 			this.injectScript(chrome.runtime.getURL('/js/foxeyeProxy.js'), 'body');
 			this.injectCss(chrome.runtime.getURL('/css/foxeye-chrome-extension-content.css'), 'head');
-		});
+		}, { once: true });
 	}
 
 	injectScript(file, node) {
