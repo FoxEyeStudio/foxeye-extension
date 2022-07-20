@@ -5,9 +5,9 @@ import {listenMessage, postMessage} from "../proxy/ProxyMessage";
 import riskCenter, {RiskType_PhishingWebsite} from "../background/RiskCenter";
 import {MaliciousContract, PhishingWebsites, SWITCH_ALERT_ID, TargetCorrectness, TokenSafety} from "../common/utils";
 
+let theThis;
 class Content {
 	constructor() {
-		this.container = null;
 		this.init();
 	}
 
@@ -38,8 +38,7 @@ class Content {
 	}
 
 	initListener() {
-		const theThis = this;
-		const containerRoot = ReactDOM.createRoot(this.container)
+		theThis = this;
 
 		window.addEventListener('message', async (e) => { // 监听 message 事件
 			if (e.origin !== window.location.origin) { // 验证消息来源地址
@@ -64,33 +63,15 @@ class Content {
 				}
 				const msg = { ...e.data, args}
 				theThis.showContainer();
-				containerRoot.render(<AlertView toast />);
+				theThis.getRoot().render(<AlertView toast />);
 				chrome.runtime.sendMessage(msg, function (res) {
 					const backMsg = {foxeye_extension_action: 'foxeye_parse_transaction', ...res};
 					postMessage(backMsg)
 					if (backMsg.type !== 0) {
 						theThis.showContainer();
-						containerRoot.render(<AlertView info={backMsg} hideContainer={theThis.hideContainer}/>);
+						theThis.getRoot().render(<AlertView info={backMsg} hideContainer={theThis.hideContainer}/>);
 					} else {
 						theThis.hideContainer();
-					}
-				});
-			} else if (e.data.foxeye_extension_action === 'foxeye_phishing_website') {
-				chrome.runtime.sendMessage(e.data, async res => {
-					// res.type = RiskType_PhishingWebsite;
-					if (res.type != 0) {
-						const domain = riskCenter.getDomain(window.location.href);
-						const _domain = riskCenter.getDomain(res.url);
-						if (domain == _domain) {
-							theThis.showContainer();
-							containerRoot.render(<AlertView info={res} hideContainer={theThis.hideContainer}/>);
-							const callback = await listenMessage('foxeye_alert_callback')
-							if (callback.action === 'abort') {
-								chrome.runtime.sendMessage({
-									foxeye_extension_action: 'foxeye_close_activetab'
-								});
-							}
-						}
 					}
 				});
 			}
@@ -113,31 +94,65 @@ class Content {
 						args = { phishing_website_off: 1}
 					}
 				}
-				postMessage({foxeye_extension_action: 'foxeye_phishing_website', url: window.location.href, args});
+				if (!args.phishing_website_off) {
+					chrome.runtime.sendMessage({foxeye_extension_action: 'foxeye_phishing_website', url: window.location.href, args}, async res => {
+						// res.type = RiskType_PhishingWebsite;
+						if (res.type != 0) {
+							const domain = riskCenter.getDomain(window.location.href);
+							const _domain = riskCenter.getDomain(res.url);
+							if (domain == _domain) {
+								theThis.showContainer();
+								theThis.getRoot().render(<AlertView info={res} hideContainer={theThis.hideContainer}/>);
+								const callback = await listenMessage('foxeye_alert_callback')
+								if (callback.action === 'abort') {
+									chrome.runtime.sendMessage({
+										foxeye_extension_action: 'foxeye_close_activetab'
+									});
+								}
+							}
+						}
+					});
+				}
 			});
 		}
 	}
 
 	initContainer() {
-		const contentWrap = window.document.querySelector('#foxeye-chrome-extension-content-wrap');
-		if (contentWrap) {
-			this.container = contentWrap;
-		} else {
-			this.container = window.document.createElement('div');
-			this.container.setAttribute('id', 'foxeye-chrome-extension-content-wrap');
-			window.document.body.appendChild(this.container);
+		if (window.self == window.top) {
+			const contentWrap = window.document.querySelector('#foxeye-chrome-extension-content-wrap');
+			if (contentWrap) {
+				window.FoxEyeContainer = contentWrap;
+			} else {
+				window.FoxEyeContainer = window.document.createElement('div');
+				window.FoxEyeContainer.setAttribute('id', 'foxeye-chrome-extension-content-wrap');
+				window.document.body.appendChild(window.FoxEyeContainer);
+			}
+			window.FoxEyeRoot = ReactDOM.createRoot(window.FoxEyeContainer);
 		}
+	}
+
+	getContainer() {
+		let win = window;
+		while (win.self != win.top) {
+			win = win.top;
+		}
+		return win.FoxEyeContainer;
 	}
 
 	showContainer() {
-		this.container.setAttribute('style', 'display: block');
+		theThis.getContainer()?.setAttribute('style', 'display: block');
 	}
 
 	hideContainer() {
-		const contentWrap = window.document.querySelector('#foxeye-chrome-extension-content-wrap');
-		if (contentWrap) {
-			contentWrap.setAttribute('style', 'display: none');
+		theThis.getContainer()?.setAttribute('style', 'display: none');
+	}
+
+	getRoot() {
+		let win = window;
+		while (win.self != win.top) {
+			win = win.top;
 		}
+		return win.FoxEyeRoot;
 	}
 }
 

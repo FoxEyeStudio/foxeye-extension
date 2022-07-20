@@ -31,9 +31,11 @@ class FoxeyeProxy {
     }
 
     insertProxy() {
-        if (typeof window.ethereum !== 'undefined') {
+        if (window?.ethereum) {
             const proxy = new Proxy(window.ethereum.request, this.proxyHandler);
             window.ethereum.request = proxy;
+            const proxy2 = new Proxy(window.ethereum.sendAsync, this.proxyHandler);
+            window.ethereum.sendAsync = proxy2;
             clearInterval(this.proxyInterval);
         } else {
             console.log(tag, '@cyh: No Found window.ethereum');
