@@ -30,4 +30,5 @@
 
 .about-link:hover {
     color: #035FA4;
+    cursor: pointer;
 }

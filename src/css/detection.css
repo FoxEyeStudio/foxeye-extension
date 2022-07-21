@@ -53,7 +53,7 @@
     background-color: rgba(242, 244, 246, 1);
 }
 
-.chain-wrap:active {
+.chain-wrap-active {
     box-shadow: 0px 0px 15px 0px rgba(34, 41, 69, 0.2);
     border: 1px solid rgba(2, 125, 213, 1);
     background-color: rgba(255, 255, 255, 1);
@@ -90,8 +90,8 @@
     background-color: rgba(242, 244, 246, 1);
 }
 
-.search-inpurt-wrap-active {
-    background-color: red;
+.search-inpurt-wrap:focus-within {
+    background-color: white;
 }
 
 .edit-text {

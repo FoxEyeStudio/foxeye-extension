@@ -11,7 +11,7 @@ import {SWITCH_ALERT_ID} from "../../common/utils";
 
 function Setting() {
     const navigate = useNavigate()
-    const [switchValue, setSwitchValue] = useState('');
+    const [switchValue, setSwitchValue] = useState(undefined);
 
     const SETTING_ITEM_TITLE = ['Phishing Websites', 'Malicious Contract', 'Token Safety', 'Target Correctness'];
     const SETTING_ITEM_DESC = ['Detect and intercept phishing websites.', 'Show alert if the contract you interacting with is malicious.', 'Check token security before purchase.Show alert if the token is malicious.', 'Intercept transactions with improper target address.']
@@ -20,11 +20,6 @@ function Setting() {
         chrome.storage.local.get(SWITCH_ALERT_ID, function(items){
             if (items) {
                 setSwitchValue(items);
-                SWITCH_ALERT_ID.forEach((id) => {
-                    if (items[id] === false) {
-                        document.getElementById(id).checked = false;
-                    }
-                })
             }
         });
     }, [])
@@ -42,10 +37,12 @@ function Setting() {
             <div className='flex-col'>
                 <div className="setting-item flex-row justify-between">
                     <div className='setting-item-title'>{SETTING_ITEM_TITLE[index]}</div>
-                    <div className='flex-row' >
-                        <input type="checkbox" id={SWITCH_ALERT_ID[index]} defaultChecked onClick={() => handleClick(SWITCH_ALERT_ID[index])}/>
-                        <label htmlFor={SWITCH_ALERT_ID[index]}></label>
-                    </div>
+                    {switchValue && (
+                        <div className='flex-row' >
+                            <input type="checkbox" id={SWITCH_ALERT_ID[index]} defaultChecked={switchValue[SWITCH_ALERT_ID[index]] !== false} onClick={() => handleClick(SWITCH_ALERT_ID[index])}/>
+                            <label htmlFor={SWITCH_ALERT_ID[index]}></label>
+                        </div>
+                    )}
                 </div>
                 <div className="setting-item-desc">{SETTING_ITEM_DESC[index]}</div>
             </div>

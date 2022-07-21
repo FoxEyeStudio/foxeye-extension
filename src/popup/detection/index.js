@@ -44,11 +44,11 @@ function Detection() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setNoFound(false);
-        setLoading(true);
         if (!inputValue) {
             return;
         }
+        setNoFound(false);
+        setLoading(true);
         const tokenAddress = inputValue;
         let chainId = 1;
         chainArray.forEach((item, index) => {
@@ -84,7 +84,10 @@ function Detection() {
                     <span className="detection-text">Token&nbsp;Detection</span>
                 </div>
                 <div className="search-wrap flex-row">
-                    <div className="chain-wrap flex-row" onClick={() => {setChainSelector(true)}}>
+                    <div className={chainSelector ? "chain-wrap flex-row chain-wrap-active" : "chain-wrap flex-row"} onClick={() => {
+                        setChainSelector(true);
+                        setNoFound(false);
+                    }}>
                         <div className="chain-inter flex-row flex-full justify-between align-center">
                             <div className="chain-text">{currentChain}</div>
                             <img
@@ -97,7 +100,7 @@ function Detection() {
                     <div className="search-inpurt-wrap flex-row align-center justify-center" id='inputWrap'>
                         <form onSubmit={handleSubmit}>
                             <input
-                                placeholder='Enter&nbsp;token&nbsp;contract&nbsp;address'
+                                placeholder='Enter token contract address'
                                 className='edit-text'
                                 type="text"
                                 value={inputValue}
