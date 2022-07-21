@@ -38,7 +38,9 @@
 .foxeye-content-body .modal-wrap {
     width: 500px;
     height: 506px;
-    flex-irection: column
+    flex-direction: column;
+    display: flex;
+    position: relative;
 }
 
 .foxeye-content-body .modal-top {
@@ -145,4 +147,17 @@
 
 .foxeye-content-body .check-report:hover {
     color: #035FA4;
+}
+
+.foxeye-content-body .foxeye-back-img {
+    width: 22px;
+    height: 22px;
+    background-image: var(--ic-back-normal);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 20px 0px 10px 20px;
+}
+
+.foxeye-back-img:hover {
+    background-image: var(--ic-back-hover);
 }

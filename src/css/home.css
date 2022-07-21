@@ -129,7 +129,7 @@
     margin-left: 10px;
 }
 
-.item-title {
+.home-item-title {
     width: 120px;
     height: 20px;
     display: inline-block;
@@ -142,7 +142,7 @@
     text-align: left;
 }
 
-.item-desc {
+.home-item-desc {
     width: 170px;
     height: 16px;
     display: inline-block;

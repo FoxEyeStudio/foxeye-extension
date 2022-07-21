@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import '../../css/common.css'
 import '../../css/setting.css'
-import titleLogo from "../../../public/images/title_logo.png";
-import aboutIcon from "../../../public/images/ic_about.png";
-import aboutHoverIcon from "../../../public/images/ic_about_hover.png";
+import titleLogo from "../../images/title_logo.png";
+import aboutIcon from "../../images/ic_about.png";
+import aboutHoverIcon from "../../images/ic_about_hover.png";
 import {useNavigate} from "react-router-dom";
-import backIcon from "../../../public/images/ic_back.png";
-import backHoverIcon from "../../../public/images/ic_back_hover.png";
+import backIcon from "../../images/ic_back.png";
+import backHoverIcon from "../../images/ic_back_hover.png";
 import {SWITCH_ALERT_ID} from "../../common/utils";
 
 function Setting() {

@@ -58,7 +58,7 @@ module.exports = {
                     to: path.resolve(rootDir, 'dist/manifest.json')
                 },
                 {
-                    from: path.resolve(rootDir, 'public/images'),
+                    from: path.resolve(rootDir, 'src/images'),
                     to: path.resolve(rootDir, 'dist/images')
                 },
                 {
@@ -69,6 +69,11 @@ module.exports = {
                 {
                     from: path.resolve(rootDir, 'src/css/content.css'),
                     to: path.resolve(rootDir, 'dist/css/foxeye-chrome-extension-content.css')
+                },
+
+                {
+                    from: path.resolve(rootDir, 'src/css/token.css'),
+                    to: path.resolve(rootDir, 'dist/css/token.css')
                 },
 
                 // { from: "src/css/content.css", to: 'dist/css/foxeye-chrome-extension-content.css', force: true}

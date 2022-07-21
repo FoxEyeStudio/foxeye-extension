@@ -98,7 +98,6 @@
     color: rgba(36, 39, 42, 1);
     font-size: 13px;
     text-align: left;
-    white-space: nowrap;
     line-height: 13px;
     width: 170px;
     overflow:hidden;
@@ -186,4 +185,16 @@
     text-align: left;
     white-space: nowrap;
     line-height: 16px;
+}
+
+.token-view-border {
+    border-radius: 7px;
+    border: 1px solid #DCDCDC;
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    height: 360px;
+    z-index: 1;
+    pointer-events: none;
+    cursor: default;
 }

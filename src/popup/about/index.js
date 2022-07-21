@@ -2,10 +2,10 @@ import React, {useEffect, useState} from "react";
 import '../../css/common.css'
 import '../../css/about.css'
 import {useNavigate, useLocation} from "react-router-dom";
-import titleLogo from "../../../public/images/title_logo.png";
-import backIcon from "../../../public/images/ic_back.png";
-import backHoverIcon from "../../../public/images/ic_back_hover.png";
-import aboutLogo from "../../../public/images/img_about_logo.png"
+import titleLogo from "../../images/title_logo.png";
+import backIcon from "../../images/ic_back.png";
+import backHoverIcon from "../../images/ic_back_hover.png";
+import aboutLogo from "../../images/img_about_logo.png"
 
 function About() {
     const navigate = useNavigate();

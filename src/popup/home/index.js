@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
-import webFavicon from '../../../public/images/web_favicon.png'
-import settingIcon from '../../../public/images/ic_setting.png'
-import detectionIcon from '../../../public/images/ic_detection.png'
-import arrowIcon from '../../../public/images/ic_arrow.png'
-import monitorIcon from '../../../public/images/ic_monitor.png'
+import webFavicon from '../../images/web_favicon.png'
+import settingIcon from '../../images/ic_setting.png'
+import detectionIcon from '../../images/ic_detection.png'
+import arrowIcon from '../../images/ic_arrow.png'
+import monitorIcon from '../../images/ic_monitor.png'
 import '../../css/home.css'
 import '../../css/common.css'
 import {useNavigate} from "react-router-dom";
-import titleLogo from "../../../public/images/title_logo.png";
-import aboutIcon from "../../../public/images/ic_about.png";
-import aboutHoverIcon from "../../../public/images/ic_about_hover.png";
+import titleLogo from "../../images/title_logo.png";
+import aboutIcon from "../../images/ic_about.png";
+import aboutHoverIcon from "../../images/ic_about_hover.png";
 import riskCenter from "../../background/RiskCenter";
 
 function Home() {
@@ -17,6 +17,7 @@ function Home() {
     const [account, setAccount] = useState();
     const [domain, setDomain] = useState();
     const [lowRisk, setLowRisk] = useState(true);
+    const [favIconUrl, setFavIconUrl] = useState();
 
     useEffect(() => {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
@@ -27,6 +28,8 @@ function Home() {
             const domain = riskCenter.getDomain(url)
             // const domain = url.hostname;
             setDomain(domain);
+
+            setFavIconUrl(tab.favIconUrl);
 
             chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_phishing_website", url}, result => {
                 if (result.type != 0) {
@@ -88,7 +91,7 @@ function Home() {
             <div className="current-website">Current&nbsp;Website</div>
             <div className="web-info-wrap flex-row justify-between align-center">
                 <div className="flex-row align-center">
-                    <img src={webFavicon} className='web-favicon'/>
+                    <img src={favIconUrl || webFavicon} className='web-favicon'/>
                     <div className="web-host-info flex-col justify-between">
                         <div className="host-text">{domain}</div>
                         <div className="website-name">{lowRisk ? 'No threat detected' : 'Malicious website'}</div>
@@ -103,8 +106,8 @@ function Home() {
                 <div className="token-detection-inter flex-row align-center">
                     <img src={detectionIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
-                        <div className="item-title">Token Detection</div>
-                        <div className="item-desc">Have a check before buying</div>
+                        <div className="home-item-title">Token Detection</div>
+                        <div className="home-item-desc">Have a check before buying</div>
                     </div>
                     <div className={'flex-full'}/>
                     <img src={arrowIcon} className={'arrow-img'}/>
@@ -114,8 +117,8 @@ function Home() {
                 <div className="token-detection-inter flex-row align-center">
                     <img src={settingIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
-                        <div className="item-title">Risk&nbsp;Alerts</div>
-                        <div className="item-desc">3&nbsp;strategies&nbsp;on</div>
+                        <div className="home-item-title">Risk&nbsp;Alerts</div>
+                        <div className="home-item-desc">3&nbsp;strategies&nbsp;on</div>
                     </div>
                     <div className={'flex-full'}/>
                     <img src={arrowIcon} className={'arrow-img'}/>
