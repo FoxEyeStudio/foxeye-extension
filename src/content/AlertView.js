@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Lottie from 'react-lottie'
 import {
     RiskType_ApproveEOA,
     RiskType_MaliciousAddress,
@@ -12,23 +13,24 @@ import {postMessage} from "../proxy/ProxyMessage";
 import TokenView from '../common/TokenView';
 import backIcon from "../images/ic_back.png";
 import backHoverIcon from "../images/ic_back_hover.png";
+import {LoadingJson} from "../common/utils";
 
 
 export default class AlertView extends Component {
     state = {
         showTokenView: false,
-        tokenInfo: ''
+        tokenInfo: '',
+        loading: false
     }
 
     clickCheckReport = () => {
-        if (this.state.tokenInfo) {
-            this.setState({ showTokenView: true });
-        }
+        this.setState({ showTokenView: true, loading: !this.state.tokenInfo });
+
         let { address, chain_id} = this.props.info;
         chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_token_info", chainId: chain_id, tokenAddress: address}, result => {
             if (result && result[address.toLowerCase()]) {
                 const tokenInfo = {...result[address.toLowerCase()], tokenAddress: address, token_id: chain_id}
-                this.setState({ tokenInfo, showTokenView: true })
+                this.setState({ tokenInfo, loading: false })
             }
         });
     }
@@ -131,9 +133,27 @@ export default class AlertView extends Component {
                                 this.setState({ showTokenView: false });
                             }}/>
 
-                            <div style={{width: '100%', height: '100%', overflowY: "auto", overflowX: 'hidden' }}>
-                                <TokenView token_info={this.state.tokenInfo} fromAlert={true}/>
-                            </div>
+                            {this.state.tokenInfo && !this.state.loading && (
+                                <div style={{width: '100%', height: '100%', overflowY: "auto", overflowX: 'hidden' }}>
+                                    <TokenView token_info={this.state.tokenInfo} fromAlert={true}/>
+                                </div>
+                            )}
+
+                            {this.state.loading && (
+                                <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: "relative"}}>
+                                    <Lottie options={{
+                                        loop: true,
+                                        autoplay: true,
+                                        animationData: LoadingJson,
+                                        rendererSettings: {
+                                            preserveAspectRatio: 'xMidYMid slice'
+                                        }
+                                    }}
+                                            height={48}
+                                            width={48}
+                                    />
+                                </div>
+                            )}
 
                         </div>
                     )}

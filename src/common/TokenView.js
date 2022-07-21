@@ -274,7 +274,7 @@ export default class TokenView extends Component {
                             <div className="foxeye-token-base-contract-security">
                                 <div className="foxeye-token-base-title">Contract Security</div>
                                 {this.is_open_source == 1 && (
-                                    <div className="foxeye-token-base-detect-item flex">
+                                    <div className="foxeye-token-base-detect-item foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
                                             <div className="foxeye-token-base-item-title">Contract source code verified</div>

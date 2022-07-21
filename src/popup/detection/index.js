@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
+import Lottie from 'react-lottie'
 import '../../css/detection.css'
 import '../../css/common.css'
 import backIcon from "../../images/ic_back.png";
@@ -12,10 +13,9 @@ import {useNavigate} from "react-router-dom";
 import titleLogo from "../../images/title_logo.png";
 import aboutIcon from "../../images/ic_about.png";
 import aboutHoverIcon from "../../images/ic_about_hover.png";
-import {getTokenInfo} from "../../common/utils";
+import {LoadingJson} from "../../common/utils";
 import TokenView from "../../common/TokenView";
 import '../../css/token.css'
-
 
 function Detection() {
     const EthereumId = 1;
@@ -32,9 +32,11 @@ function Detection() {
     const [chainSelector, setChainSelector] = useState(false);
     const navigate = useNavigate()
     const chainArray = ['Ethereum', 'BSC', 'Polygon', 'Arbitrum', 'Avalanche', 'Heco', 'Ftm', 'Okc', 'Goerli'];
-    const chainIdArray = [1, 56, 137, 42161, 43114, 128, 250, 66, 5];
+    const chainIdArray = [EthereumId, BscId, PolygonId, ArbitrumId, AvalancheId, HecoId, FtmId, OkcId, GoerliId];
     const [currentChain, setCurrentChain] = useState(chainArray[0]);
     const [tokenInfo, setTokenInfo] = useState();
+    const [loading, setLoading] = useState(false);
+    const [noFound, setNoFound] = useState(false);
 
     const handleChange = (event) => {
         setInputValue(event.target.value);
@@ -42,6 +44,8 @@ function Detection() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setNoFound(false);
+        setLoading(true);
         if (!inputValue) {
             return;
         }
@@ -54,8 +58,12 @@ function Detection() {
         })
         chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_token_info", chainId, tokenAddress}, result => {
             if (result && result[tokenAddress.toLowerCase()]) {
+                setLoading(false);
                 const tokenInfo = {...result[tokenAddress.toLowerCase()], tokenAddress, token_id: chainId}
                 setTokenInfo(tokenInfo);
+            } else {
+                setLoading(false);
+                setNoFound(true);
             }
         });  //send to background.js
     }
@@ -99,14 +107,14 @@ function Detection() {
                         <div className="search-img" style={{ '--ic-search-normal': 'url(' + searchIcon + ')', '--ic-search-hover': 'url(' + searchHoverIcon + ')'}} onClick={handleSubmit}></div>
                     </div>
                 </div>
-                {!tokenInfo && (
+                {!tokenInfo && !loading && (
                     <div className='security-no-info-wrap flex-col align-center'>
                         <img src={detectionImg} className='search-no-info-img'/>
                         <div className="search-no-info-text">Full security report for any token</div>
                     </div>
                 )}
 
-                {!!tokenInfo && (
+                {!!tokenInfo && !loading && (
                     <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: "relative"}}>
                         <div style={{width: '100%', height: 360, paddingLeft: 16, paddingRight: 16, overflowY: "auto", overflowX: 'hidden' }}>
                             <div style={{width: '100%', height: '100%'}}>
@@ -116,6 +124,28 @@ function Detection() {
                         </div>
                         <div className='token-view-border'>
                         </div>
+                    </div>
+                )}
+
+                {loading && (
+                    <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: "relative"}}>
+                        <Lottie options={{
+                            loop: true,
+                            autoplay: true,
+                            animationData: LoadingJson,
+                            rendererSettings: {
+                                preserveAspectRatio: 'xMidYMid slice'
+                            }
+                        }}
+                                height={48}
+                                width={48}
+                        />
+                    </div>
+                )}
+
+                {noFound && (
+                    <div className='token-no-wrap'>
+                        Token not found
                     </div>
                 )}
 
@@ -137,7 +167,6 @@ function Detection() {
                         </div>
                     )
                 }
-
             </div>
         </div>
     )

@@ -198,3 +198,26 @@
     pointer-events: none;
     cursor: default;
 }
+
+.token-no-wrap {
+    z-index: 10;
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 136px;
+    display: flex;
+    align-items: center;
+
+    height: 50px;
+    background: #FBECEE;
+    border-radius: 6px;
+    border: 1px solid #D73A4A;
+
+    font-size: 13px;
+    font-family: SFUIDisplay-Medium, SFUIDisplay;
+    font-weight: 500;
+    color: #24272A;
+    line-height: 16px;
+
+    padding-left: 16px
+}

@@ -45,6 +45,7 @@
 .web-favicon {
     width: 36px;
     height: 36px;
+    object-fit: contain;
 }
 
 .web-host-info {
