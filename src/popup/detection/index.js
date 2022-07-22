@@ -26,13 +26,12 @@ function Detection() {
     const HecoId = 128;
     const FtmId = 250;
     const OkcId = 66;
-    const GoerliId = 5;
 
     const [inputValue, setInputValue] = useState('');
     const [chainSelector, setChainSelector] = useState(false);
     const navigate = useNavigate()
-    const chainArray = ['Ethereum', 'BSC', 'Polygon', 'Arbitrum', 'Avalanche', 'Heco', 'Ftm', 'Okc', 'Goerli'];
-    const chainIdArray = [EthereumId, BscId, PolygonId, ArbitrumId, AvalancheId, HecoId, FtmId, OkcId, GoerliId];
+    const chainArray = ['Ethereum', 'BSC', 'Polygon', 'Arbitrum', 'Avalanche', 'Heco', 'Ftm', 'Okc'];
+    const chainIdArray = [EthereumId, BscId, PolygonId, ArbitrumId, AvalancheId, HecoId, FtmId, OkcId];
     const [currentChain, setCurrentChain] = useState(chainArray[0]);
     const [tokenInfo, setTokenInfo] = useState();
     const [loading, setLoading] = useState(false);
