@@ -47,6 +47,7 @@ function Detection() {
         if (!inputValue) {
             return;
         }
+        setTokenInfo(undefined);
         setNoFound(false);
         setLoading(true);
         const tokenAddress = inputValue;
@@ -159,7 +160,10 @@ function Detection() {
                                 chainArray.map((chain, index) => {
                                     return (
                                         <div className='flex-col' key={'chain-' + index} onClick={() => {
-                                            setCurrentChain(chain);
+                                            if (currentChain !== chain) {
+                                                setTokenInfo(undefined);
+                                                setCurrentChain(chain);
+                                            }
                                         }}>
                                             <div className="chain-select-item">{chain}</div>
                                             {index !== chainArray.length -1 && <div className="chain-select-item-line"></div>}

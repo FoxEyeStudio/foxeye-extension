@@ -67,7 +67,7 @@ export async function getCoingeckoInfo(chainId, tokenAddress) {
         } else if (chainId == 250) {
             chainName = 'fantom';
         }
-        const url = 'https://api.coingecko.com/api/v3/coins/' + chainName + '/contract/' + tokenAddress
+        const url = 'https://api.coingecko.com/api/v3/coins/' + chainName + '/contract/' + tokenAddress.toLowerCase()
 
         let result = await fetch(url, options).then(ret => ret.json()).catch(err => {
             return undefined;
