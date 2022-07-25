@@ -134,7 +134,7 @@ export default class AlertView extends Component {
                             }}/>
 
                             {this.state.tokenInfo && !this.state.loading && (
-                                <div style={{width: '100%', height: '100%', overflowY: "auto", overflowX: 'hidden' }}>
+                                <div style={{width: '100%', height: '100%', overflowY: "hidden", overflowX: 'hidden' }}>
                                     <TokenView token_info={this.state.tokenInfo} fromAlert={true}/>
                                 </div>
                             )}

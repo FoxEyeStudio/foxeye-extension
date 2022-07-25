@@ -120,10 +120,7 @@ function Detection() {
                 {!!tokenInfo && !loading && (
                     <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: "relative"}}>
                         <div style={{width: '100%', height: 360, paddingLeft: 16, paddingRight: 16, overflowY: "auto", overflowX: 'hidden' }}>
-                            <div style={{width: '100%', height: '100%'}}>
-                                <TokenView token_info={tokenInfo} />
-                            </div>
-
+                            <TokenView token_info={tokenInfo} />
                         </div>
                         <div className='token-view-border'>
                         </div>

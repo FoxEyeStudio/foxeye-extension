@@ -38,18 +38,6 @@ class Content {
 		tagNode.appendChild(script);
 	}
 
-	copyToClipboard(textToCopy){
-		const el = document.createElement('textarea');
-		el.value = textToCopy;
-		el.setAttribute('readonly', '');
-		el.style.position = 'absolute';
-		el.style.left = '-9999px';
-		document.body.appendChild(el);
-		el.select();
-		document.execCommand('copy');
-		document.body.removeChild(el);
-	}
-
 	initListener() {
 		theThis = this;
 
@@ -88,10 +76,6 @@ class Content {
 					}
 				});
 			}
-
-			if (e.data.foxeye_extension_action === 'foxeye_write_clipboard') {
-				theThis.copyToClipboard(e.data.textToCopy);
-			}
 		});
 
 		chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
@@ -99,8 +83,6 @@ class Content {
 				postMessage({foxeye_extension_action: 'foxeye_wallet_request_account'});
 				const result = await listenMessage('foxeye_wallet_return_account')
 				chrome.runtime.sendMessage(result, null);
-			} else if (request.foxeye_extension_action === 'foxeye_write_clipboard') {
-				theThis.copyToClipboard(request.textToCopy);
 			}
 			return false;
 		});

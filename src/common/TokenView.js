@@ -21,6 +21,9 @@ import ic_coingecko  from '../images/ic_coingecko.png'
 import ic_link from '../images/ic_link.png';
 import ic_link_hover from '../images/ic_link_hover.png';
 import {postMessage} from "../proxy/ProxyMessage";
+import BScroll from '@better-scroll/core'
+import MouseWheel from '@better-scroll/mouse-wheel'
+import ScrollBar from '@better-scroll/scroll-bar'
 
 export default class TokenView extends Component {
     state = {
@@ -39,17 +42,26 @@ export default class TokenView extends Component {
                 this.setState({coingeckoLink: '', tokenLogo: ''});
             }
         });
+
+        if (this.props.fromAlert) {
+            BScroll.use(MouseWheel)
+            BScroll.use(ScrollBar)
+            let bs = new BScroll('.foxeye-base-scroll', {
+                mouseWheel: {
+                    speed: 20,
+                    invert: false,
+                    easeTime: 300,
+                    dampingFactor: 0
+                },
+                scrollY: true,
+                scrollbar: true,
+                click: true
+            })
+        }
     }
 
     copyToClipboard = (textToCopy) => {
-        if (this.props.fromAlert) {
-            postMessage({foxeye_extension_action: 'foxeye_write_clipboard',textToCopy: textToCopy})
-            return;
-        }
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-            const tab = tabs[0];
-            chrome.tabs.sendMessage(tab.id, {foxeye_extension_action: "foxeye_write_clipboard", textToCopy: textToCopy}, undefined); //send to content.js
-        });
+        navigator.clipboard.writeText(textToCopy);
     }
 
     linkTo = url => {
@@ -216,7 +228,7 @@ export default class TokenView extends Component {
         }
 
         return (
-            <div style={{width: '100%', height: '100%'}}>
+            <div style={{width: '100%', height: '100%'}} className="foxeye-base-scroll">
                 <div className="foxeye-token-base-result-cover">
                     <div className='foxeye-token-base-token-banner'>
                         <div className='foxeye-token-base-token-banner-logo-and-tag'>
