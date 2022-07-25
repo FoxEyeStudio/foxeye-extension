@@ -2,7 +2,6 @@
     display: inline-block;
     color: rgba(36, 39, 42, 1);
     font-size: 20px;
-    font-family: SFUIDisplay-Semibold;
     font-weight: 600;
     white-space: nowrap;
     text-align: left;
@@ -58,17 +57,16 @@ input:checked + label:after {
 
 .setting-item-title {
     font-size: 16px;
-    font-family: SFUIDisplay-Semibold, SFUIDisplay;
     font-weight: 600;
     color: #24272A;
 }
 
 .setting-item-desc {
     font-size: 14px;
-    font-family: SFUIDisplay-Regular, SFUIDisplay;
     font-weight: 400;
     color: #24272A;
-    margin: 8px 20px 0px 20px
+    margin: 8px 20px 0px 20px;
+    line-height: 20px;
 }
 
 .setting-item-space {

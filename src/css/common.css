@@ -1,3 +1,7 @@
+#popup-root *, #popup-root div, #popup-root div *, #popup-root span, #popup-root span * {
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+}
+
 .flex-col {
     display: flex;
     flex-direction: column;

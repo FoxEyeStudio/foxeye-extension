@@ -6,7 +6,6 @@
 
 .about-version-name {
     font-size: 16px;
-    font-family: SFUIDisplay-Regular, SFUIDisplay;
     font-weight: 400;
     color: #535A61;
     margin: 20px auto 0px;
@@ -14,14 +13,12 @@
 
 .about-protector {
     font-size: 20px;
-    font-family: SFUIDisplay-Regular, SFUIDisplay;
     font-weight: 400;
     color: #535A61;
 }
 
 .about-link {
     font-size: 14px;
-    font-family: SFUIDisplay-Regular, SFUIDisplay;
     font-weight: 400;
     color: #027DD5;
     margin-top: 8px;

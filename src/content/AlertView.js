@@ -53,15 +53,16 @@ export default class AlertView extends Component {
                 </div>
             )
         }
-        const {type, address, symbol} = this.props.info;
-
+        const {type, address, symbol, url} = this.props.info;
         let picUrl = '';
         let title = '';
         let errorDesc = '';
         let bgColor = '#D73A4A';
+        let targetContent = '';
         if (type === RiskType_PhishingWebsite) {
             picUrl = 'img_alert_phishing';
             title = 'Phishing Website';
+            targetContent = url;
             errorDesc = 'The website is blacklisted by FoxEye. Continuing browsing may cause asset loss.';
         } else if (type === RiskType_MaliciousContract) {
             picUrl = 'img_alert_malicious';
@@ -90,12 +91,11 @@ export default class AlertView extends Component {
             errorDesc = 'You are approving to an EOA(ordinary user account), which has no limitation on fund spending.';
         }
 
-        let targetContent = '';
         if (!!symbol) {
             targetContent = symbol + ', ';
         }
         if (address) {
-            targetContent += address;
+            targetContent += address.substr(0, 8) + '...' + address.substr(-6);
         }
 
         return (
@@ -106,7 +106,7 @@ export default class AlertView extends Component {
                         <img src={chrome.runtime.getURL('/images/' + picUrl +'.png')} className='alert-type-img'/>
                     </div>
                     <div className='modal-bottom'>
-                        <div className='modal-title'>
+                        <div className='modal-title' style={{color: type === RiskType_SwapMediumRiskToken && '#F6851B' }}>
                             {title}
                         </div>
                         <div className='address-and-host'>
@@ -154,7 +154,6 @@ export default class AlertView extends Component {
                                     />
                                 </div>
                             )}
-
                         </div>
                     )}
                 </div>

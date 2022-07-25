@@ -23,7 +23,6 @@
 .detection-text {
     color: rgba(36, 39, 42, 1);
     font-size: 16px;
-    font-family: SFUIDisplay-Semibold;
     font-weight: 600;
     text-align: left;
     white-space: nowrap;
@@ -67,10 +66,10 @@
 .chain-text {
     color: rgba(36, 39, 42, 1);
     font-size: 13px;
-    font-family: SFUIDisplay-Medium;
     text-align: left;
     white-space: nowrap;
     line-height: 16px;
+    font-weight: 500;
 }
 
 .down-icon {
@@ -149,7 +148,6 @@
     height: 40px;
     color: rgba(36, 39, 42, 1);
     font-size: 13px;
-    font-family: SFUIDisplay-Medium;
     text-align: left;
     white-space: nowrap;
     line-height: 16px;
@@ -157,6 +155,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-weight: 500;
 }
 
 .chain-select-item:hover {
@@ -181,10 +180,10 @@
 .search-no-info-text {
     color: rgba(130, 139, 149, 1);
     font-size: 14px;
-    font-family: SFUIDisplay-Regular;
     text-align: left;
     white-space: nowrap;
     line-height: 16px;
+    font-weight: 400;
 }
 
 .token-view-border {
@@ -212,9 +211,7 @@
     background: #FBECEE;
     border-radius: 6px;
     border: 1px solid #D73A4A;
-
     font-size: 13px;
-    font-family: SFUIDisplay-Medium, SFUIDisplay;
     font-weight: 500;
     color: #24272A;
     line-height: 16px;

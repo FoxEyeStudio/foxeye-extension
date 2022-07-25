@@ -36,6 +36,7 @@ function Detection() {
     const [tokenInfo, setTokenInfo] = useState();
     const [loading, setLoading] = useState(false);
     const [noFound, setNoFound] = useState(false);
+    const [hoverChainSelector,setHoverChainSelector ] = useState(false);
 
     const handleChange = (event) => {
         setInputValue(event.target.value);
@@ -72,6 +73,7 @@ function Detection() {
         <div className='flex-col' style={{height: '100%'}} onClick={() => {
             if (chainSelector) {
                 setChainSelector(false);
+                setHoverChainSelector(false);
             }
         }}>
             <div className='title-wrap'>
@@ -160,8 +162,12 @@ function Detection() {
                                                 setTokenInfo(undefined);
                                                 setCurrentChain(chain);
                                             }
+                                        }} onMouseOver={() => {
+                                            if (!hoverChainSelector) {
+                                                setHoverChainSelector(true);
+                                            }
                                         }}>
-                                            <div className="chain-select-item">{chain}</div>
+                                            <div className="chain-select-item" style={{color: !hoverChainSelector && currentChain === chain && '#027DD5'}}>{chain}</div>
                                             {index !== chainArray.length -1 && <div className="chain-select-item-line"></div>}
                                         </div>
                                     )

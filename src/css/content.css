@@ -1,3 +1,7 @@
+#foxeye-chrome-extension-content-wrap *, #foxeye-chrome-extension-content-wrap div, #foxeye-chrome-extension-content-wrap div *, #foxeye-chrome-extension-content-wrap span, #foxeye-chrome-extension-content-wrap span * {
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+}
+
 .foxeye-alert-toast {
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 999999999;
@@ -8,7 +12,6 @@
     align-items: center;
     padding: 12px 0px 12px 0px;
     font-size: 16px;
-    font-family: SFUIDisplay-Regular, SFUIDisplay;
     font-weight: 400;
     color: #FFFFFF;
     line-height: 20px;
@@ -104,14 +107,19 @@
 }
 
 .foxeye-content-body .address-and-host {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     color: #535A61;
     margin-top: 10px;
+    width: 460px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    text-align: center;
 }
 
 .foxeye-content-body .alert-desc {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     color: #24272A;
     margin-top: 20px;
@@ -136,7 +144,7 @@
 
 .foxeye-content-body .check-report {
     font-size: 16px;
-    font-family: SFUIDisplay-Regular;
+    font-weight: 400;
     color: #027DD5;
     line-height: 24px;
     display: flex;
