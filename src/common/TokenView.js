@@ -35,13 +35,14 @@ export default class TokenView extends Component {
         const { token_info } = this.props;
         const tokenAddress = token_info.tokenAddress;
         const chainId = token_info.token_id;
-        chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_coingecko_info", chainId, tokenAddress}, result => {
-            if (result) {
-                this.setState(result);
-            } else {
-                this.setState({coingeckoLink: '', tokenLogo: ''});
-            }
-        });
+        // chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_coingecko_info", chainId, tokenAddress}, result => {
+        //     if (result) {
+        //         this.setState(result);
+        //     } else {
+        //         this.setState({coingeckoLink: '', tokenLogo: ''});
+        //     }
+        // });
+        this.setState({tokenLogo: `https://relayer.gopocket.finance/api/v1/getImage/${chainId}/${tokenAddress}`});
 
         if (this.props.fromAlert) {
             BScroll.use(MouseWheel)
