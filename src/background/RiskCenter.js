@@ -8,6 +8,14 @@ export const RiskType_ApproveEOA = 4;// erc20 approve to
 export const RiskType_TransferToContract = 5;// erc20 transfer to
 export const RiskType_SwapHighRiskToken = 6; // buy token on uniswap-like dex
 export const RiskType_SwapMediumRiskToken = 7; // buy token on uniswap-like dex
+export const RiskType_ApproveNormal = 8; // approve analysis
+
+export const Approve_ERC20_approve = 1;
+export const Approve_ERC20_increaseAllowance = 2;
+export const Approve_ERC721_approve = 3;
+export const Approve_ERC721_setApprovalForAll = 4;
+
+export const app_version = 105;
 
 // const api_host = 'http://localhost:6699/v1/';
 const api_host = 'https://api.foxeye.io/v1/';
@@ -38,11 +46,11 @@ class RiskCenter {
         console.log(tag, chain_id, transaction);
         try {
             const { data, to, from } = transaction;
-            const { malicious_contract_off, token_safety_off, target_correctness_off } = args || {};
+            const { malicious_contract_off, token_safety_off, target_correctness_off, approve_reminder_off } = args || {};
             const options = {
                 method: 'POST',
                 body: JSON.stringify({
-                    chain_id, data, to, from, malicious_contract_off, token_safety_off, target_correctness_off
+                    chain_id, data, to, from, app_version, malicious_contract_off, token_safety_off, target_correctness_off, approve_reminder_off
                 }),
                 headers: {
                     'Accept': 'application/json',
