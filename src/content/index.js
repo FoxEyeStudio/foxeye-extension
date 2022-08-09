@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import AlertView from './AlertView'
 import {listenMessage, postMessage} from "../proxy/ProxyMessage";
 import riskCenter, {RiskType_PhishingWebsite} from "../background/RiskCenter";
-import {MaliciousContract, PhishingWebsites, SWITCH_ALERT_ID, TargetCorrectness, TokenSafety} from "../common/utils";
+import {MaliciousContract, PhishingWebsites, SWITCH_ALERT_ID, TargetCorrectness, TokenSafety, ApproveReminder} from "../common/utils";
 
 let theThis;
 class Content {
@@ -18,7 +18,20 @@ class Content {
 			this.injectScript(chrome.runtime.getURL('/js/foxeyeProxy.js'), 'body');
 			this.injectCss(chrome.runtime.getURL('/css/foxeye-chrome-extension-content.css'), 'head');
 			this.injectCss(chrome.runtime.getURL('/css/foxeye-chrome-extension-token.css'), 'head');
+			this.saveAppVersioin();
 		}, { once: true });
+	}
+
+	saveAppVersioin() {
+		const url = chrome.runtime.getURL('manifest.json');
+		const xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			const manifest = JSON.parse(xhr.response);
+			const version = manifest.version;
+			chrome.storage.local.set({ 'app_version': version });
+		};
+		xhr.open('GET', url, true);
+		xhr.send();
 	}
 
 	injectScript(file, node) {
@@ -60,6 +73,9 @@ class Content {
 					}
 					if (switchInfo[TargetCorrectness] === false) {
 						args = { ...args, target_correctness_off: 1}
+					}
+					if (switchInfo[ApproveReminder] === false) {
+						args = { ...args, approve_reminder_off: 1}
 					}
 				}
 				const msg = { ...e.data, args}

@@ -1,3 +1,4 @@
+import {SWITCH_ALERT_ID} from "../common/utils";
 
 export const RiskType_Safe = 0;
 export const RiskType_PhishingWebsite = 1;
@@ -15,7 +16,7 @@ export const Approve_ERC20_increaseAllowance = 2;
 export const Approve_ERC721_approve = 3;
 export const Approve_ERC721_setApprovalForAll = 4;
 
-export const app_version = 105;
+// export const app_version = 105;
 
 // const api_host = 'http://localhost:6699/v1/';
 const api_host = 'https://api.foxeye.io/v1/';
@@ -28,7 +29,6 @@ const g_websites = {
 };
 
 class RiskCenter {
-
     /*
     * method: "eth_sendTransaction"
     * params: Array(1)
@@ -44,6 +44,8 @@ class RiskCenter {
     // malicious_contract_off, token_safety_off, target_correctness_off
     async parseTransaction(chain_id, transaction, args) {
         console.log(tag, chain_id, transaction);
+        const versionObj = await chrome.storage.local.get('app_version');
+        const app_version = versionObj['app_version'];
         try {
             const { data, to, from } = transaction;
             const { malicious_contract_off, token_safety_off, target_correctness_off, approve_reminder_off } = args || {};

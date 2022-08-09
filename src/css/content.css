@@ -36,11 +36,9 @@
     align-items: center;
 }
 
-
-
 .foxeye-content-body .modal-wrap {
     width: 500px;
-    height: 506px;
+    min-height: 506px;
     flex-direction: column;
     display: flex;
     position: relative;
@@ -57,11 +55,27 @@
 }
 
 .foxeye-content-body .modal-bottom {
-    height: 306px;
+    min-height: 306px;
     width: 500px;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
     background-color: white;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foxeye-content-body .no-approve-wrap {
+    width: 500px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foxeye-content-body .approve-wrap {
+    width: 406px;
     flex-direction: column;
     display: flex;
     justify-content: center;
@@ -94,6 +108,7 @@
     color: #027DD5;
     margin-top: 20px;
     cursor: pointer;
+    margin-bottom: 30px;
 }
 
 .foxeye-content-body .continue-btn:hover {
@@ -103,7 +118,8 @@
 .foxeye-content-body .modal-title {
     font-size: 30px;
     font-weight: bold;
-    color: #D73A4A
+    color: #D73A4A;
+    margin-top: 30px;
 }
 
 .foxeye-content-body .address-and-host {
@@ -166,6 +182,77 @@
     margin: 20px 0px 10px 20px;
 }
 
-.foxeye-back-img:hover {
+foxeye-content-body .foxeye-back-img:hover {
     background-image: var(--ic-back-hover);
 }
+
+.foxeye-content-body .foxeye-subtype-top-wrap {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.foxeye-content-body .foxeye-subtype-top-ellipsis {
+    font-size: 20px;
+    font-weight: bold;
+    color: #24272A;
+    line-height: 24px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.foxeye-content-body .foxeye-subtype-arrow-top {
+    width: 12px;
+    height: 6px;
+    margin-top: 6px;
+}
+
+.foxeye-content-body .foxeye-subtype-arrow-bottom {
+    width: 12px;
+    height: 8px;
+}
+
+.foxeye-content-body .foxeye-subtype-type-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #F6851B;
+    line-height: 14px;
+    padding: 3px 12px 3px 12px;
+    background: #FDE0C6;
+    border-radius: 10px;
+}
+
+.foxeye-content-body .foxeye-subtype-contract-wrap {
+    display: flex;
+    flex-direction: row;
+    margin-top: 6px;
+}
+
+.foxeye-content-body .foxeye-subtype-contract {
+    font-size: 20px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 24px;
+}
+
+.foxeye-content-body .foxeye-subtype-contract-address {
+    font-size: 20px;
+    font-weight: bold;
+    color: #24272A;
+    line-height: 24px;
+    margin-left: 20px;
+}
+
+.foxeye-content-body .foxeye-subtype-desc {
+    font-size: 16px;
+    font-weight: 400;
+    color: #24272A;
+    line-height: 24px;
+    text-align: center;
+    margin-top: 20px;
+    max-width: 410px;
+    word-wrap: break-word;
+}
+

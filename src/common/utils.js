@@ -13,8 +13,9 @@ export const PhishingWebsites = 'phishing-websites-switch';
 export const MaliciousContract = 'malicious-contract-switch';
 export const TokenSafety = 'token-safety-switch';
 export const TargetCorrectness = 'target-correctness-switch';
+export const ApproveReminder = 'approve-reminder-switch';
 
-export const SWITCH_ALERT_ID = [PhishingWebsites, MaliciousContract, TokenSafety, TargetCorrectness];
+export const SWITCH_ALERT_ID = [PhishingWebsites, MaliciousContract, TokenSafety, TargetCorrectness, ApproveReminder];
 
 export async function getTokenInfo(chainId, tokenAddress) {
     try {

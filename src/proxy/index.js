@@ -4,6 +4,8 @@ import {listenMessage, postMessage} from "./ProxyMessage";
 const tag = 'FoxeyeProxy: ';
 
 class FoxeyeProxy {
+    delayCount = 0;
+
     constructor() {
         this.initProxy();
         this.initListener();
@@ -38,6 +40,10 @@ class FoxeyeProxy {
             window.ethereum.sendAsync = proxy2;
             clearInterval(this.proxyInterval);
         } else {
+            if (this.delayCount < 3) {
+                this.delayCount += 1;
+                setTimeout(() => { this.insertProxy() }, 3000);
+            }
             console.log(tag, '@cyh: No Found window.ethereum');
         }
     }
@@ -45,7 +51,6 @@ class FoxeyeProxy {
     // proxyInterval = setInterval(this.insertProxy(), 1000);
 
     initProxy() {
-        // const proxyThis = this;
         this.proxyHandler = {
             async apply(target, thisArg, argArray) {
                 const transaction = [...argArray][0];
@@ -67,8 +72,7 @@ class FoxeyeProxy {
                 return target(...argArray);
             }
         };
-        this.proxyInterval = setInterval(this.insertProxy(), 1000);
-        setTimeout(() => { clearInterval(this.proxyInterval); }, 10000);
+        setTimeout(() => { this.insertProxy() }, 1000);
     }
 }
 

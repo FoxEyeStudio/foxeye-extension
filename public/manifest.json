@@ -24,7 +24,8 @@
         "resources": [
             "images/*",
             "js/foxeyeProxy.js",
-            "css/*"
+            "css/*",
+            "manifest.json"
         ],
         "matches": ["<all_urls>"]
     }],

@@ -14,7 +14,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgba(242, 244, 246, 1);
+    background-color: rgba(242, 244, 246, 0.5);
 }
 
 .title-logo {

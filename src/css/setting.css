@@ -65,7 +65,7 @@ input:checked + label:after {
     font-size: 14px;
     font-weight: 400;
     color: #24272A;
-    margin: 8px 20px 0px 20px;
+    margin: 3px 20px 0px 20px;
     line-height: 20px;
 }
 
