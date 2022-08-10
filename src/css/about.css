@@ -45,6 +45,10 @@
     align-items: center;
 }
 
+.about-item:hover {
+    background-color: rgba(242, 244, 246, 1);
+}
+
 .about-item-img {
     width: 22px;
     height: 22px;

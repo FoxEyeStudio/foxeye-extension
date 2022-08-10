@@ -53,8 +53,9 @@ export default class AlertView extends Component {
     }
 
     amountFormat = num => {
-        if (num > 1000000000) {
-            const p = Math.floor(Math.log(num) / Math.LN10);
+        num = Number(num);
+        const p = Math.floor(Math.log(num) / Math.LN10);
+        if (Math.abs(p) > 10) {
             const n = num * (10 ** -p);
             if (p > 0) {
                 return `${n}e+${p}`;
@@ -62,9 +63,20 @@ export default class AlertView extends Component {
                 return `${n}e${p}`;
             }
         }
-        const mon = num.toFixed(2)
-        const reg = /(\d)(?=(\d{3})+\.)/g
-        return mon.replace(reg, ($0, $1) => $1 + ',')
+        if (p >= 0) {
+            let length = 0;
+            if (String(num).indexOf('.') !== -1) {
+                const dotIndex = String(num).indexOf('.') + 1;   //小数点的位置
+                length = String(num).length - dotIndex;  //小数的位数
+            }
+            let mon = num.toFixed(length)
+            if (length > 5) {
+                mon = num.toFixed(5)
+            }
+            const reg = /(\d)(?=(\d{3})+\.)/g
+            return mon.replace(reg, ($0, $1) => $1 + ',')
+        }
+        return num;
     }
 
     render() {
