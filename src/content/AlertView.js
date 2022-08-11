@@ -171,7 +171,7 @@ export default class AlertView extends Component {
                 subTypeTitleLeft = name
                 subTypeTitleLeftMaxWidth = 300;
                 subTypeTitleRight = '\u00a0\u00a0\u00a0' + token_id;
-                subTypeTitleRightMaxWidth = 120;
+                subTypeTitleRightMaxWidth = 300;// no limit
                 subTypeTag = 'Approve';
                 subTypeDesc = 'After approval, this address can transfer the NFT, if you\'re not sure please abort.'
             } else if (sub_type === Approve_ERC721_setApprovalForAll) {
