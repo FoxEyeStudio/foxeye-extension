@@ -31,5 +31,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true;
     }
 
+    if (request.foxeye_extension_action === 'foxeye_security_statistic') {
+        riskCenter.parseSecurityStatistic().then(result => sendResponse(result));
+        return true;
+    }
+
     return false;
 });

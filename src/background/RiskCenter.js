@@ -21,6 +21,7 @@ export const Approve_ERC721_setApprovalForAll = 4;
 // const api_host = 'http://localhost:6699/v1/';
 const api_host = 'https://api.foxeye.io/v1/';
 const phishing_website_url = 'https://api.gopluslabs.io/api/v1/phishing_site?url=';
+const security_statistic_url = 'http://open-api.gopluslabs.io/api/v1/public/statistic/count?types=TOKEN,DAPP,WEBSITE';
 
 const tag = 'RiskCenter: ';
 
@@ -131,6 +132,26 @@ class RiskCenter {
         }
         return domain;
     }
+
+    async parseSecurityStatistic() {
+        const options = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Connection': 'keep-alive'
+            }
+        };
+        let result = await fetch(security_statistic_url, options).then(ret => ret.json()).catch(err => {
+            return undefined;
+        });
+
+        if (result && result.code == 1) {
+            return result.result;
+        }
+        return undefined;
+    }
+
 }
 
 const riskCenter = new RiskCenter();

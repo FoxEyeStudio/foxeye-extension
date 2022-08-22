@@ -17,7 +17,7 @@ import ic_web_danger from '../../images/ic_web_danger.png'
 import ic_web_safe from '../../images/ic_web_safe.png'
 import ic_security from '../../images/ic_security.png'
 import riskCenter from "../../background/RiskCenter";
-import {STORAGE_INTERCEPTED_AMOUNT} from "../../common/utils";
+import {STORAGE_INTERCEPTED_AMOUNT, STORAGE_SECURITY_STATISTIC_AMOUNT} from "../../common/utils";
 
 function Home() {
     const navigate = useNavigate()
@@ -26,6 +26,10 @@ function Home() {
     const [lowRisk, setLowRisk] = useState(true);
     const [favIconUrl, setFavIconUrl] = useState();
     const [interceptedAmount, setInterceptedAmount] = useState(0);
+    const [tokenAmount, setTokenAmount] = useState(0);
+    const [phishingAmount, setPhishingAmount] = useState(0);
+    const [contractAmount, setContractAmount] = useState(0);
+    const [syncTime, setSyncTime] = useState();
 
     useEffect(() => {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
@@ -62,10 +66,53 @@ function Home() {
                 setInterceptedAmount(interceptedAmount);
             }
         });
+
+        chrome.storage.local.get(STORAGE_SECURITY_STATISTIC_AMOUNT, function (result) {
+            if (result && result[STORAGE_SECURITY_STATISTIC_AMOUNT]) {
+                const content = result[STORAGE_SECURITY_STATISTIC_AMOUNT];
+                setTokenAmount(formatNumber(content['TOKEN']));
+                setPhishingAmount(formatNumber(content['WEBSITE']));
+                setContractAmount(formatNumber(content['DAPP']));
+                setSyncTime(content['time']);
+            }
+        });
+
+        chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_security_statistic"}, result => {
+            if(result) {
+                setTokenAmount(formatNumber(result['TOKEN']));
+                setPhishingAmount(formatNumber(result['WEBSITE']));
+                setContractAmount(formatNumber(result['DAPP']));
+                const d = new Date();
+                const date = new Date()
+                const time = dateFormat("HH:MM", date);
+                result['time'] = time;
+                setSyncTime(time);
+                chrome.storage.local.set({ [STORAGE_SECURITY_STATISTIC_AMOUNT]: result });
+            }
+        });
     }, []);
 
-    const openSetting = () => {
-        navigate('/setting')
+    const formatNumber = num => {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+
+    const dateFormat = (fmt, date) => {
+        let ret;
+        const opt = {
+            "Y+": date.getFullYear().toString(),
+            "m+": (date.getMonth() + 1).toString(),
+            "d+": date.getDate().toString(),
+            "H+": date.getHours().toString(),
+            "M+": date.getMinutes().toString(),
+            "S+": date.getSeconds().toString()
+        };
+        for (let k in opt) {
+            ret = new RegExp("(" + k + ")").exec(fmt);
+            if (ret) {
+                fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+            };
+        };
+        return fmt;
     }
 
 
@@ -124,14 +171,16 @@ function Home() {
                         Safe Library
                     </div>
                     <div className='flex-full'/>
-                    <div className='state-synced'>
-                        Synced at 22:30
-                    </div>
+                    {syncTime && (
+                        <div className='state-synced'>
+                            Synced at {syncTime}
+                        </div>
+                    )}
                 </div>
                 <div className='security-check-wrap'>
                     <div className='security-check-item'>
                         <div className='security-check-item-amount'>
-                            11,624
+                            {tokenAmount}
                         </div>
                         <div className='security-check-item-desc'>
                             Tokens
@@ -140,7 +189,7 @@ function Home() {
                     <div className='security-check-item-line'/>
                     <div className='security-check-item'>
                         <div className='security-check-item-amount'>
-                            145,423
+                            {phishingAmount}
                         </div>
                         <div className='security-check-item-desc'>
                             Phishing
@@ -149,7 +198,7 @@ function Home() {
                     <div className='security-check-item-line'/>
                     <div className='security-check-item'>
                         <div className='security-check-item-amount'>
-                            43,927
+                            {contractAmount}
                         </div>
                         <div className='security-check-item-desc'>
                             Contracts

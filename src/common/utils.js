@@ -19,6 +19,8 @@ export const SWITCH_ALERT_ID = [PhishingWebsites, MaliciousContract, TokenSafety
 
 export const STORAGE_INTERCEPTED_AMOUNT = 'storage-intercepted-amount';
 
+export const STORAGE_SECURITY_STATISTIC_AMOUNT = 'storage-security-statistic';
+
 export async function getTokenInfo(chainId, tokenAddress) {
     try {
         const options = {
