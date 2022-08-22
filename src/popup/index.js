@@ -8,6 +8,7 @@ import About from "./about";
 import Guide from "./guide";
 import '../css/popup.css'
 import '../css/common.css'
+import Approval from "./approval";
 
 function Popup(props) {
     return (
@@ -19,6 +20,7 @@ function Popup(props) {
                     <Route exact path="/detection" element={<Detection />} />
                     <Route exact path="/about" element={<About />} />
                     <Route exact path="/guide" element={<Guide />} />
+                    <Route exact path="/approval" element={<Approval />} />
                     <Route path="*" element={<Navigate to={props.initPage} />} />
                 </Routes>
             </HashRouter>

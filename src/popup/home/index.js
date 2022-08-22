@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import webFavicon from '../../images/web_favicon.png'
 import settingIcon from '../../images/ic_setting.png'
 import detectionIcon from '../../images/ic_detection.png'
+import approvalListIcon from '../../images/ic_approval_list.png'
 import arrowIcon from '../../images/ic_arrow.png'
 import monitorIcon from '../../images/ic_monitor.png'
 import '../../css/home.css'
@@ -10,6 +11,11 @@ import {useNavigate} from "react-router-dom";
 import titleLogo from "../../images/title_logo.png";
 import aboutIcon from "../../images/ic_about.png";
 import aboutHoverIcon from "../../images/ic_about_hover.png";
+import ic_connected from '../../images/ic_connected.png'
+import ic_inactive from '../../images/ic_inactive.png'
+import ic_web_danger from '../../images/ic_web_danger.png'
+import ic_web_safe from '../../images/ic_web_safe.png'
+import ic_security from '../../images/ic_security.png'
 import riskCenter from "../../background/RiskCenter";
 
 function Home() {
@@ -61,42 +67,100 @@ function Home() {
                 <img src={titleLogo} className='title-logo' />
                 <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'home'}})}}/>
             </div>
-            <div className="account-wrap flex-col justify-center">
+            <div className='home-top-wrap'>
+                <div className='intercepted-wrap'>
+                    <div className='intercepted-amount'>
+                        10
+                    </div>
+                    <div className='intercepted-desc'>
+                        threats intercepted for you
+                    </div>
+                </div>
                 {!!account ? (
-                    <div className="flex-col justify-between align-center">
-                        <span className="address-text">{account.substring(0, 6) + '...' + account.substring(account.length-4)}</span>
-                        <div className="monitor-bg flex-row justify-center align-center">
-                            <img
-                                className="monitor-img"
-                                src={monitorIcon}
-                            />
-                            <span className="monitor-text">Monitoring</span>
+                    <div className='state-wrap'>
+                        <img src={ic_connected} className='state-icon'/>
+                        <div className='state-title'>
+                            Account
+                        </div>
+                        <div className='flex-full'/>
+                        <div className='state-desc'>
+                            {account.substring(0, 6) + '...' + account.substring(account.length-4)}
                         </div>
                     </div>
                 ) : (
-                    <div className="flex-col justify-between">
-                        <div className="wallet-inactive-text">Wallet&nbsp;Inactive</div>
-                        <div className="wallet-inactive_desc">When&nbsp;Connected&nbsp;to&nbsp;website,FoxEye&nbsp;will&nbsp;
-                            <br/>monitor&nbsp;malicious&nbsp;behaviour.</div>
+                    <div className='state-wrap'>
+                        <img src={ic_inactive} className='state-icon'/>
+                        <div className='state-title'>
+                            Account
+                        </div>
+                        <div className='flex-full'/>
+                        <div className='state-desc'>
+                            Wallet is Inactive
+                        </div>
                     </div>
                 )}
-            </div>
-
-            <div className="current-website">Current&nbsp;Website</div>
-            <div className="web-info-wrap flex-row justify-between align-center">
-                <div className="flex-row align-center">
-                    <img src={favIconUrl || webFavicon} className='web-favicon'/>
-                    <div className="web-host-info flex-col justify-between">
-                        <div className="host-text">{domain}</div>
-                        <div className="website-name">{lowRisk ? 'No threat detected' : 'Malicious website'}</div>
+                <div className='state-wrap'>
+                    <img src={favIconUrl || webFavicon} className='state-icon'/>
+                    <div className='state-title'>
+                        {domain}
+                    </div>
+                    <div className='flex-full'/>
+                    <img className='state-web-security' src={lowRisk ? ic_web_safe : ic_web_danger}/>
+                    <div className='state-desc'>
+                        {lowRisk ? 'No threat detected' : 'Malicious website'}
                     </div>
                 </div>
-                <div className="security_wrap flex-col" style={{backgroundColor: lowRisk ? '#06A130' : '#D73A4A'}}>
-                    <div className="security-text">{lowRisk ? 'Low Risk' : 'High Risk'}</div>
+                <div className='state-wrap'>
+                    <img src={ic_security} className='state-icon'/>
+                    <div className='state-title'>
+                        Safe Library
+                    </div>
+                    <div className='flex-full'/>
+                    <div className='state-synced'>
+                        Synced at 22:30
+                    </div>
+                </div>
+                <div className='security-check-wrap'>
+                    <div className='security-check-item'>
+                        <div className='security-check-item-amount'>
+                            11,624
+                        </div>
+                        <div className='security-check-item-desc'>
+                            Tokens
+                        </div>
+                    </div>
+                    <div className='security-check-item-line'/>
+                    <div className='security-check-item'>
+                        <div className='security-check-item-amount'>
+                            145,423
+                        </div>
+                        <div className='security-check-item-desc'>
+                            Phishing
+                        </div>
+                    </div>
+                    <div className='security-check-item-line'/>
+                    <div className='security-check-item'>
+                        <div className='security-check-item-amount'>
+                            43,927
+                        </div>
+                        <div className='security-check-item-desc'>
+                            Contracts
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="line flex-col"></div>
-            <div className="token-detection-wrap flex-col" onClick={()=>{navigate('/detection')}}>
+            <div className="token-detection-wrap flex-col" onClick={()=>{navigate('/approval')}}>
+                <div className="token-detection-inter flex-row align-center">
+                    <img src={approvalListIcon} className='detection-img'/>
+                    <div className="item-wrapper flex-col justify-between">
+                        <div className="home-item-title">Approval List</div>
+                        <div className="home-item-desc">Manage approval regularly</div>
+                    </div>
+                    <div className={'flex-full'}/>
+                    <img src={arrowIcon} className={'arrow-img'}/>
+                </div>
+            </div>
+            <div className="setting-wrap flex-col" onClick={()=>{navigate('/detection')}}>
                 <div className="token-detection-inter flex-row align-center">
                     <img src={detectionIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
@@ -107,7 +171,7 @@ function Home() {
                     <img src={arrowIcon} className={'arrow-img'}/>
                 </div>
             </div>
-            <div className="setting-wrap flex-col" onClick={openSetting}>
+            <div className="setting-wrap flex-col" onClick={() => {navigate('/setting')}}>
                 <div className="token-detection-inter flex-row align-center">
                     <img src={settingIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
