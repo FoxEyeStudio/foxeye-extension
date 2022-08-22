@@ -3,7 +3,15 @@ import ReactDOM from 'react-dom/client';
 import AlertView from './AlertView'
 import {listenMessage, postMessage} from "../proxy/ProxyMessage";
 import riskCenter, {RiskType_PhishingWebsite} from "../background/RiskCenter";
-import {MaliciousContract, PhishingWebsites, SWITCH_ALERT_ID, TargetCorrectness, TokenSafety, ApproveReminder} from "../common/utils";
+import {
+	MaliciousContract,
+	PhishingWebsites,
+	SWITCH_ALERT_ID,
+	TargetCorrectness,
+	TokenSafety,
+	ApproveReminder,
+	STORAGE_INTERCEPTED_AMOUNT
+} from "../common/utils";
 
 let theThis;
 class Content {
@@ -51,6 +59,17 @@ class Content {
 		tagNode.appendChild(script);
 	}
 
+	addInterceptedAccount = () => {
+		chrome.storage.local.get(STORAGE_INTERCEPTED_AMOUNT, function (result) {
+			let interceptedAmount = 0;
+			if (result && result[STORAGE_INTERCEPTED_AMOUNT]) {
+				interceptedAmount = result[STORAGE_INTERCEPTED_AMOUNT];
+			}
+			interceptedAmount += 1;
+			chrome.storage.local.set({ [STORAGE_INTERCEPTED_AMOUNT]: interceptedAmount });
+		});
+	}
+
 	initListener() {
 		theThis = this;
 
@@ -87,6 +106,7 @@ class Content {
 					if (backMsg.type !== 0) {
 						theThis.showContainer();
 						theThis.getRoot().render(<AlertView info={backMsg} hideContainer={theThis.hideContainer}/>);
+						theThis.addInterceptedAccount();
 					} else {
 						theThis.hideContainer();
 					}

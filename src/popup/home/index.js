@@ -17,6 +17,7 @@ import ic_web_danger from '../../images/ic_web_danger.png'
 import ic_web_safe from '../../images/ic_web_safe.png'
 import ic_security from '../../images/ic_security.png'
 import riskCenter from "../../background/RiskCenter";
+import {STORAGE_INTERCEPTED_AMOUNT} from "../../common/utils";
 
 function Home() {
     const navigate = useNavigate()
@@ -24,6 +25,7 @@ function Home() {
     const [domain, setDomain] = useState();
     const [lowRisk, setLowRisk] = useState(true);
     const [favIconUrl, setFavIconUrl] = useState();
+    const [interceptedAmount, setInterceptedAmount] = useState(0);
 
     useEffect(() => {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
@@ -54,6 +56,12 @@ function Home() {
             return false;
         });
 
+        chrome.storage.local.get(STORAGE_INTERCEPTED_AMOUNT, function (result) {
+            if (result && result[STORAGE_INTERCEPTED_AMOUNT]) {
+                const interceptedAmount = result[STORAGE_INTERCEPTED_AMOUNT];
+                setInterceptedAmount(interceptedAmount);
+            }
+        });
     }, []);
 
     const openSetting = () => {
@@ -70,7 +78,7 @@ function Home() {
             <div className='home-top-wrap'>
                 <div className='intercepted-wrap'>
                     <div className='intercepted-amount'>
-                        10
+                        {interceptedAmount}
                     </div>
                     <div className='intercepted-desc'>
                         threats intercepted for you

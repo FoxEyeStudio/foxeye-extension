@@ -17,6 +17,8 @@ export const ApproveReminder = 'approve-reminder-switch';
 
 export const SWITCH_ALERT_ID = [PhishingWebsites, MaliciousContract, TokenSafety, TargetCorrectness, ApproveReminder];
 
+export const STORAGE_INTERCEPTED_AMOUNT = 'storage-intercepted-amount';
+
 export async function getTokenInfo(chainId, tokenAddress) {
     try {
         const options = {
