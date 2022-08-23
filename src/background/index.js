@@ -36,5 +36,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true;
     }
 
+    if (request.foxeye_extension_action === 'foxeye_fetch_approvals') {
+        const { account } = request;
+        riskCenter.fetchApprovals(account).then(result => sendResponse(result));
+        return true;
+    }
+
     return false;
 });

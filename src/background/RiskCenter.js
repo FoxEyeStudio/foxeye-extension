@@ -16,6 +16,15 @@ export const Approve_ERC20_increaseAllowance = 2;
 export const Approve_ERC721_approve = 3;
 export const Approve_ERC721_setApprovalForAll = 4;
 
+export const EthereumId = 1;
+export const PolygonId = 137;
+export const ArbitrumId = 42161;
+export const BscId = 56;
+export const AvalancheId = 43114;
+export const HecoId = 128;
+export const FtmId = 250;
+export const OkcId = 66;
+
 // export const app_version = 105;
 
 // const api_host = 'http://localhost:6699/v1/';
@@ -150,6 +159,35 @@ class RiskCenter {
             return result.result;
         }
         return undefined;
+    }
+
+    approvalsUrl(chain_id, account) {
+        return `https://api.gopluslabs.io/api/v2/token_approval_security/${chain_id}?addresses=${account}`;
+    }
+
+    async fetchApprovals(account) {
+        const options = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Connection': 'keep-alive'
+            }
+        };
+        let eth_result = await fetch(this.approvalsUrl(EthereumId, account), options).then(ret => ret.json()).catch(err => {
+            return undefined;
+        });
+        let bsc_result = await fetch(this.approvalsUrl(BscId, account), options).then(ret => ret.json()).catch(err => {
+            return undefined;
+        });
+        let result = [];
+        if (eth_result && (eth_result.code == 1 || eth_result.code == 2) && eth_result.result && eth_result.result.length > 0) {
+            result.push(...eth_result.result);
+        }
+        if (bsc_result && (bsc_result.code == 1 || bsc_result.code == 2) && bsc_result.result && bsc_result.result.length > 0) {
+            result.push(...bsc_result.result);
+        }
+        return result;
     }
 
 }
