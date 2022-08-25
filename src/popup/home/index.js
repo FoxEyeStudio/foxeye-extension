@@ -206,7 +206,7 @@ function Home() {
                     </div>
                 </div>
             </div>
-            <div className="token-detection-wrap flex-col" onClick={()=>{navigate('/approval')}}>
+            <div className="token-detection-wrap flex-col" onClick={()=>{navigate('/approval', { state: { account }})}}>
                 <div className="token-detection-inter flex-row align-center">
                     <img src={approvalListIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
