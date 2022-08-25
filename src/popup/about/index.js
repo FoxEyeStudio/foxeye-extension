@@ -32,7 +32,7 @@ function About() {
                 <img src={titleLogo} className='title-logo' />
             </div>
             <div className="token-detection-title flex-row align-center">
-                <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/' + state.from)}}/>
+                <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/' + state.from, { state })}}/>
                 <span className="detection-text">About</span>
             </div>
             <img src={aboutLogo} className='about-logo-img'/>

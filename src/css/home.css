@@ -257,6 +257,10 @@
     color: #24272A;
     line-height: 20px;
     margin-left: 8px;
+    max-width: 165px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .state-web-security {

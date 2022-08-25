@@ -85,7 +85,7 @@ function Approval() {
         <div className='flex-col' style={{height: '100%'}}>
             <div className='title-wrap'>
                 <img src={titleLogo} className='title-logo' />
-                <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'approval'}})}}/>
+                <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'approval', account}})}}/>
             </div>
             <div className="token-detection-title flex-row align-center">
                 <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/home')}}/>
