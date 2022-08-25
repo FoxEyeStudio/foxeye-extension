@@ -148,7 +148,7 @@ function Approval() {
                                         <div className='approval-list-item-spender-name'>{vv.address_info?.tag ? vv.address_info.tag : vv.address_info?.contract_name ? vv.address_info.contract_name : 'unknown'}</div>
                                         <div className='approval-list-item-spender-wrap'>
                                             <div className='approval-list-item-spender-title'>Contract</div>
-                                            <div className='approval-list-item-spender-content'>{vv.approved_contract.substring(0, 14) + '...' + vv.approved_contract.substring(vv.approved_contract.length-14)}</div>
+                                            <div className='approval-list-item-spender-content'>{vv.approved_contract.substring(0, 12) + '...' + vv.approved_contract.substring(vv.approved_contract.length-10)}</div>
                                             <img src={ic_about_website} className='approval-list-item-spender-link' onClick={
                                                 () => {
                                                     let url = `https://etherscan.io/address/${vv.approved_contract}`;
