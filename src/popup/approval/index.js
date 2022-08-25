@@ -23,6 +23,7 @@ function Approval() {
     const { state: { account } } = useLocation();
     const [loading, setLoading] = useState(true);
     const [approvals, setApprovals] = useState([]);
+    const [approvalPopup, setApprovalPopup] = useState(false);
 
     useEffect(() => {
         if (!ethers.utils.isAddress(account)) {
@@ -146,7 +147,7 @@ function Approval() {
                                     <div>
                                         <div className='approval-list-item-spender-name'>{vv.address_info?.tag ? vv.address_info.tag : vv.address_info?.contract_name ? vv.address_info.contract_name : 'unknown'}</div>
                                         <div className='approval-list-item-spender-wrap'>
-                                            <div className='approval-list-item-spender-title'>Spender</div>
+                                            <div className='approval-list-item-spender-title'>Contract</div>
                                             <div className='approval-list-item-spender-content'>{vv.approved_contract.substring(0, 14) + '...' + vv.approved_contract.substring(vv.approved_contract.length-14)}</div>
                                             <img src={ic_about_website} className='approval-list-item-spender-link' onClick={
                                                 () => {
@@ -159,15 +160,11 @@ function Approval() {
                                             }/>
                                         </div>
                                         <div className='approval-list-item-spender-wrap'>
-                                            <div className='approval-list-item-spender-title'>Allowance</div>
+                                            <div className='approval-list-item-spender-title'>Limit</div>
                                             <div className='approval-list-item-spender-content'>{amountFormat(vv.approved_amount)}</div>
                                             <img src={ic_about_hover} className='approval-list-item-spender-link' onClick={
                                                 () => {
-                                                    let url = `https://etherscan.io/address/${vv.approved_contract}`;
-                                                    if (v.chain_id == BscId) {
-                                                        url = `https://bscscan.com/address/${vv.approved_contract}`;
-                                                    }
-                                                    chrome.tabs.create({url});
+                                                    setApprovalPopup(true);
                                                 }
                                             }/>
                                         </div>
@@ -180,6 +177,17 @@ function Approval() {
                                 ))}
                             </div>
                         ))}
+                    </div>
+                </div>
+            )}
+            {approvalPopup && (
+                <div className='approval-popup-wrap'>
+                    <div className='approval-popup-content-wrap'>
+                        <div className='approval-popup-content-title'>Token Approval Limit</div>
+                        <div className='approval-popup-content-content'>Approval sets maximum token amount for certain smart contracts to utilize. Malicious contract usually set this amount to "UNLIMITED".   (Note: Unlimited amount does not neccessarily mean that the contract is malicious, many normal contracts also set the token quota as unlimited.)</div>
+                        <div className='approval-popup-content-ok' onClick={() => {
+                            setApprovalPopup(false);
+                        }}>OK</div>
                     </div>
                 </div>
             )}
