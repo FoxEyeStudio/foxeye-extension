@@ -138,6 +138,7 @@ class Content {
 							const domain = riskCenter.getDomain(window.location.href);
 							const _domain = riskCenter.getDomain(res.url);
 							if (domain == _domain) {
+								theThis.addInterceptedAccount();
 								theThis.showContainer();
 								theThis.getRoot().render(<AlertView info={res} hideContainer={theThis.hideContainer}/>);
 								const callback = await listenMessage('foxeye_alert_callback')

@@ -232,8 +232,8 @@ function Home() {
                 <div className="token-detection-inter flex-row align-center">
                     <img src={settingIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
-                        <div className="home-item-title">Risk&nbsp;Alerts</div>
-                        <div className="home-item-desc">3&nbsp;strategies&nbsp;on</div>
+                        <div className="home-item-title">Risk Alerts</div>
+                        <div className="home-item-desc">5 strategies on</div>
                     </div>
                     <div className={'flex-full'}/>
                     <img src={arrowIcon} className={'arrow-img'}/>
