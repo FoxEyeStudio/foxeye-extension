@@ -1,8 +1,16 @@
+.approval-loading-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
 .approval-scroll-div {
     display: flex;
     overflow: auto;
     margin-top: 25px;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
 }
 
 .approval-top-wrap {
@@ -76,6 +84,9 @@
     width: 325px;
     background: #FFFFFF;
     border: 1px solid #D6D9DC;
+    border-radius: 6px;
+    margin-top: 10px;
+    margin-bottom: 24px;
 }
 
 .approval-list-title {
@@ -103,11 +114,20 @@
     background: #D6D9DC;
 }
 
+.approval-list-line-16px {
+    height: 1px;
+    background: #D6D9DC;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 6px;
+}
+
 .approval-list-item-title-wrap {
     display: flex;
     position: relative;
     flex-direction: row;
     margin: 24px 16px 22px 16px;
+    align-items: center;
 }
 
 .approval-list-item-icon {
@@ -131,6 +151,7 @@
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-left: 16px;
 }
 
 .approval-list-item-spender-amount {
@@ -141,20 +162,7 @@
     margin-left: 5px;
 }
 
-.approval-list-item-spender-wrap {
-    display: flex;
-    flex-direction: row;
-    margin-left: 16px;
-    margin-right: 16px;
-}
-
-.approval-list-item-safe-icon {
-    width: 18px;
-    height: 18px;
-    margin-right: 4px;
-}
-
-.approval-list-item-spender-contract {
+.approval-list-item-spender-name {
     font-size: 15px;
     font-weight: 600;
     color: #030319;
@@ -162,11 +170,44 @@
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-left: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
-.approval-list-item-spender-address-wrap {
+.approval-list-item-spender-wrap {
     display: flex;
     flex-direction: row;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.approval-list-item-spender-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #030319;
+    line-height: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.approval-list-item-spender-content {
+    font-size: 12px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 12px;
+}
+
+.approval-list-item-spender-link {
+    margin-left: 4px;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
 }
 
 .approval-scanning {
