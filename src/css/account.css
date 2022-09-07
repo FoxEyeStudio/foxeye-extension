@@ -1,0 +1,56 @@
+.recent-account-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 16px;
+    margin: 24px 16px 8px 16px
+}
+
+
+.recent-account-scroll-div {
+    display: flex;
+    overflow: auto;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+}
+
+.recent-account-item-base {
+    display: flex;
+    flex-direction: column;
+    margin: 8px 16px 8px 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.recent-account-item-wrap {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid #D6D9DC;
+    padding: 0px 16px 0px 16px;
+    cursor: pointer;
+}
+
+.recent-account-item-wrap:hover {
+    border: 1px solid #027DD5;
+}
+
+.recent-account-item-checkbox {
+    width: 18px;
+    height: 18px;
+}
+
+.recent-account-item-address {
+    width: 262px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #24272A;
+    line-height: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 8px
+}
+

@@ -4,20 +4,26 @@ import settingIcon from '../../images/ic_setting.png'
 import detectionIcon from '../../images/ic_detection.png'
 import approvalListIcon from '../../images/ic_approval_list.png'
 import arrowIcon from '../../images/ic_arrow.png'
-import monitorIcon from '../../images/ic_monitor.png'
 import '../../css/home.css'
 import '../../css/common.css'
 import {useNavigate} from "react-router-dom";
 import titleLogo from "../../images/title_logo.png";
 import aboutIcon from "../../images/ic_about.png";
 import aboutHoverIcon from "../../images/ic_about_hover.png";
+import earnIcon from "../../images/ic_earn.png";
+import earnHoverIcon from "../../images/ic_earn_hover.png";
 import ic_connected from '../../images/ic_connected.png'
 import ic_inactive from '../../images/ic_inactive.png'
+import ic_address_enter from '../../images/ic_address_enter.png'
 import ic_web_danger from '../../images/ic_web_danger.png'
 import ic_web_safe from '../../images/ic_web_safe.png'
 import ic_security from '../../images/ic_security.png'
 import riskCenter from "../../background/RiskCenter";
-import {STORAGE_INTERCEPTED_AMOUNT, STORAGE_SECURITY_STATISTIC_AMOUNT} from "../../common/utils";
+import {
+    STORAGE_INTERCEPTED_AMOUNT,
+    STORAGE_RECENT_ACCOUTS,
+    STORAGE_SECURITY_STATISTIC_AMOUNT, STORAGE_SELECTED_ACCOUT
+} from "../../common/utils";
 
 function Home() {
     const navigate = useNavigate()
@@ -30,19 +36,19 @@ function Home() {
     const [phishingAmount, setPhishingAmount] = useState(0);
     const [contractAmount, setContractAmount] = useState(0);
     const [syncTime, setSyncTime] = useState();
+    const [recentAccount, setRecentAccount] = useState();
 
     useEffect(() => {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+            updateAccount(undefined);
             const tab = tabs[0];
-            chrome.tabs.sendMessage(tab.id, {foxeye_extension_action: "foxeye_wallet_request_account"}, undefined); //send to content.js
-
             const url = new URL(tab.url);
             const domain = riskCenter.getDomain(url)
-            // const domain = url.hostname;
+            if (url.protocol !== 'chrome:') {
+                chrome.tabs.sendMessage(tab.id, {foxeye_extension_action: "foxeye_wallet_request_account"}, undefined); //send to content.js
+            }
             setDomain(domain);
-
             setFavIconUrl(tab.favIconUrl);
-
             chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_phishing_website", url}, result => {
                 if (result.type != 0) {
                     setLowRisk(false);
@@ -50,12 +56,12 @@ function Home() {
             });  //send to background.js
         });
 
-
         chrome.runtime.onMessage.addListener(function getAccount(request) {
             if (request.foxeye_extension_action === 'foxeye_wallet_return_account') {
                 const { account } = request;
                 setAccount(account);
                 chrome.runtime.onMessage.removeListener(getAccount);
+                updateAccount(account);
             }
             return false;
         });
@@ -92,6 +98,37 @@ function Home() {
         });
     }, []);
 
+    const updateAccount = account => {
+        chrome.storage.local.get(STORAGE_RECENT_ACCOUTS, function (result) {
+            let accountData;
+            if (result && result[STORAGE_RECENT_ACCOUTS]) {
+                accountData = result[STORAGE_RECENT_ACCOUTS];
+            }
+            if (account) {
+                if (accountData) {
+                    const accountlist = accountData.split(',');
+                    if (accountlist[accountlist.length - 1] != account) {
+                        accountData += ',' + account;
+                        chrome.storage.local.set({ [STORAGE_RECENT_ACCOUTS]: accountData });
+                    }
+                } else {
+                    chrome.storage.local.set({ [STORAGE_RECENT_ACCOUTS]: account });
+                }
+            } else if (accountData) {
+                chrome.storage.local.get(STORAGE_SELECTED_ACCOUT, function (selResult) {
+                    if (selResult && selResult[STORAGE_SELECTED_ACCOUT]) {
+                        setRecentAccount(selResult[STORAGE_SELECTED_ACCOUT]);
+                    } else {
+                        const accountlist = accountData.split(',');
+                        if (accountlist && accountlist.length > 0) {
+                            setRecentAccount(accountlist[accountlist.length - 1]);
+                        }
+                    }
+                })
+            }
+        });
+    }
+
     const formatNumber = num => {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
@@ -120,40 +157,46 @@ function Home() {
         <div className='flex-col'>
             <div className='title-wrap'>
                 <img src={titleLogo} className='title-logo' />
-                <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'home'}})}}/>
+                <div className='flex-row'>
+                    <div style={{ '--ic-about-normal': 'url(' + earnIcon + ')', '--ic-about-hover': 'url(' + earnHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/earn', {state: {from: 'home'}})}}/>
+                    <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'home'}})}}/>
+                </div>
             </div>
             <div className='home-top-wrap'>
-                <div className='intercepted-wrap'>
-                    <div className='intercepted-amount'>
-                        {interceptedAmount}
+                <div className='intercepted-and-account-wrap'>
+                    <div className='intercepted-wrap'>
+                        <div className='intercepted-amount'>
+                            {interceptedAmount}
+                        </div>
+                        <div className='intercepted-desc'>
+                            &nbsp;threats intercepted for you
+                        </div>
                     </div>
-                    <div className='intercepted-desc'>
-                        threats intercepted for you
-                    </div>
+                    {!!account ? (
+                        <div className='account-wrap'>
+                            <img src={ic_connected} className='account-icon'/>
+                            <div className='state-desc'>
+                                {account.substring(0, 6) + '...' + account.substring(account.length-4)}
+                            </div>
+                        </div>
+                    ) : !!recentAccount ? (
+                        <div className='account-wrap-edit' onClick={()=>{navigate('/account')}}>
+                            <img src={ic_inactive} className='account-icon'/>
+                            <div className='state-desc'>
+                                {recentAccount.substring(0, 6) + '...' + recentAccount.substring(recentAccount.length-4)}
+                            </div>
+                            <img src={ic_address_enter} style={{ marginLeft: 6 }} className='account-icon'/>
+                        </div>
+                    ) : (
+                        <div className='account-wrap'>
+                            <img src={ic_inactive} className='account-icon'/>
+                            <div className='state-desc'>
+                                Wallet is Inactive
+                            </div>
+                        </div>
+                    )}
                 </div>
-                {!!account ? (
-                    <div className='state-wrap'>
-                        <img src={ic_connected} className='state-icon'/>
-                        <div className='state-title'>
-                            Account
-                        </div>
-                        <div className='flex-full'/>
-                        <div className='state-desc'>
-                            {account.substring(0, 6) + '...' + account.substring(account.length-4)}
-                        </div>
-                    </div>
-                ) : (
-                    <div className='state-wrap'>
-                        <img src={ic_inactive} className='state-icon'/>
-                        <div className='state-title'>
-                            Account
-                        </div>
-                        <div className='flex-full'/>
-                        <div className='state-desc'>
-                            Wallet is Inactive
-                        </div>
-                    </div>
-                )}
+
                 <div className='state-wrap'>
                     <img src={favIconUrl || webFavicon} className='state-icon'/>
                     <div className='state-title'>

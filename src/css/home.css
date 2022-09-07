@@ -1,10 +1,3 @@
-.account-wrap {
-    height: 120px;
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.15);
-    width: 100%;
-}
-
 .wallet-inactive-text {
     display: inline-block;
     color: rgba(36, 39, 42, 1);
@@ -103,7 +96,6 @@
 
 .token-detection-wrap {
     height: 70px;
-    margin-top: 10px;
     width: 100%;
     cursor: pointer;
 }
@@ -185,11 +177,6 @@
     margin: 8px 0 0 0;
 }
 
-.monitor-img {
-    width: 10px;
-    height: 10px;
-}
-
 .monitor-text {
     display: inline-block;
     color: rgba(83, 90, 97, 1);
@@ -203,39 +190,69 @@
 
 .home-top-wrap {
     width: 100%;
-    height: 283px;
+    height: 222px;
     background: #FFFFFF;
-    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.1500);
+    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.15);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.account-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 129px;
+    border-radius: 16px;
+    margin-top: 8px;
+}
+
+.account-wrap-edit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    width: 129px;
+    border-radius: 16px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.account-wrap-edit:hover {
+    background: #F2F4F6;
+}
+
+.intercepted-and-account-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2px;
 }
 
 .intercepted-wrap {
-    width: 322px;
-    height: 67px;
-    background: #F8F9FA;
-    border-radius: 6px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 8px;
 }
 
 .intercepted-amount {
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 600;
     color: #027DD5;
-    line-height: 32px;
+    line-height: 20px;
 }
 
 .intercepted-desc {
-    font-size: 12px;
-    font-weight: 400;
-    color: #535A61;
-    line-height: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #24272A;
+    line-height: 20px;
 }
 
 .state-wrap {
@@ -249,6 +266,11 @@
 .state-icon {
     width: 18px;
     height: 18px;
+}
+
+.account-icon {
+    width: 10px;
+    height: 10px;
 }
 
 .state-title {

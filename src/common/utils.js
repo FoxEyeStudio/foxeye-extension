@@ -21,6 +21,10 @@ export const STORAGE_INTERCEPTED_AMOUNT = 'storage-intercepted-amount';
 
 export const STORAGE_SECURITY_STATISTIC_AMOUNT = 'storage-security-statistic';
 
+export const STORAGE_RECENT_ACCOUTS = 'storage-recent-accouts';
+
+export const STORAGE_SELECTED_ACCOUT = 'storage-selected-accout';
+
 export async function getTokenInfo(chainId, tokenAddress) {
     try {
         const options = {

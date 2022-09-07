@@ -9,6 +9,8 @@ import Guide from "./guide";
 import '../css/popup.css'
 import '../css/common.css'
 import Approval from "./approval";
+import Earn from "./earn";
+import Account from "./account";
 
 function Popup(props) {
     return (
@@ -21,6 +23,8 @@ function Popup(props) {
                     <Route exact path="/about" element={<About />} />
                     <Route exact path="/guide" element={<Guide />} />
                     <Route exact path="/approval" element={<Approval />} />
+                    <Route exact path="/earn" element={<Earn />} />
+                    <Route exact path="/account" element={<Account />} />
                     <Route path="*" element={<Navigate to={props.initPage} />} />
                 </Routes>
             </HashRouter>
