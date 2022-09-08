@@ -1,5 +1,6 @@
-import riskCenter from './RiskCenter'
+import riskCenter, {Task_TokenDetection} from './RiskCenter'
 import {getCoingeckoInfo, getTokenInfo} from "../common/utils";
+import {ethers} from "ethers";
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.foxeye_extension_action === 'foxeye_sendTransaction') {
@@ -20,8 +21,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     if (request.foxeye_extension_action === 'foxeye_get_token_info') {
-        const { chainId, tokenAddress } = request;
-        getTokenInfo(chainId, tokenAddress).then(result => sendResponse(result));
+        const { chainId, tokenAddress, account } = request;
+        getTokenInfo(chainId, tokenAddress).then(result => {
+            sendResponse(result);
+            if (ethers.utils.isAddress(account)) {
+                riskCenter.taskStat(account, Task_TokenDetection, tokenAddress);
+            }
+        });
         return true;
     }
 

@@ -1,4 +1,4 @@
-import {SWITCH_ALERT_ID} from "../common/utils";
+import {AesEncrypt, SWITCH_ALERT_ID} from "../common/utils";
 
 export const RiskType_Safe = 0;
 export const RiskType_PhishingWebsite = 1;
@@ -15,6 +15,11 @@ export const Approve_ERC20_approve = 1;
 export const Approve_ERC20_increaseAllowance = 2;
 export const Approve_ERC721_approve = 3;
 export const Approve_ERC721_setApprovalForAll = 4;
+
+export const Task_TokenDetection = 1;
+export const Task_RiskAlert = 2;
+export const Task_ExperienceDemo = 3;
+export const Task_Approvals = 4;
 
 export const EthereumId = 1;
 export const PolygonId = 137;
@@ -190,6 +195,34 @@ class RiskCenter {
         return result;
     }
 
+    async taskStat(address, type, _content) {
+        try {
+            const versionObj = await chrome.storage.local.get('app_version');
+            const app_version = versionObj['app_version'];
+            let data = JSON.stringify({
+                address, type, _content
+            });
+            data = AesEncrypt(data);
+            const options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    data, app_version
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Connection': 'keep-alive'
+                },
+            };
+            const url = `${api_host}stat`;
+            let result = await fetch(url, options).then(ret => ret.json()).catch(err => {
+                return undefined;
+            });
+            console.log(tag, 'taskStat', result);
+        } catch (e) {
+            console.log(tag, 'taskStat', e);
+        }
+    }
 }
 
 const riskCenter = new RiskCenter();

@@ -9,7 +9,7 @@ import searchHoverIcon from "../../images/ic_search_hover.png";
 import detectionImg from "../../images/img_detection.png";
 import downIcon from "../../images/ic_down.png";
 
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import titleLogo from "../../images/title_logo.png";
 import aboutIcon from "../../images/ic_about.png";
 import aboutHoverIcon from "../../images/ic_about_hover.png";
@@ -27,9 +27,10 @@ function Detection() {
     const FtmId = 250;
     const OkcId = 66;
 
+    const { state: { account } } = useLocation();
     const [inputValue, setInputValue] = useState('');
     const [chainSelector, setChainSelector] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const chainArray = ['Ethereum', 'BSC', 'Polygon', 'Arbitrum', 'Avalanche', 'Heco', 'Ftm', 'Okc'];
     const chainIdArray = [EthereumId, BscId, PolygonId, ArbitrumId, AvalancheId, HecoId, FtmId, OkcId];
     const [currentChain, setCurrentChain] = useState(chainArray[0]);
@@ -57,7 +58,7 @@ function Detection() {
                 chainId = chainIdArray[index];
             }
         })
-        chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_token_info", chainId, tokenAddress}, result => {
+        chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_token_info", chainId, tokenAddress, account}, result => {
             if (result && result[tokenAddress.toLowerCase()]) {
                 setLoading(false);
                 const tokenInfo = {...result[tokenAddress.toLowerCase()], tokenAddress, token_id: chainId}
