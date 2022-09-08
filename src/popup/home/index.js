@@ -114,6 +114,7 @@ function Home() {
                 } else {
                     chrome.storage.local.set({ [STORAGE_RECENT_ACCOUTS]: account });
                 }
+                chrome.storage.local.set({ [STORAGE_SELECTED_ACCOUT]: account });
             } else if (accountData) {
                 chrome.storage.local.get(STORAGE_SELECTED_ACCOUT, function (selResult) {
                     if (selResult && selResult[STORAGE_SELECTED_ACCOUT]) {
