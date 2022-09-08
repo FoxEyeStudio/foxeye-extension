@@ -150,4 +150,20 @@
     margin-top: 4px;
 }
 
+.guide-step5-item-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #24272A;
+    line-height: 20px;
+}
+
+.guide-step5-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 20px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+}
+
 

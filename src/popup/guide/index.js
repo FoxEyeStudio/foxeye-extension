@@ -14,6 +14,10 @@ import icGuidePhishing from "../../images/ic_guide_phishing.png";
 import icGuideReminder from "../../images/ic_guide_reminder.png";
 import icGuideReport from "../../images/ic_guide_report.png";
 import icGuideToken from "../../images/ic_guide_token.png";
+import icGuideSafety from "../../images/ic_guide_safety.png";
+import icGuideManage from "../../images/ic_guide_manage.png";
+import icGuideIntercepts from "../../images/ic_guide_intercepts.png";
+import icGuideFoxeye from "../../images/ic_guide_foxeye.png";
 
 function Guide() {
     const navigate = useNavigate();
@@ -124,6 +128,43 @@ function Guide() {
                 </div>
                 <div className='flex-row'>
                     <div className='guide-step2-back-img' style={{'--ic-guide-back': 'url(' + icGuideBack + ')', '--ic-guide-back-hover': 'url(' + icGuideBackHover + ')'}} onClick={() => setStep(3)}/>
+                    <div className='guide-step2-btn' onClick={() => setStep(5)}>
+                        <div className='guide-step2-next'>
+                            Next
+                        </div>
+                        <img src={icEnterWhite} className='guide-step2-next-icon'/>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    const stepFive = () => {
+        const icons = [icGuideSafety, icGuideManage, icGuideIntercepts, icGuideFoxeye];
+        const titles  = ['Check Token Safety Report', 'Manage approvals', 'FoxEye intercepts malicious activities for you', 'Open FoxEye'];
+        return (
+            <div className='guide-step2-wrap'>
+                <div className='flex-col flex-full align-center'>
+                    <div className='guide-step2-title' style={{ marginBottom: 8 }}>
+                        Fox Airdrop
+                    </div>
+                    <div className='guide-step5-desc'>
+                        You’ll receive $FOX airdrop while using the following FoxEye’s features. You can check this later in Aidrop Centre.
+                    </div>
+
+                    {icons.map((item, index) => (
+                        <div className='guide-step3-item' key={'stepThree-index-' + index}>
+                            <img src={item} className='guide-step3-item-img'/>
+                            <div className='guide-step3-item-content'>
+                                <div className='guide-step5-item-title'>
+                                    {titles[index]}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className='flex-row'>
+                    <div className='guide-step2-back-img' style={{'--ic-guide-back': 'url(' + icGuideBack + ')', '--ic-guide-back-hover': 'url(' + icGuideBackHover + ')'}} onClick={() => setStep(4)}/>
                     <div className='guide-step2-btn' onClick={()=>{
                         if (state?.from) {
                             navigate('/' + state.from, {state: {from: state.to}})
@@ -141,14 +182,13 @@ function Guide() {
         )
     }
 
-
-
     return (
         <div className='flex-col' style={{height: '100%'}}>
             {step == 1 && stepOne()}
             {step == 2 && stepTwo()}
             {step == 3 && stepThree()}
             {step == 4 && stepFour()}
+            {step == 5 && stepFive()}
         </div>
     )
 }
