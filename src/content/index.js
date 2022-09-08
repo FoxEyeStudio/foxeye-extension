@@ -10,7 +10,8 @@ import {
 	TargetCorrectness,
 	TokenSafety,
 	ApproveReminder,
-	STORAGE_INTERCEPTED_AMOUNT
+	STORAGE_INTERCEPTED_AMOUNT,
+	STORAGE_SELECTED_ACCOUT
 } from "../common/utils";
 
 let theThis;
@@ -132,23 +133,29 @@ class Content {
 					}
 				}
 				if (!args.phishing_website_off) {
-					chrome.runtime.sendMessage({foxeye_extension_action: 'foxeye_phishing_website', url: window.location.href, args}, async res => {
-						// res.type = RiskType_PhishingWebsite;
-						if (res.type != 0) {
-							const domain = riskCenter.getDomain(window.location.href);
-							const _domain = riskCenter.getDomain(res.url);
-							if (domain == _domain) {
-								theThis.addInterceptedAccount();
-								theThis.showContainer();
-								theThis.getRoot().render(<AlertView info={res} hideContainer={theThis.hideContainer}/>);
-								const callback = await listenMessage('foxeye_alert_callback')
-								if (callback.action === 'abort') {
-									chrome.runtime.sendMessage({
-										foxeye_extension_action: 'foxeye_close_activetab'
-									});
+
+					chrome.storage.local.get(STORAGE_SELECTED_ACCOUT, function (selResult) {
+						let account;
+						if (selResult && selResult[STORAGE_SELECTED_ACCOUT]) {
+							account = selResult[STORAGE_SELECTED_ACCOUT];
+						}
+						chrome.runtime.sendMessage({foxeye_extension_action: 'foxeye_phishing_website', url: window.location.href, args, account}, async res => {
+							if (res.type != 0) {
+								const domain = riskCenter.getDomain(window.location.href);
+								const _domain = riskCenter.getDomain(res.url);
+								if (domain == _domain) {
+									theThis.addInterceptedAccount();
+									theThis.showContainer();
+									theThis.getRoot().render(<AlertView info={res} hideContainer={theThis.hideContainer}/>);
+									const callback = await listenMessage('foxeye_alert_callback')
+									if (callback.action === 'abort') {
+										chrome.runtime.sendMessage({
+											foxeye_extension_action: 'foxeye_close_activetab'
+										});
+									}
 								}
 							}
-						}
+						});
 					});
 				}
 			});
