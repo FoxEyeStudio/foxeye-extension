@@ -260,7 +260,7 @@ function Home() {
                     <img src={arrowIcon} className={'arrow-img'}/>
                 </div>
             </div>
-            <div className="setting-wrap flex-col" onClick={()=>{navigate('/detection', { state: { account }})}}>
+            <div className="setting-wrap flex-col" onClick={()=>{navigate('/detection', { state: { account: account || recentAccount }})}}>
                 <div className="token-detection-inter flex-row align-center">
                     <img src={detectionIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
