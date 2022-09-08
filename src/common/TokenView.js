@@ -140,12 +140,6 @@ export default class TokenView extends Component {
         this.lp_holders && this.lp_holders.forEach(holder => {
             this.lp_holders_percent += holder.percent * 100
         })
-        if (this.lp_holders) {
-            if (this.lp_holders[0].locked_detail) {
-
-                console.log(this.lp_holders[0].locked_detail)
-            }
-        }
         if (this.is_open_source == 0) {
             this.red_items_count += 1
         }
