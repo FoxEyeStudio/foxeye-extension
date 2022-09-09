@@ -1,0 +1,363 @@
+.earn-tab-wrap {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    margin-top: 24px;
+    margin-bottom: 8px;
+}
+
+.earn-tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.earn-tab-item-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #535A61;
+    line-height: 24px;
+}
+
+.earn-tab-item-name-selected {
+    font-size: 20px;
+    font-weight: 600;
+    color: #027DD5;
+    line-height: 24px;
+}
+
+.earn-tab-item-line {
+    width: 24px;
+    height: 4px;
+    background: transparent;
+    border-radius: 2px;
+    margin-top: 4px;
+}
+
+.earn-tab-item-line-selected {
+    width: 24px;
+    height: 4px;
+    background: #027DD5;
+    border-radius: 2px;
+    margin-top: 4px;
+}
+
+.earn-airdrops-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 16px;
+    margin-bottom: 8px;
+}
+
+.earn-scroll-div {
+    display: flex;
+    overflow: auto;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+    padding: 8px 16px 16px 16px;
+}
+
+.earn-airdrops-qualification-wrap {
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #D6D9DC;
+    padding: 16px;
+}
+
+.earn-qualification-title-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.earn-qualification-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #24272A;
+    line-height: 24px;
+}
+
+.earn-qualification-detail {
+    font-size: 14px;
+    font-weight: 400;
+    color: #027DD5;
+    line-height: 16px;
+    cursor: pointer;
+}
+
+.earn-qualification-detail:hover {
+    color: #035FA4;
+}
+
+.earn-account-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 16px;
+    align-items: center;
+}
+
+.earn-account-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.earn-account-address {
+    font-size: 14px;
+    font-weight: 500;
+    color: #24272A;
+    line-height: 16px;
+    margin-left: 8px;
+}
+
+.earn-eligible-icon {
+    width: 6px;
+    height: 6px;
+    background: #00C16F;
+    border-radius: 6px;
+}
+
+.earn-uneligible-icon {
+    width: 6px;
+    height: 6px;
+    background: #6A737D;
+    border-radius: 6px;
+}
+
+.earn-eligible-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #24272A;
+    line-height: 16px;
+    margin-left: 4px;
+}
+
+.earn-eligible-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 16px;
+}
+
+.earn-claimable-wrap {
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #D6D9DC;
+    margin-top: 16px;
+}
+
+.earn-claimable-title-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 16px 0px 16px
+}
+
+.earn-claimable-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #24272A;
+    line-height: 24px;
+}
+
+.earn-claimable-number {
+    font-size: 16px;
+    font-weight: 400;
+    color: #24272A;
+    line-height: 24px;
+}
+
+.earn-claimable-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 16px;
+    margin: 8px 16px 16px 16px;
+}
+
+.earn-claimable-line {
+    width: 324px;
+    height: 1px;
+    background: #D6D9DC;
+}
+
+.earn-claimable-item-wrap {
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.earn-claimable-item-title-wrap {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.earn-claimable-item-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.earn-claimable-title-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #24272A;
+    line-height: 16px;
+    margin-left: 8px;
+}
+
+.earn-claimable-per-action {
+    font-size: 14px;
+    font-weight: 400;
+    color: #24272A;
+    line-height: 16px;
+}
+
+.earn-claimable-fold-icon {
+    width: 18px;
+    height: 18px;
+    marign-left: 7px;
+    cursor: pointer;
+}
+
+.earn-claimable-item-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.earn-claimable-item-clickable-desc {
+    color: #027DD5;
+    cursor: pointer;
+}
+
+.earn-claimable-item-clickable-desc:hover {
+    color: #035FA4;
+}
+
+.earn-claimable-tip-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.earn-claimable-tip-content {
+    font-size: 12px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 16px;
+    margin-left: 1px;
+}
+
+.earn-claim-btn-wrap {
+    margin: 30px 0 8px 0px;
+}
+
+.earn-claim-btn {
+    width: 317px;
+    height: 46px;
+    background: #027DD5;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 19px;
+    cursor: pointer;
+}
+
+.earn-claim-btn:hover {
+    background: #035FA4;
+}
+
+.earn-dividends-item-wrap {
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #D6D9DC;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+}
+
+.earn-dividends-item-title-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 293px;
+}
+
+.earn-dividends-item-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #24272A;
+    line-height: 24px;
+}
+
+.earn-dividends-item-amount {
+    font-size: 16px;
+    font-weight: 400;
+    color: #24272A;
+    line-height: 24px;
+}
+
+.earn-dividends-item-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 16px;
+    margin-top: 8px;
+}
+
+.earn-dividends-item-desc-clickable {
+    color: #027DD5;
+    cursor: pointer;
+}
+
+.earn-dividends-item-desc-clickable:hover {
+    color: #035FA4;
+}
+
+.earn-dividends-btn-wrap {
+    margin: 30px 0 0px 0px;
+}
+
+.earn-dividends-btn {
+    width: 317px;
+    height: 46px;
+    background: #027DD5;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 19px;
+    cursor: pointer;
+}
+
+.earn-dividends-btn:hover {
+    background: #035FA4;
+}
+
+.earn-dividends-learnmore-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+}

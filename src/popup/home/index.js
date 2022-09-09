@@ -18,6 +18,8 @@ import ic_address_enter from '../../images/ic_address_enter.png'
 import ic_web_danger from '../../images/ic_web_danger.png'
 import ic_web_safe from '../../images/ic_web_safe.png'
 import ic_security from '../../images/ic_security.png'
+import imgAdAirdrop from '../../images/img_ad_airdrop.png'
+import imgAdTag from '../../images/img_ad_tag.png'
 import riskCenter from "../../background/RiskCenter";
 import {
     STORAGE_INTERCEPTED_AMOUNT,
@@ -37,6 +39,7 @@ function Home() {
     const [contractAmount, setContractAmount] = useState(0);
     const [syncTime, setSyncTime] = useState();
     const [recentAccount, setRecentAccount] = useState();
+    const [adList, setAdList] = useState([]);
 
     useEffect(() => {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
@@ -153,13 +156,16 @@ function Home() {
         return fmt;
     }
 
+    const goEarn = () => {
+        navigate('/earn', {state: { account: account || recentAccount}});
+    }
 
     return (
         <div className='flex-col'>
             <div className='title-wrap'>
                 <img src={titleLogo} className='title-logo' />
                 <div className='flex-row'>
-                    <div style={{ '--ic-about-normal': 'url(' + earnIcon + ')', '--ic-about-hover': 'url(' + earnHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/earn', {state: {from: 'home'}})}}/>
+                    <div style={{ '--ic-about-normal': 'url(' + earnIcon + ')', '--ic-about-hover': 'url(' + earnHoverIcon + ')'}} className='title-about' onClick={goEarn}/>
                     <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'home'}})}}/>
                 </div>
             </div>
@@ -282,6 +288,10 @@ function Home() {
                     <div className={'flex-full'}/>
                     <img src={arrowIcon} className={'arrow-img'}/>
                 </div>
+            </div>
+            <div className='ad-airdrop-wrap'>
+                <img src={imgAdAirdrop} className='ad-airdrop' onClick={goEarn}/>
+                {false && <img src={imgAdTag} className='ad-tag'/>}
             </div>
         </div>
     )

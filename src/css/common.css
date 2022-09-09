@@ -1,4 +1,4 @@
-#popup-root *, #popup-root div, #popup-root div *, #popup-root span, #popup-root span * {
+#popup-root *, #popup-root div, #popup-root div *, #popup-root span, #popup-root span *, #popup-root em, #popup-root em * {
     font-family: system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
 }
 

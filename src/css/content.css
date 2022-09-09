@@ -1,4 +1,4 @@
-#foxeye-chrome-extension-content-wrap *, #foxeye-chrome-extension-content-wrap div, #foxeye-chrome-extension-content-wrap div *, #foxeye-chrome-extension-content-wrap span, #foxeye-chrome-extension-content-wrap span * {
+#foxeye-chrome-extension-content-wrap *, #foxeye-chrome-extension-content-wrap div, #foxeye-chrome-extension-content-wrap div *, #foxeye-chrome-extension-content-wrap span, #foxeye-chrome-extension-content-wrap span *, #foxeye-chrome-extension-content-wrap em, #foxeye-chrome-extension-content-wrap em * {
     font-family: system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
 }
 
