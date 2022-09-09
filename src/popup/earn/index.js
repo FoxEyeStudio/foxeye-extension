@@ -60,12 +60,12 @@ function Earn() {
                 {showDetection && (
                     <div className='flex-col'>
                         <div className='earn-claimable-item-desc'>
-                            Use<em className='earn-claimable-item-clickable-desc' onClick={() => {}}> token detection</em> feature to get a safety report of any token.
+                            Use<em className='earn-claimable-item-clickable-desc' onClick={()=>{navigate('/detection', { state: { account, from: 'earn' }})}}> token detection</em> feature to get a safety report of any token.
                         </div>
                         <div className='flex-row align-center'>
                             <img src={icTips} className='earn-claimable-tip-icon'/>
                             <div className='earn-claimable-tip-content'>
-                                Daily Upper Limit: 10 tokens
+                                Daily Upper Limit: 20 tokens
                             </div>
                         </div>
                     </div>
@@ -146,7 +146,7 @@ function Earn() {
         <div className='flex-col' style={{height: '100%'}}>
             <div className='title-wrap'>
                 <img src={titleLogo} className='title-logo' />
-                <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'earn'}})}}/>
+                <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {account, from: 'earn'}})}}/>
             </div>
             <div className="token-detection-title flex-row align-center">
                 <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/home')}}/>
@@ -185,7 +185,7 @@ function Earn() {
                         <div className='earn-account-wrap'>
                             <img src={icAccount} className='earn-account-icon'/>
                             <div className='earn-account-address'>
-                                {account.substr(0, 8) + '...' + account.substr(-6)}
+                                {account?.substr(0, 8) + '...' + account?.substr(-6)}
                             </div>
                             <div className='flex-full'/>
                             <div className='earn-eligible-icon' />

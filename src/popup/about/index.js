@@ -54,7 +54,7 @@ function About() {
                 <img className='about-item-arrow' src={icArrow}/>
             </div>
             <div className='about-line'></div>
-            <div className='about-item' onClick={()=>{navigate('/guide', {state: {from: 'about', to: state.from}})}}>
+            <div className='about-item' onClick={()=>{navigate('/guide', {state: {...state, from: 'about', to: state.from}})}}>
                 <img className='about-item-img' src={icAboutGuide}/>
                 <div className='about-item-title'>
                     User Guide

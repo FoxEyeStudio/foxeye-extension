@@ -27,7 +27,7 @@ function Detection() {
     const FtmId = 250;
     const OkcId = 66;
 
-    const { state: { account } } = useLocation();
+    const { state: { account, from } } = useLocation();
     const [inputValue, setInputValue] = useState('');
     const [chainSelector, setChainSelector] = useState(false);
     const navigate = useNavigate();
@@ -83,7 +83,13 @@ function Detection() {
             </div>
             <div className="detection-wrap flex-col flex-full" >
                 <div className="token-detection-title flex-row align-center">
-                    <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/home')}}/>
+                    <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{
+                        if (from == 'earn') {
+                            navigate('/earn', {state: { account }})
+                        } else {
+                            navigate('/home')
+                        }
+                    }}/>
                     <span className="detection-text">Token&nbsp;Detection</span>
                 </div>
                 <div className="search-wrap flex-row">

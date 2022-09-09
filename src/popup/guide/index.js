@@ -167,7 +167,7 @@ function Guide() {
                     <div className='guide-step2-back-img' style={{'--ic-guide-back': 'url(' + icGuideBack + ')', '--ic-guide-back-hover': 'url(' + icGuideBackHover + ')'}} onClick={() => setStep(4)}/>
                     <div className='guide-step2-btn' onClick={()=>{
                         if (state?.from) {
-                            navigate('/' + state.from, {state: {from: state.to}})
+                            navigate('/' + state.from, {state: {...state, from: state.to}})
                         } else {
                             navigate('/home');
                             chrome.storage.local.set({ 'popup-guide-end': true });
