@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import '../../css/common.css'
 import '../../css/earn.css'
 import titleLogo from "../../images/title_logo.png";
@@ -22,6 +22,23 @@ function Earn() {
     const [showAlert, setShowAlert] = useState(false);
     const [showDemo, setShowDemo] = useState(false);
     const [airdropTab, setAirdropTab] = useState(true);
+    const [claimAmount, setCliamAmount] = useState(0);
+
+    const formatNumber = num => {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+
+    useEffect(() => {
+        chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_airdrop_amount", account}, result => {
+            if(result) {
+                if (result.address?.toUpperCase() === account?.toUpperCase()) {
+                    if (result.amount) {
+                        setCliamAmount(formatNumber(result.amount))
+                    }
+                }
+            }
+        });
+    }, []);
 
     const detectionItem = () => {
         return (
@@ -188,7 +205,7 @@ function Earn() {
                             </div>
                             <div className='flex-full'/>
                             <div className='earn-claimable-number'>
-                                111,222,222
+                                {claimAmount}
                             </div>
                         </div>
                         <div className='earn-claimable-desc'>

@@ -56,5 +56,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true;
     }
 
+    if (request.foxeye_extension_action === 'foxeye_get_airdrop_amount') {
+        const { account } = request;
+        riskCenter.getAirdropAmount(account).then(result => sendResponse(result));
+        return true;
+    }
+
     return false;
 });

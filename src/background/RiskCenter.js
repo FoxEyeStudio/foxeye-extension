@@ -36,6 +36,7 @@ export const OkcId = 66;
 const api_host = 'https://api.foxeye.io/v1/';
 const phishing_website_url = 'https://api.gopluslabs.io/api/v1/phishing_site?url=';
 const security_statistic_url = 'http://open-api.gopluslabs.io/api/v1/public/statistic/count?types=TOKEN,DAPP,WEBSITE';
+const get_airdrop_amount_url = 'https://api.foxeye.io/v1/get_amount/';
 
 const tag = 'RiskCenter: ';
 
@@ -222,6 +223,27 @@ class RiskCenter {
         } catch (e) {
             console.log(tag, 'taskStat', e);
         }
+    }
+
+    async getAirdropAmount(address) {
+        const url = get_airdrop_amount_url + address;
+        const options = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Connection': 'keep-alive'
+            }
+        };
+
+        let result = await fetch(url, options).then(ret => ret.json()).catch(err => {
+            return undefined;
+        });
+
+        if (result && result.status == 1) {
+            return result.result;
+        }
+        return undefined;
     }
 }
 
