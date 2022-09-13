@@ -26,6 +26,7 @@ import {
     STORAGE_RECENT_ACCOUTS,
     STORAGE_SECURITY_STATISTIC_AMOUNT, STORAGE_SELECTED_ACCOUT
 } from "../../common/utils";
+import BannerView from "../../common/BannerView";
 
 function Home() {
     const navigate = useNavigate()
@@ -39,7 +40,7 @@ function Home() {
     const [contractAmount, setContractAmount] = useState(0);
     const [syncTime, setSyncTime] = useState();
     const [recentAccount, setRecentAccount] = useState();
-    const [adList, setAdList] = useState([]);
+    const [adList, setAdList] = useState(undefined);
 
     useEffect(() => {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
@@ -97,6 +98,14 @@ function Home() {
                 result['time'] = time;
                 setSyncTime(time);
                 chrome.storage.local.set({ [STORAGE_SECURITY_STATISTIC_AMOUNT]: result });
+            }
+        });
+
+        chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_banner_ad_config"}, result => {
+            if(result && result.banners && result.banners.length > 0) {
+                setAdList(result.banners);
+            } else {
+                setAdList([]);
             }
         });
     }, []);
@@ -290,8 +299,13 @@ function Home() {
                 </div>
             </div>
             <div className='ad-airdrop-wrap'>
-                <img src={imgAdAirdrop} className='ad-airdrop' onClick={goEarn}/>
-                {false && <img src={imgAdTag} className='ad-tag'/>}
+                {adList?.length <= 0 && <img src={imgAdAirdrop} className='ad-airdrop' onClick={goEarn}/>}
+                {adList?.length > 0 && (
+                    <div style={{ width: 325, height: 80}}>
+                        <BannerView adList={adList}/>
+                    </div>
+                )}
+                {adList?.length > 0 && <img src={imgAdTag} className='ad-tag'/>}
             </div>
         </div>
     )

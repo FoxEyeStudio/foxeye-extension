@@ -62,5 +62,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true;
     }
 
+    if (request.foxeye_extension_action === 'foxeye_get_banner_ad_config') {
+        riskCenter.getBannerAdConfig().then(result => sendResponse(result));
+        return true;
+    }
+
     return false;
 });

@@ -53,11 +53,12 @@
 
 .earn-scroll-div {
     display: flex;
-    overflow: auto;
     align-items: center;
     flex-direction: column;
     flex: 1;
     padding: 8px 16px 16px 16px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .earn-airdrops-qualification-wrap {
