@@ -189,7 +189,8 @@ class Content {
 	}
 
 	hideContainer() {
-		theThis.getContainer()?.setAttribute('style', 'display: none');
+		// theThis.getContainer()?.setAttribute('style', 'display: none');
+		theThis.getRoot().render(undefined);
 	}
 
 	getRoot() {
