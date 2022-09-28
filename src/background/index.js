@@ -32,7 +32,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const { chainId, tokenAddress, account } = request;
         getTokenInfo(chainId, tokenAddress).then(result => {
             sendResponse(result);
-            if (ethers.utils.isAddress(account)) {
+            let success = false;
+            try {
+                success = result.code == 1 && result.result[tokenAddress.toLowerCase()];
+            } catch (e) {
+            }
+            if (ethers.utils.isAddress(account) && success) {
                 riskCenter.taskStat(account, Task_TokenDetection, tokenAddress);
             }
         });
