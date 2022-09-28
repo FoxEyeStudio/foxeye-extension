@@ -30,7 +30,17 @@ function Earn() {
         if (!num) {
             return 0;
         }
-        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        num = Number(num);
+        let length = 0;
+        if (String(num).indexOf('.') !== -1) {
+            const dotIndex = String(num).indexOf('.') + 1;
+            length = String(num).length - dotIndex;
+        }
+        let mon = num.toFixed(length)
+        if (length > 2) {
+            mon = num.toFixed(2)
+        }
+        return mon.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
 
     useEffect(() => {
@@ -272,7 +282,7 @@ function Earn() {
                         </div>
                     </div>
                     <div className='earn-dividends-learnmore-desc'>
-                        The lottery system is operated in a decentralised way.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => setAirdropTab(true)}>Learn More</em>
+                        The lottery system is operated in a decentralised way.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => {}}>Learn More</em>
                     </div>
                 </div>
             )}
