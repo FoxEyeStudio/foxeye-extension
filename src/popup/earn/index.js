@@ -23,8 +23,13 @@ function Earn() {
     const [showDemo, setShowDemo] = useState(false);
     const [airdropTab, setAirdropTab] = useState(true);
     const [claimAmount, setCliamAmount] = useState(0);
+    const [poolValue, setPoolValue] = useState(0);
+    const [balance, setBalance] = useState(0);
 
     const formatNumber = num => {
+        if (!num) {
+            return 0;
+        }
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
 
@@ -32,9 +37,9 @@ function Earn() {
         chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_airdrop_amount", account}, result => {
             if(result) {
                 if (result.address?.toUpperCase() === account?.toUpperCase()) {
-                    if (result.amount) {
-                        setCliamAmount(formatNumber(result.amount))
-                    }
+                    setCliamAmount(formatNumber(result.amount))
+                    setPoolValue(formatNumber(result.pool))
+                    setBalance(formatNumber(result.balance))
                 }
             }
         });
@@ -232,7 +237,7 @@ function Earn() {
                     <div className='earn-dividends-item-wrap'>
                         <div className='earn-dividends-item-title-wrap'>
                             <div className='earn-dividends-item-title'>Current Ad Pool</div>
-                            <div className='earn-dividends-item-amount'>$5,644</div>
+                            <div className='earn-dividends-item-amount'>${poolValue}</div>
                         </div>
                         <div className='earn-dividends-item-desc'>By holding $FOX, you can buy lotteries to get dividends from Ad Pool.</div>
                     </div>
@@ -253,7 +258,7 @@ function Earn() {
                     <div className='earn-dividends-item-wrap'>
                         <div className='earn-dividends-item-title-wrap'>
                             <div className='earn-dividends-item-title'>My FOX Tokens</div>
-                            <div className='earn-dividends-item-amount'>0</div>
+                            <div className='earn-dividends-item-amount'>{balance}</div>
                         </div>
                         <div className='earn-dividends-item-desc'>
                             You can collect FOX tokens from <em className='earn-dividends-item-desc-clickable' onClick={() => setAirdropTab(true)}>airdrops</em>
