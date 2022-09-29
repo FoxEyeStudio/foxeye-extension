@@ -123,6 +123,10 @@ function Earn() {
         )
     }
 
+    const linkTo = url => {
+        chrome.tabs.create({url});
+    }
+
     const demoItem = () => {
         return (
             <div className='earn-claimable-item-wrap'>
@@ -143,7 +147,9 @@ function Earn() {
                 {showDemo && (
                     <div className='flex-col'>
                         <div className='earn-claimable-item-desc'>
-                            <em className='earn-claimable-item-clickable-desc' onClick={() => {}}>Risk Demo</em> is a demo for risk alerts. When you haven't met any risk alert yet, you can experience risk demo to see how FoxEye will behave when encountering risks.
+                            <em className='earn-claimable-item-clickable-desc' onClick={() => {
+                                linkTo('https://foxeye.io/risk-demo')
+                            }}>Risk Demo</em> is a demo for risk alerts. When you haven't met any risk alert yet, you can experience risk demo to see how FoxEye will behave when encountering risks.
                         </div>
                         <div className='flex-row align-center'>
                             <img src={icTips} className='earn-claimable-tip-icon'/>
