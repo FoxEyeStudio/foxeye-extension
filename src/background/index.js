@@ -44,7 +44,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             sendResponse(result);
             let success = false;
             try {
-                success = result.code == 1 && result.result[tokenAddress.toLowerCase()];
+                success = !!(result && result[tokenAddress.toLowerCase()]);
             } catch (e) {
             }
             if (ethers.utils.isAddress(account) && success) {
