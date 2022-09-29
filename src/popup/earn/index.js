@@ -14,6 +14,7 @@ import icEarningsDemo from '../../images/ic_earnings_demo.png'
 import icFord from '../../images/ic_fold.png'
 import icTips from '../../images/ic_earnings_tips.png'
 import icUnFord from '../../images/ic_unfold.png'
+import {Task_ExperienceDemo} from "../../background/RiskCenter";
 
 function Earn() {
     const navigate = useNavigate()
@@ -148,7 +149,10 @@ function Earn() {
                     <div className='flex-col'>
                         <div className='earn-claimable-item-desc'>
                             <em className='earn-claimable-item-clickable-desc' onClick={() => {
-                                linkTo('https://foxeye.io/risk-demo')
+                                chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_taskstat", account, type: Task_ExperienceDemo, content: ''}, result => {
+
+                                    linkTo('https://foxeye.io/risk-demo');
+                                });
                             }}>Risk Demo</em> is a demo for risk alerts. When you haven't met any risk alert yet, you can experience risk demo to see how FoxEye will behave when encountering risks.
                         </div>
                         <div className='flex-row align-center'>

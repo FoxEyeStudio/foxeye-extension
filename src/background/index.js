@@ -23,6 +23,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true;
     }
 
+    if (request.foxeye_extension_action === 'foxeye_taskstat') {
+        const { account, type, content } = request;
+        if (ethers.utils.isAddress(account)) {
+            riskCenter.taskStat(account, type, content).then(result => sendResponse(result));
+        } else {
+            sendResponse(undefined);
+        }
+        return true;
+    }
+
     if (request.foxeye_extension_action === 'foxeye_close_activetab') {
         chrome.tabs.query({ active: true, lastFocusedWindow: true }).then(tabs => tabs && tabs.length > 0 ? tabs[0].id : -1).then(tabId => tabId != -1 && chrome.tabs.remove(tabId));
         return true;
