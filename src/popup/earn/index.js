@@ -11,6 +11,7 @@ import icAccount from '../../images/ic_account.png';
 import icEarningsDetection from '../../images/ic_earnings_detection.png'
 import icEarningsAlert from '../../images/ic_earnings_alert.png'
 import icEarningsDemo from '../../images/ic_earnings_demo.png'
+import icEarningsRevoke from '../../images/ic_earnings_revoke.png'
 import icFord from '../../images/ic_fold.png'
 import icTips from '../../images/ic_earnings_tips.png'
 import icUnFord from '../../images/ic_unfold.png'
@@ -22,6 +23,7 @@ function Earn() {
     const [showDetection, setShowDetection] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [showDemo, setShowDemo] = useState(false);
+    const [showRevoke, setRevoke] = useState(false);
     const [airdropTab, setAirdropTab] = useState(true);
     const [claimAmount, setCliamAmount] = useState(0);
     const [poolValue, setPoolValue] = useState(0);
@@ -167,6 +169,43 @@ function Earn() {
         )
     }
 
+    const revokeItem = () => {
+        return (
+            <div className='earn-claimable-item-wrap'>
+                <div className='earn-claimable-item-title-wrap'>
+                    <img className='earn-claimable-item-icon' src={icEarningsRevoke}/>
+                    <div className='earn-claimable-title-text'>
+                        Revoke Approvals
+                    </div>
+                    <div className='flex-full'/>
+                    <div className='earn-claimable-per-action'>
+                        10 per action
+                    </div>
+                    <img className='earn-claimable-fold-icon' src={showRevoke ? icFord : icUnFord} onClick={() => {
+                        setRevoke(!showRevoke);
+                    }}/>
+
+                </div>
+                {showRevoke && (
+                    <div className='flex-col'>
+                        <div className='earn-claimable-item-desc'>
+                            <em className='earn-claimable-item-clickable-desc' onClick={()=>{
+                                navigate('/approval', { state: { account: account, from: 'earn' }})
+                            }}
+                            >Approval Management</em>  is a tool for checking and revoking approvals. Regularly revoking unnecessary and unknown approvals can increase your safety significantly.
+                        </div>
+                        <div className='flex-row align-center'>
+                            <img src={icTips} className='earn-claimable-tip-icon'/>
+                            <div className='earn-claimable-tip-content'>
+                                Daily Upper Limit: 10 tokens
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        )
+    }
+
     return (
         <div className='flex-col' style={{height: '100%'}}>
             <div className='title-wrap'>
@@ -242,6 +281,8 @@ function Earn() {
                         {alertItem()}
                         <div className='earn-claimable-line'/>
                         {demoItem()}
+                        <div className='earn-claimable-line'/>
+                        {revokeItem()}
                     </div>
 
                     <div className='earn-claim-btn-wrap'>

@@ -20,7 +20,7 @@ import BigNumber from "bignumber.js";
 
 function Approval() {
     const navigate = useNavigate();
-    const { state: { account } } = useLocation();
+    const { state: { account, from } } = useLocation();
     const [loading, setLoading] = useState(true);
     const [approvals, setApprovals] = useState([]);
     const [approvalPopup, setApprovalPopup] = useState(false);
@@ -88,7 +88,13 @@ function Approval() {
                 <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'approval', account}})}}/>
             </div>
             <div className="token-detection-title flex-row align-center">
-                <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/home')}}/>
+                <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{
+                    if (from == 'earn') {
+                        navigate('/earn', {state: { account }})
+                    } else {
+                        navigate('/home')
+                    }
+                }}/>
                 <span className="detection-text">Approvals Management</span>
             </div>
             {loading && (
