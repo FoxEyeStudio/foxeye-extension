@@ -133,7 +133,7 @@ function Approval() {
                         <div className='approval-list-title'>List of Approved Tokens</div>
                         <div className='approval-list-title-desc'>Approving unknown dapp leads to security risks. Please check regularly!</div>
                         {approvals.map((v, i, a) => (
-                            <div>
+                            <div key={'approvals-v-' + i}>
                                 <div className='approval-list-line'/>
                                 <div className='approval-list-item-title-wrap'>
                                     <div>
@@ -144,7 +144,7 @@ function Approval() {
                                     <div className='approval-list-item-spender-amount'>{v.approved_list.length} Approval(s)</div>
                                 </div>
                                 {v.approved_list.map((vv, ii, aa) => (
-                                    <div>
+                                    <div key={'approved_list-vv-' + ii}>
                                         <div className='approval-list-item-spender-name'>{vv.address_info?.tag ? vv.address_info.tag : vv.address_info?.contract_name ? vv.address_info.contract_name : 'unknown'}</div>
                                         <div className='approval-list-item-spender-wrap'>
                                             <div className='approval-list-item-spender-title'>Contract</div>
@@ -159,7 +159,7 @@ function Approval() {
                                                 }
                                             }/>
                                         </div>
-                                        <div className='approval-list-item-spender-wrap'>
+                                        <div className='approval-list-item-spender-wrap' style={{ marginBottom: 0 }}>
                                             <div className='approval-list-item-spender-title'>Limit</div>
                                             <div className='approval-list-item-spender-content'>{amountFormat(vv.approved_amount)}</div>
                                             <img src={ic_about_hover} className='approval-list-item-spender-link' onClick={
@@ -168,9 +168,28 @@ function Approval() {
                                                 }
                                             }/>
                                         </div>
-                                        <div className='approval-list-item-spender-wrap'>
-                                            <div className='approval-list-item-spender-title'>Time</div>
-                                            <div className='approval-list-item-spender-content'>{timeFormat(vv.approved_time)}</div>
+                                        <div className='approval-revoke-item-wrap'>
+                                            <div className='approval-list-item-spender-wrap' style={{ marginTop: 10 }}>
+                                                <div className='approval-list-item-spender-title'>Time</div>
+                                                <div className='approval-list-item-spender-content'>{timeFormat(vv.approved_time)}</div>
+                                            </div>
+                                            <div className='approval-revoke-btn' onClick={async () => {
+                                                const src = account;
+                                                const token = v.token_address;
+                                                const spender = vv.approved_contract;
+                                                const chainId = v.chain_id;
+                                                const logo = `https://relayer.gopocket.finance/api/v1/getImage/${v.chain_id}/${v.token_address}`;
+                                                const symbol = v.token_symbol;
+                                                const versionObj = await chrome.storage.local.get('app_version');
+                                                const app_version = versionObj['app_version'];
+                                                const json = {src, token, spender, chainId, logo, symbol, app_version};
+                                                let jsonStr = JSON.stringify(json);
+                                                const jsonEncode = btoa(jsonStr)
+                                                const url = `https://foxeye.io?approval=${jsonEncode}`;
+                                                chrome.tabs.create({url});
+                                            }}>
+                                                Revoke
+                                            </div>
                                         </div>
                                         {(ii < v.approved_list.length - 1) && (<div className='approval-list-line-16px'/>)}
                                     </div>
