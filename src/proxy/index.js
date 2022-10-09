@@ -56,6 +56,9 @@ class FoxeyeProxy {
                 const transaction = [...argArray][0];
                 const { method } = transaction;
                 if (method == 'eth_sendTransaction') {
+                    if (window.location?.href?.includes('https://foxeye.io/?approval=')) {
+                        return target(...argArray);
+                    }
                     postMessage({foxeye_extension_action: 'foxeye_sendTransaction', chainId: Number(window.ethereum.chainId).toString(), params: transaction.params[0]})
                     const result = await listenMessage('foxeye_parse_transaction')
                     if (result.type === 0) {
