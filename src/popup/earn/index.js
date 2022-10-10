@@ -197,7 +197,7 @@ function Earn() {
                         <div className='flex-row align-center'>
                             <img src={icTips} className='earn-claimable-tip-icon'/>
                             <div className='earn-claimable-tip-content'>
-                                Daily Upper Limit: 10 tokens
+                                Daily Upper Limit: 40 tokens
                             </div>
                         </div>
                     </div>
