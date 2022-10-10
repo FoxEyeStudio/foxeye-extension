@@ -217,6 +217,14 @@ function Approval() {
                     </div>
                 </div>
             )}
+            {!loading && ethers.utils.isAddress(account) && approvals.length === 0 && (
+                <div className='approval-inactive-wrap'>
+                    <img className='approval-img-inactive' src={imgInactive} />
+                    <div className='approval-inactive-text'>
+                        No contract has been approved
+                    </div>
+                </div>
+            )}
             {!account && (
                 <div className='approval-inactive-wrap'>
                     <img className='approval-img-inactive' src={imgInactive} />
