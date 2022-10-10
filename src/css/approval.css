@@ -300,3 +300,23 @@
 .approval-revoke-btn:hover {
     background: #035FA4;
 }
+
+.approval-inactive-wrap {
+    display: flex;
+    flex-direction: column;
+    margin-top: 113px;
+    align-items: center;
+}
+
+.approval-img-inactive {
+    width: 150px;
+    height: 132px;
+}
+
+.approval-inactive-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #828B95;
+    line-height: 20px;
+    text-align: center;
+}

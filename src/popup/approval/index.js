@@ -12,6 +12,7 @@ import ic_eth_tag from "../../images/ic_eth_tag.png";
 import ic_bsc_tag from "../../images/ic_bsc_tag.png";
 import ic_about_website from "../../images/ic_about_website.png";
 import ic_about_hover from "../../images/ic_about_hover.png";
+import imgInactive from "../../images/img_inactive.png";
 import Lottie from "react-lottie";
 import {LoadingJson} from "../../common/utils";
 import {ethers} from "ethers";
@@ -213,6 +214,14 @@ function Approval() {
                         <div className='approval-popup-content-ok' onClick={() => {
                             setApprovalPopup(false);
                         }}>OK</div>
+                    </div>
+                </div>
+            )}
+            {!account && (
+                <div className='approval-inactive-wrap'>
+                    <img className='approval-img-inactive' src={imgInactive} />
+                    <div className='approval-inactive-text'>
+                        Wallet is inactive, please connect to a <br/> Web3 website
                     </div>
                 </div>
             )}
