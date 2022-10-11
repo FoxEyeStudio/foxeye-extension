@@ -31,7 +31,7 @@ function Guide() {
                 <div className='guide-step1-bg' style={{'--img-guide-bg': 'url(' + imgGuideBg + ')'}}>
                     <img src={aboutLogo} className='guide-step1-logo-img'/>
                     <div className='guide-step1-name'>
-                        Metamask Protector
+                        {iLocal('Metamask_Protector')}
                     </div>
                 </div>
                 <div className='guide-step1-btn' onClick={() => setStep(2)}>
@@ -94,7 +94,7 @@ function Guide() {
                     <div className='guide-step2-back-img' style={{'--ic-guide-back': 'url(' + icGuideBack + ')', '--ic-guide-back-hover': 'url(' + icGuideBackHover + ')'}} onClick={() => setStep(2)}/>
                     <div className='guide-step2-btn' onClick={() => setStep(4)}>
                         <div className='guide-step2-next'>
-                            Next
+                            {iLocal('Next')}
                         </div>
                         <img src={icEnterWhite} className='guide-step2-next-icon'/>
                     </div>
@@ -131,7 +131,7 @@ function Guide() {
                     <div className='guide-step2-back-img' style={{'--ic-guide-back': 'url(' + icGuideBack + ')', '--ic-guide-back-hover': 'url(' + icGuideBackHover + ')'}} onClick={() => setStep(3)}/>
                     <div className='guide-step2-btn' onClick={() => setStep(5)}>
                         <div className='guide-step2-next'>
-                            Next
+                            {iLocal('Next')}
                         </div>
                         <img src={icEnterWhite} className='guide-step2-next-icon'/>
                     </div>

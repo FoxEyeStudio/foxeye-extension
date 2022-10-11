@@ -60,7 +60,7 @@ function Setting() {
                 <span className="detection-text">{iLocal('Settings')}</span>
             </div>
             <div className='flex-full'/>
-            <span className="setting-risk-alert">Risk Alerts</span>
+            <span className="setting-risk-alert">{iLocal('Risk_Alerts')}</span>
             {getSettingItem(0)}
             <div className='flex-full'/>
             {getSettingItem(1)}

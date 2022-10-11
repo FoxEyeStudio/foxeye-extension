@@ -83,7 +83,7 @@ export default class AlertView extends Component {
         if (this.props.toast) {
             return (
                 <div className='foxeye-alert-toast'>
-                    FoxEye starting...
+                    {iLocal('FoxEye_starting')}
                 </div>
             )
         }

@@ -110,7 +110,7 @@
   "Settings": { "message": "Settings" },
   "No_contract_has_been_approved": { "message": "No contract has been approved" },
   "Wallet_is_inactive_when_approval": { "message": "Wallet is inactive, please connect to a Web3 website" },
-
+  "FoxEye_starting": { "message": "FoxEye starting..." },
 
   "risky_items": { "message": "$1 risky items" },
   "risky_item": { "message": "$1 risky item" },
