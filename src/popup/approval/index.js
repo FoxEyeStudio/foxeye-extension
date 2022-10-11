@@ -14,7 +14,7 @@ import ic_about_website from "../../images/ic_about_website.png";
 import ic_about_hover from "../../images/ic_about_hover.png";
 import imgInactive from "../../images/img_inactive.png";
 import Lottie from "react-lottie";
-import {LoadingJson} from "../../common/utils";
+import {iLocal, LoadingJson} from "../../common/utils";
 import {ethers} from "ethers";
 import {BscId, EthereumId} from "../../background/RiskCenter";
 import BigNumber from "bignumber.js";
@@ -96,7 +96,7 @@ function Approval() {
                         navigate('/home')
                     }
                 }}/>
-                <span className="detection-text">Approvals Management</span>
+                <span className="detection-text">{iLocal('Approvals_Management')}</span>
             </div>
             {loading && (
                 <div className='approval-loading-wrap' style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: "relative"}}>
@@ -111,7 +111,7 @@ function Approval() {
                             height={48}
                             width={48}
                     />
-                    <div className='approval-scanning flex-col'>Scanning...</div>
+                    <div className='approval-scanning flex-col'>{iLocal('Scanning')}</div>
                 </div>
             )}
             {!loading && ethers.utils.isAddress(account) && approvals.length > 0 && (
@@ -124,21 +124,21 @@ function Approval() {
                         <div className='approval-top-data-wrap'>
                             <div className='approval-top-type-wrap'>
                                 <div className='approval-top-data-value'>{tokens}</div>
-                                <div className='approval-top-type-value'>Tokens</div>
+                                <div className='approval-top-type-value'>{iLocal('Tokens')}</div>
                             </div>
                             <div className='approval-top-type-wrap'>
                                 <div className='approval-top-data-value'>{contracts}</div>
-                                <div className='approval-top-type-value'>Contracts</div>
+                                <div className='approval-top-type-value'>{iLocal('Contracts')}</div>
                             </div>
                             <div className='approval-top-type-wrap'>
                                 <div className='approval-top-data-value'>{chains}</div>
-                                <div className='approval-top-type-value'>Chains</div>
+                                <div className='approval-top-type-value'>{iLocal('Chains')}</div>
                             </div>
                         </div>
                     </div>
                     <div className='approval-list-wrap'>
-                        <div className='approval-list-title'>List of Approved Tokens</div>
-                        <div className='approval-list-title-desc'>Approving unknown dapp leads to security risks. Please check regularly!</div>
+                        <div className='approval-list-title'>{iLocal('List_of_Approved_Tokens')}</div>
+                        <div className='approval-list-title-desc'>{iLocal('List_of_Approved_Tokens_Desc')}</div>
                         {approvals.map((v, i, a) => (
                             <div key={'approvals-v-' + i}>
                                 <div className='approval-list-line'/>
@@ -148,13 +148,13 @@ function Approval() {
                                         <img src={tagImage(v.chain_id)} className='approval-list-item-tag'/>
                                     </div>
                                     <div className='approval-list-item-token-name'>{v.token_symbol}</div>
-                                    <div className='approval-list-item-spender-amount'>{v.approved_list.length} Approval(s)</div>
+                                    <div className='approval-list-item-spender-amount'>{iLocal('Approval_Length', [v.approved_list.length])}</div>
                                 </div>
                                 {v.approved_list.map((vv, ii, aa) => (
                                     <div key={'approved_list-vv-' + ii}>
-                                        <div className='approval-list-item-spender-name'>{vv.address_info?.tag ? vv.address_info.tag : vv.address_info?.contract_name ? vv.address_info.contract_name : 'unknown'}</div>
+                                        <div className='approval-list-item-spender-name'>{vv.address_info?.tag ? vv.address_info.tag : vv.address_info?.contract_name ? vv.address_info.contract_name : iLocal('unknown')}</div>
                                         <div className='approval-list-item-spender-wrap'>
-                                            <div className='approval-list-item-spender-title'>Contract</div>
+                                            <div className='approval-list-item-spender-title'>{iLocal('Contract')}</div>
                                             <div className='approval-list-item-spender-content'>{vv.approved_contract.substring(0, 12) + '...' + vv.approved_contract.substring(vv.approved_contract.length-10)}</div>
                                             <img src={ic_about_website} className='approval-list-item-spender-link' onClick={
                                                 () => {
@@ -167,7 +167,7 @@ function Approval() {
                                             }/>
                                         </div>
                                         <div className='approval-list-item-spender-wrap' style={{ marginBottom: 0 }}>
-                                            <div className='approval-list-item-spender-title'>Limit</div>
+                                            <div className='approval-list-item-spender-title'>{iLocal('Limit')}</div>
                                             <div className='approval-list-item-spender-content'>{amountFormat(vv.approved_amount)}</div>
                                             <img src={ic_about_hover} className='approval-list-item-spender-link' onClick={
                                                 () => {
@@ -177,7 +177,7 @@ function Approval() {
                                         </div>
                                         <div className='approval-revoke-item-wrap'>
                                             <div className='approval-list-item-spender-wrap' style={{ marginTop: 10 }}>
-                                                <div className='approval-list-item-spender-title'>Time</div>
+                                                <div className='approval-list-item-spender-title'>{iLocal('Time')}</div>
                                                 <div className='approval-list-item-spender-content'>{timeFormat(vv.approved_time)}</div>
                                             </div>
                                             <div className='approval-revoke-btn' onClick={async () => {
@@ -195,7 +195,7 @@ function Approval() {
                                                 const url = `https://foxeye.io?approval=${jsonEncode}`;
                                                 chrome.tabs.create({url});
                                             }}>
-                                                Revoke
+                                                {iLocal('Revoke')}
                                             </div>
                                         </div>
                                         {(ii < v.approved_list.length - 1) && (<div className='approval-list-line-16px'/>)}
@@ -221,7 +221,7 @@ function Approval() {
                 <div className='approval-inactive-wrap'>
                     <img className='approval-img-inactive' src={imgInactive} />
                     <div className='approval-inactive-text'>
-                        No contract has been approved
+                        {iLocal('No_contract_has_been_approved')}
                     </div>
                 </div>
             )}
@@ -229,7 +229,7 @@ function Approval() {
                 <div className='approval-inactive-wrap'>
                     <img className='approval-img-inactive' src={imgInactive} />
                     <div className='approval-inactive-text'>
-                        Wallet is inactive, please connect to a <br/> Web3 website
+                        {iLocal('Wallet_is_inactive_when_approval')}
                     </div>
                 </div>
             )}

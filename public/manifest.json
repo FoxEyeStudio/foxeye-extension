@@ -1,6 +1,6 @@
 {
-    "name": "FoxEye",
-    "description": "FoxEye - Metamask Protector",
+    "name": "__MSG_appName__",
+    "description": "__MSG_appDescription__",
     "version": "1.0.6",
     "manifest_version": 3,
     "background": {
@@ -44,5 +44,6 @@
         "32": "/icons/logo.png",
         "48": "/icons/logo.png",
         "128": "/icons/logo.png"
-    }
+    },
+    "default_locale": "en"
 }

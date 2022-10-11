@@ -20,7 +20,7 @@ import backIcon from "../images/ic_back.png";
 import backHoverIcon from "../images/ic_back_hover.png";
 import icArrowTop from "../images/ic_arrow_top.png";
 import icArrowBottom from "../images/ic_arrow_bottom.png";
-import {LoadingJson} from "../common/utils";
+import {iLocal, LoadingJson} from "../common/utils";
 import {number} from "prop-types";
 
 export default class AlertView extends Component {
@@ -96,34 +96,34 @@ export default class AlertView extends Component {
         let subTypeDesign = false;
         if (type === RiskType_PhishingWebsite) {
             picUrl = 'img_alert_phishing';
-            title = 'Phishing Website';
+            title = iLocal('Phishing_Website');
             targetContent = url;
-            errorDesc = 'The website is blacklisted by FoxEye. Continuing browsing may cause asset loss.';
+            errorDesc = iLocal('Phishing_Website_desc');
         } else if (type === RiskType_MaliciousContract) {
             picUrl = 'img_alert_malicious';
-            title = 'Malicious Contract';
-            errorDesc = 'This contract is a scam that will steal your funds. Any interaction should be avoided.';
+            title = iLocal('Malicious_Contract');
+            errorDesc = iLocal('Malicious_Contract_desc');
         } else if (type === RiskType_MaliciousAddress) {
             picUrl = 'img_alert_malicious';
-            title = 'Malicious Address';
-            errorDesc = 'This address is marked as malicious address, interacting with it could cause potential loss or legal problem.';
+            title = iLocal('Malicious_Address');
+            errorDesc = iLocal('Malicious_Address_desc');
         } else if (type === RiskType_TransferToContract) {
             // picUrl = '';
             // title = '';
             // errorDesc = '';
         } else if (type === RiskType_SwapHighRiskToken) {
             picUrl = 'img_alert_highrisk';
-            title = 'High Risk Token';
-            errorDesc = 'This token is marked as high-risk';
+            title = iLocal('High_Risk_Token');
+            errorDesc = iLocal('High_Risk_Token_Desc');
         } else if (type === RiskType_SwapMediumRiskToken) {
             picUrl = 'img_alert_midrisk';
-            title = 'Mid Risk Token';
-            errorDesc = 'This token is marked as mid-risk';
+            title = iLocal('Mid_Risk_Token');
+            errorDesc = iLocal('Mid_Risk_Token_Desc');
             bgColor = '#FFA354';
         } else if (type === RiskType_ApproveEOA) {
             picUrl = 'img_alert_wrong';
-            title = 'Wrong Target';
-            errorDesc = 'You are approving to an EOA(ordinary user account), which has no limitation on fund spending.';
+            title = iLocal('Wrong_Target');
+            errorDesc = iLocal('Wrong_Target_Desc');
         } else if (type === RiskType_ApproveNormal) {
             bgColor = '#FFA354';
             subTypeDesign = true;
@@ -159,27 +159,27 @@ export default class AlertView extends Component {
                 subTypeTitleLeft = this.amountFormat(amount) + '\u00a0\u00a0\u00a0' + name;
                 subTypeTitleLeftMaxWidth = 400;
                 subTypeTitleRight = '';
-                subTypeTag = 'Approve';
-                subTypeDesc = 'After approval, this address can spend approved ' + this.amountFormat(amount) + '\u00a0' + name + ', if you’re not sure please abort.'
+                subTypeTag = iLocal('Approve');
+                subTypeDesc = iLocal('Approve_Desc', [this.amountFormat(amount), name]);
             } else if (sub_type === Approve_ERC20_increaseAllowance) {
                 subTypeTitleLeft = this.amountFormat(amount) + '\u00a0\u00a0\u00a0' + name;
                 subTypeTitleLeftMaxWidth = 400;
                 subTypeTitleRight = '';
-                subTypeTag = 'increaseAllowance';
-                subTypeDesc = 'After approval, this address can spend approved ' + this.amountFormat(amount) + '\u00a0' + name + ', if you’re not sure please abort.'
+                subTypeTag = iLocal('increaseAllowance');
+                subTypeDesc = iLocal('increaseAllowance_Desc', [this.amountFormat(amount), name])
             } else if (sub_type === Approve_ERC721_approve) {
                 subTypeTitleLeft = name
                 subTypeTitleLeftMaxWidth = 300;
                 subTypeTitleRight = '\u00a0\u00a0\u00a0' + token_id;
                 subTypeTitleRightMaxWidth = 300;// no limit
-                subTypeTag = 'Approve';
-                subTypeDesc = 'After approval, this address can transfer the NFT, if you\'re not sure please abort.'
+                subTypeTag = iLocal('Approve');
+                subTypeDesc = iLocal('Approve_Nft_Desc');
             } else if (sub_type === Approve_ERC721_setApprovalForAll) {
                 subTypeTitleLeft = 'All NFTs in' + '\u00a0\u00a0\u00a0' + name;
                 subTypeTitleLeftMaxWidth = 400;
                 subTypeTitleRight = '';
-                subTypeTag = 'SetApproveForAll';
-                subTypeDesc = 'After approval, this address can transfer all of your NFTs in ' + name +' collection, if you are not sure please abort.';
+                subTypeTag = iLocal('SetApproveForAll');
+                subTypeDesc = iLocal('SetApproveForAll_Desc', [name]);
             }
         }
 
@@ -208,7 +208,7 @@ export default class AlertView extends Component {
                                 <img className='foxeye-subtype-arrow-bottom' src={icArrowBottom}/>
                                 <div className='foxeye-subtype-contract-wrap'>
                                     <div className='foxeye-subtype-contract'>
-                                        Contract
+                                        {iLocal('Contract')}
                                     </div>
                                     <div className='foxeye-subtype-contract-address'>
                                         {subTypeContractAddress}
@@ -231,16 +231,16 @@ export default class AlertView extends Component {
                                 </div>
                                 {(type === RiskType_SwapHighRiskToken || type === RiskType_SwapMediumRiskToken) && (
                                     <div className='check-report' onClick={this.clickCheckReport}>
-                                        Check Report
+                                        {iLocal('Check_Report')}
                                     </div>
                                 )}
                             </div>
                         )}
                         <div className={'foxeye-content-abort'} onClick={this.clickAbort}>
-                            Abort
+                            {iLocal('Abort')}
                         </div>
                         <div className='continue-btn' onClick={this.clickContinue}>
-                            Continue
+                            {iLocal('Continue')}
                         </div>
                     </div>
                     {this.state.showTokenView && (

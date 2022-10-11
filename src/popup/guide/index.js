@@ -18,6 +18,7 @@ import icGuideSafety from "../../images/ic_guide_safety.png";
 import icGuideManage from "../../images/ic_guide_manage.png";
 import icGuideIntercepts from "../../images/ic_guide_intercepts.png";
 import icGuideFoxeye from "../../images/ic_guide_foxeye.png";
+import {iLocal} from "../../common/utils";
 
 function Guide() {
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Guide() {
                     </div>
                 </div>
                 <div className='guide-step1-btn' onClick={() => setStep(2)}>
-                    Take a Tour
+                    {iLocal('Take_Tour')}
                 </div>
             </div>
         )
@@ -45,10 +46,10 @@ function Guide() {
             <div className='guide-step2-wrap'>
                 <div className='flex-col flex-full align-center'>
                     <div className='guide-step2-title'>
-                        Automatic Monitor
+                        {iLocal('Automatic_Monitor')}
                     </div>
                     <div className='guide-step2-desc'>
-                        FoxEye automatically detects threats when you are interacting with dApps by Metamask and other wallets. You don't need to do anything at all.<br/><br/>If any threats are detected, FoxEye will show an alert specifying the situation.
+                        {iLocal('FoxEye_automatically_detects')}<br/><br/>{iLocal('If_any_threats')}
                     </div>
                     <img src={imgGuideMonitor} className='guide-step2-img'/>
                 </div>
@@ -56,7 +57,7 @@ function Guide() {
                     <div className='guide-step2-back-img' style={{'--ic-guide-back': 'url(' + icGuideBack + ')', '--ic-guide-back-hover': 'url(' + icGuideBackHover + ')'}} onClick={() => setStep(1)}/>
                     <div className='guide-step2-btn' onClick={() => setStep(3)}>
                         <div className='guide-step2-next'>
-                            Next
+                            {iLocal('Next')}
                         </div>
                         <img src={icEnterWhite} className='guide-step2-next-icon'/>
                     </div>
@@ -73,7 +74,7 @@ function Guide() {
             <div className='guide-step2-wrap'>
                 <div className='flex-col flex-full align-center'>
                     <div className='guide-step2-title' style={{ marginBottom: 8 }}>
-                        Various Safe Alerts
+                        {iLocal('Various_Safe_Alerts')}
                     </div>
                     {icons.map((item, index) => (
                         <div className='guide-step3-item' key={'stepThree-index-' + index}>
@@ -110,7 +111,7 @@ function Guide() {
             <div className='guide-step2-wrap'>
                 <div className='flex-col flex-full align-center'>
                     <div className='guide-step2-title' style={{ marginBottom: 8 }}>
-                        Handy Tools
+                        {iLocal('Handy_Tools')}
                     </div>
                     {icons.map((item, index) => (
                         <div className='guide-step3-item' key={'stepFour-index-' + index}>
@@ -146,10 +147,10 @@ function Guide() {
             <div className='guide-step2-wrap'>
                 <div className='flex-col flex-full align-center'>
                     <div className='guide-step2-title' style={{ marginBottom: 8 }}>
-                        Fox Airdrop
+                        {iLocal('Fox_Airdrop')}
                     </div>
                     <div className='guide-step5-desc'>
-                        You’ll receive $FOX airdrop while using the following FoxEye’s features. You can check this later in Aidrop Centre.
+                        {iLocal('You_receive_FOX_airdrop')}
                     </div>
 
                     {icons.map((item, index) => (
@@ -174,7 +175,7 @@ function Guide() {
                         }
                     }}>
                         <div className='guide-step2-next'>
-                            Start to use FoxEye
+                            {iLocal('Start_to_use_FoxEye')}
                         </div>
                     </div>
                 </div>

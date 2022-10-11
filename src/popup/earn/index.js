@@ -16,6 +16,7 @@ import icFord from '../../images/ic_fold.png'
 import icTips from '../../images/ic_earnings_tips.png'
 import icUnFord from '../../images/ic_unfold.png'
 import {Task_ExperienceDemo} from "../../background/RiskCenter";
+import {iLocal} from "../../common/utils";
 
 function Earn() {
     const navigate = useNavigate()
@@ -64,11 +65,11 @@ function Earn() {
                 <div className='earn-claimable-item-title-wrap'>
                     <img className='earn-claimable-item-icon' src={icEarningsDetection}/>
                     <div className='earn-claimable-title-text'>
-                        Token Detection
+                        {iLocal('Token_Detection')}
                     </div>
                     <div className='flex-full'/>
                     <div className='earn-claimable-per-action'>
-                        5 per action
+                        {iLocal('five_per_action')}
                     </div>
                     <img className='earn-claimable-fold-icon' src={showDetection ? icFord : icUnFord} onClick={() => {
                         setShowDetection(!showDetection);
@@ -83,7 +84,7 @@ function Earn() {
                         <div className='flex-row align-center'>
                             <img src={icTips} className='earn-claimable-tip-icon'/>
                             <div className='earn-claimable-tip-content'>
-                                Daily Upper Limit: 20 tokens
+                                {iLocal('Daily_Upper_20')}
                             </div>
                         </div>
                     </div>
@@ -98,11 +99,11 @@ function Earn() {
                 <div className='earn-claimable-item-title-wrap'>
                     <img className='earn-claimable-item-icon' src={icEarningsAlert}/>
                     <div className='earn-claimable-title-text'>
-                        Risk Alert
+                        {iLocal('Risk_Alert')}
                     </div>
                     <div className='flex-full'/>
                     <div className='earn-claimable-per-action'>
-                        20 per action
+                        {iLocal('twenty_per_action')}
                     </div>
                     <img className='earn-claimable-fold-icon' src={showAlert ? icFord : icUnFord} onClick={() => {
                         setShowAlert(!showAlert);
@@ -112,12 +113,12 @@ function Earn() {
                 {showAlert && (
                     <div className='flex-col'>
                         <div className='earn-claimable-item-desc'>
-                            Risk alerts are triggered automatically while using FoxEye. Once triggered you'll get airdrop bouns.
+                            {iLocal('Risk_alerts_are_triggered')}
                         </div>
                         <div className='flex-row align-center'>
                             <img src={icTips} className='earn-claimable-tip-icon'/>
                             <div className='earn-claimable-tip-content'>
-                                Daily Upper Limit: 60 tokens
+                                {iLocal('Daily_Upper_60')}
                             </div>
                         </div>
                     </div>
@@ -136,7 +137,7 @@ function Earn() {
                 <div className='earn-claimable-item-title-wrap'>
                     <img className='earn-claimable-item-icon' src={icEarningsDemo}/>
                     <div className='earn-claimable-title-text'>
-                        Experience Risk Demo
+                        {iLocal('Experience_Risk_Demo')}
                     </div>
                     <div className='flex-full'/>
                     <div className='earn-claimable-per-action'>
@@ -160,7 +161,7 @@ function Earn() {
                         <div className='flex-row align-center'>
                             <img src={icTips} className='earn-claimable-tip-icon'/>
                             <div className='earn-claimable-tip-content'>
-                                This is a one-time task.
+                                {iLocal('This_is_one_time_task')}
                             </div>
                         </div>
                     </div>
@@ -175,11 +176,11 @@ function Earn() {
                 <div className='earn-claimable-item-title-wrap'>
                     <img className='earn-claimable-item-icon' src={icEarningsRevoke}/>
                     <div className='earn-claimable-title-text'>
-                        Revoke Approvals
+                        {iLocal('Revoke_Approvals')}
                     </div>
                     <div className='flex-full'/>
                     <div className='earn-claimable-per-action'>
-                        10 per action
+                        {iLocal('ten_per_action')}
                     </div>
                     <img className='earn-claimable-fold-icon' src={showRevoke ? icFord : icUnFord} onClick={() => {
                         setRevoke(!showRevoke);
@@ -197,7 +198,7 @@ function Earn() {
                         <div className='flex-row align-center'>
                             <img src={icTips} className='earn-claimable-tip-icon'/>
                             <div className='earn-claimable-tip-content'>
-                                Daily Upper Limit: 40 tokens
+                                {iLocal('Daily_Upper_40')}
                             </div>
                         </div>
                     </div>
@@ -214,20 +215,20 @@ function Earn() {
             </div>
             <div className="token-detection-title flex-row align-center">
                 <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/home')}}/>
-                <span className="detection-text">Earnings Center</span>
+                <span className="detection-text">{iLocal('Earnings_Center')}</span>
             </div>
 
             <div className='earn-tab-wrap'>
                 <div className='earn-tab-item' onClick={() => setAirdropTab(true)}>
                     <div className={airdropTab ? 'earn-tab-item-name-selected' : 'earn-tab-item-name'}>
-                        Airdrops
+                        {iLocal('Airdrops')}
                     </div>
                     <div className={airdropTab ? 'earn-tab-item-line-selected' : 'earn-tab-item-line'}/>
                 </div>
                 <div style={{ width: 42}} />
                 <div className='earn-tab-item' onClick={() => setAirdropTab(false)}>
                     <div className={airdropTab ? 'earn-tab-item-name' : 'earn-tab-item-name-selected'}>
-                        Dividends
+                        {iLocal('Dividends')}
                     </div>
                     <div className={airdropTab ? 'earn-tab-item-line' : 'earn-tab-item-line-selected'}/>
                 </div>
@@ -235,15 +236,15 @@ function Earn() {
             {airdropTab ? (
                 <div className='earn-scroll-div'>
                     <div className='earn-airdrops-desc'>
-                        $FOX token allows you to gain dividends from FoxEye Ad Pool.
+                        {iLocal('FOX_token_allows')}
                     </div>
                     <div className='earn-airdrops-qualification-wrap'>
                         <div className='earn-qualification-title-wrap'>
                             <div className='earn-qualification-title'>
-                                Airdrop Qualification
+                                {iLocal('Airdrop_Qualification')}
                             </div>
                             <div className='earn-qualification-detail'>
-                                Details
+                                {iLocal('Details')}
                             </div>
                         </div>
                         <div className='earn-account-wrap'>
@@ -254,18 +255,18 @@ function Earn() {
                             <div className='flex-full'/>
                             <div className='earn-eligible-icon' />
                             <div className='earn-eligible-text'>
-                                Eligible
+                                {iLocal('Eligible')}
                             </div>
                         </div>
                         <div className='earn-eligible-desc'>
-                            $FOX token will be distributed among eligible FoxEye users.
+                            {iLocal('FOX_token_distributed')}
                         </div>
                     </div>
 
                     <div className='earn-claimable-wrap'>
                         <div className='earn-claimable-title-wrap'>
                             <div className='earn-claimable-title'>
-                                Claimable
+                                {iLocal('Claimable')}
                             </div>
                             <div className='flex-full'/>
                             <div className='earn-claimable-number'>
@@ -273,7 +274,7 @@ function Earn() {
                             </div>
                         </div>
                         <div className='earn-claimable-desc'>
-                            Increase your airdrop amount by completing the following tasks.
+                            {iLocal('Increase_your_airdrop')}
                         </div>
                         <div className='earn-claimable-line'/>
                         {detectionItem()}
@@ -289,7 +290,7 @@ function Earn() {
                         <div className='earn-claim-btn' onClick={() => {
 
                         }}>
-                            Claim Airdrops
+                            {iLocal('Claim_Airdrops')}
                         </div>
                     </div>
                 </div>
@@ -297,28 +298,28 @@ function Earn() {
                 <div className='earn-scroll-div' style={{marginTop: 0}}>
                     <div className='earn-dividends-item-wrap'>
                         <div className='earn-dividends-item-title-wrap'>
-                            <div className='earn-dividends-item-title'>Current Ad Pool</div>
+                            <div className='earn-dividends-item-title'>{iLocal('Current_Ad_Pool')}</div>
                             <div className='earn-dividends-item-amount'>${poolValue}</div>
                         </div>
-                        <div className='earn-dividends-item-desc'>By holding $FOX, you can buy lotteries to get dividends from Ad Pool.</div>
+                        <div className='earn-dividends-item-desc'>{iLocal('By_holding_FOX')}</div>
                     </div>
                     <div className='earn-dividends-item-wrap'>
                         <div className='earn-dividends-item-title-wrap'>
-                            <div className='earn-dividends-item-title'>Lottery Cost</div>
+                            <div className='earn-dividends-item-title'>{iLocal('Lottery_Cost')}</div>
                             <div className='earn-dividends-item-amount'>100 FOX</div>
                         </div>
-                        <div className='earn-dividends-item-desc'>There's no limitation for one account on how many lotteries he can buy or win.</div>
+                        <div className='earn-dividends-item-desc'>{iLocal('There_no_limitation')}</div>
                     </div>
                     <div className='earn-dividends-item-wrap'>
                         <div className='earn-dividends-item-title-wrap'>
-                            <div className='earn-dividends-item-title'>10K FOX Dividends</div>
+                            <div className='earn-dividends-item-title'>{iLocal('Ten_Thousand_FOX_Dividends')}</div>
                             <div className='earn-dividends-item-amount'>$10</div>
                         </div>
-                        <div className='earn-dividends-item-desc'>Dividends for holding every 10K $FOX token if you win a lottery.</div>
+                        <div className='earn-dividends-item-desc'>{iLocal('Dividends_for_holding')}</div>
                     </div>
                     <div className='earn-dividends-item-wrap'>
                         <div className='earn-dividends-item-title-wrap'>
-                            <div className='earn-dividends-item-title'>My FOX Tokens</div>
+                            <div className='earn-dividends-item-title'>{iLocal('My_FOX_Tokens')}</div>
                             <div className='earn-dividends-item-amount'>{balance}</div>
                         </div>
                         <div className='earn-dividends-item-desc'>
@@ -329,7 +330,7 @@ function Earn() {
                         <div className='earn-dividends-btn' onClick={() => {
 
                         }}>
-                            Buy a lottery to win dividends
+                            {iLocal('Buy_lottery_to_dividends')}
                         </div>
                     </div>
                     <div className='earn-dividends-learnmore-desc'>

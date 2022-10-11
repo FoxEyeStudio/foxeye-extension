@@ -22,6 +22,7 @@ import imgAdAirdrop from '../../images/img_ad_airdrop.png'
 import imgAdTag from '../../images/img_ad_tag.png'
 import riskCenter from "../../background/RiskCenter";
 import {
+    iLocal,
     STORAGE_INTERCEPTED_AMOUNT,
     STORAGE_RECENT_ACCOUTS,
     STORAGE_SECURITY_STATISTIC_AMOUNT, STORAGE_SELECTED_ACCOUT
@@ -74,6 +75,7 @@ function Home() {
             if (result && result[STORAGE_INTERCEPTED_AMOUNT]) {
                 const interceptedAmount = result[STORAGE_INTERCEPTED_AMOUNT];
                 setInterceptedAmount(interceptedAmount);
+                document.getElementById("threats_intercepted_id").innerHTML = iLocal("threats_intercepted", [interceptedAmount.toString().fontcolor("#027DD5")]);
             }
         });
 
@@ -108,6 +110,8 @@ function Home() {
                 setAdList([]);
             }
         });
+
+        document.getElementById("threats_intercepted_id").innerHTML = iLocal("threats_intercepted", [interceptedAmount.toString().fontcolor("#027DD5")]);
     }, []);
 
     const updateAccount = account => {
@@ -181,11 +185,7 @@ function Home() {
             <div className='home-top-wrap'>
                 <div className='intercepted-and-account-wrap'>
                     <div className='intercepted-wrap'>
-                        <div className='intercepted-amount'>
-                            {interceptedAmount}
-                        </div>
-                        <div className='intercepted-desc'>
-                            &nbsp;threats intercepted for you
+                        <div className='intercepted-desc' id='threats_intercepted_id'>
                         </div>
                     </div>
                     {!!account ? (
@@ -207,7 +207,7 @@ function Home() {
                         <div className='account-wrap'>
                             <img src={ic_inactive} className='account-icon'/>
                             <div className='state-desc'>
-                                Wallet is Inactive
+                                {iLocal('Wallet_is_Inactive')}
                             </div>
                         </div>
                     )}
@@ -227,12 +227,12 @@ function Home() {
                 <div className='state-wrap'>
                     <img src={ic_security} className='state-icon'/>
                     <div className='state-title'>
-                        Safe Library
+                        {iLocal('Safe_Library')}
                     </div>
                     <div className='flex-full'/>
                     {syncTime && (
                         <div className='state-synced'>
-                            Synced at {syncTime}
+                            {iLocal('Synced_at', [syncTime])}
                         </div>
                     )}
                 </div>
@@ -251,7 +251,7 @@ function Home() {
                             {phishingAmount}
                         </div>
                         <div className='security-check-item-desc'>
-                            Phishing
+                            {iLocal('Phishing')}
                         </div>
                     </div>
                     <div className='security-check-item-line'/>
@@ -269,8 +269,8 @@ function Home() {
                 <div className="token-detection-inter flex-row align-center">
                     <img src={approvalListIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
-                        <div className="home-item-title">Approval List</div>
-                        <div className="home-item-desc">Manage approval regularly</div>
+                        <div className="home-item-title">{iLocal('Approval_List')}</div>
+                        <div className="home-item-desc">{iLocal('Manage_approval_regularly')}</div>
                     </div>
                     <div className={'flex-full'}/>
                     <img src={arrowIcon} className={'arrow-img'}/>
@@ -280,8 +280,8 @@ function Home() {
                 <div className="token-detection-inter flex-row align-center">
                     <img src={detectionIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
-                        <div className="home-item-title">Token Detection</div>
-                        <div className="home-item-desc">Have a check before buying</div>
+                        <div className="home-item-title">{iLocal('Token_Detection')}</div>
+                        <div className="home-item-desc">{iLocal('Have_a_check')}</div>
                     </div>
                     <div className={'flex-full'}/>
                     <img src={arrowIcon} className={'arrow-img'}/>
@@ -291,8 +291,8 @@ function Home() {
                 <div className="token-detection-inter flex-row align-center">
                     <img src={settingIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
-                        <div className="home-item-title">Risk Alerts</div>
-                        <div className="home-item-desc">5 strategies on</div>
+                        <div className="home-item-title">{iLocal('Risk_Alerts')}</div>
+                        <div className="home-item-desc">{iLocal('five_strategies_on')}</div>
                     </div>
                     <div className={'flex-full'}/>
                     <img src={arrowIcon} className={'arrow-img'}/>

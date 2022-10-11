@@ -13,7 +13,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import titleLogo from "../../images/title_logo.png";
 import aboutIcon from "../../images/ic_about.png";
 import aboutHoverIcon from "../../images/ic_about_hover.png";
-import {LoadingJson} from "../../common/utils";
+import {iLocal, LoadingJson} from "../../common/utils";
 import TokenView from "../../common/TokenView";
 import '../../css/token.css'
 
@@ -90,7 +90,7 @@ function Detection() {
                             navigate('/home')
                         }
                     }}/>
-                    <span className="detection-text">Token&nbsp;Detection</span>
+                    <span className="detection-text">{iLocal('Token_Detection')}</span>
                 </div>
                 <div className="search-wrap flex-row">
                     <div className={chainSelector ? "chain-wrap flex-row chain-wrap-active" : "chain-wrap flex-row"} onClick={() => {
@@ -122,7 +122,7 @@ function Detection() {
                 {!tokenInfo && !loading && (
                     <div className='security-no-info-wrap flex-col align-center'>
                         <img src={detectionImg} className='search-no-info-img'/>
-                        <div className="search-no-info-text">Full security report for any token</div>
+                        <div className="search-no-info-text">{iLocal('Full_security_report')}</div>
                     </div>
                 )}
 
@@ -154,7 +154,7 @@ function Detection() {
 
                 {noFound && (
                     <div className='token-no-wrap'>
-                        Token not found
+                        {iLocal('Token_not_found')}
                     </div>
                 )}
 

@@ -9,7 +9,7 @@ import backIcon from "../../images/ic_back.png";
 import backHoverIcon from "../../images/ic_back_hover.png";
 import imgCheckboxDefault from "../../images/img_checkbox_default.png";
 import imgCheckboxSelected from "../../images/img_checkbox_selected.png";
-import {STORAGE_RECENT_ACCOUTS, STORAGE_SELECTED_ACCOUT} from "../../common/utils";
+import {iLocal, STORAGE_RECENT_ACCOUTS, STORAGE_SELECTED_ACCOUT} from "../../common/utils";
 
 function Account() {
     const navigate = useNavigate()
@@ -67,10 +67,10 @@ function Account() {
             </div>
             <div className="token-detection-title flex-row align-center">
                 <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/home')}}/>
-                <span className="detection-text">Recent Accounts</span>
+                <span className="detection-text">{iLocal('Recent_Accounts')}</span>
             </div>
             <div className='recent-account-desc'>
-                FoxEye will track your current connected account based on the active webpage tab. If your active tab is not a Dapp you can switch your account here.
+                {iLocal('Recent_Accounts_Desc')}
             </div>
 
             <div className='recent-account-scroll-div'>

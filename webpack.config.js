@@ -75,7 +75,10 @@ module.exports = {
                     from: path.resolve(rootDir, 'src/css/token.css'),
                     to: path.resolve(rootDir, 'dist/css/foxeye-chrome-extension-token.css')
                 },
-
+                {
+                    from: path.resolve(rootDir, 'public/_locales'),
+                    to: path.resolve(rootDir, 'dist/_locales')
+                },
                 // { from: "src/css/content.css", to: 'dist/css/foxeye-chrome-extension-content.css', force: true}
             ],
         })

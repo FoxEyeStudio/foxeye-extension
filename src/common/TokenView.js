@@ -24,6 +24,7 @@ import {postMessage} from "../proxy/ProxyMessage";
 import BScroll from '@better-scroll/core'
 import MouseWheel from '@better-scroll/mouse-wheel'
 import ScrollBar from '@better-scroll/scroll-bar'
+import {iLocal} from "./utils";
 
 export default class TokenView extends Component {
     state = {
@@ -260,33 +261,33 @@ export default class TokenView extends Component {
                     <div className='foxeye-token-base-token-banner-line' />
                     <div className="foxeye-token-base-result foxeye-token-base-content">
                         <div className="foxeye-token-base-security-detection">
-                            <div className="foxeye-token-base-title">Security Detection </div>
+                            <div className="foxeye-token-base-title">{iLocal('Security_Detection')}</div>
                             <div className="foxeye-token-base-items-num foxeye-token-base-flex foxeye-token-base-items-center foxeye-token-base-flex-full">
                                 <img className="foxeye-token-base-icon-attention" src={ic_attention} style={{marginRight: 5}}/>
                                 {this.red_items_count > 1 ? (
-                                    <span className="foxeye-token-base-item-title">{this.red_items_count} risky items</span>
+                                    <span className="foxeye-token-base-item-title">{iLocal('risky_items', [this.red_items_count])}</span>
                                 ) : (
-                                    <span className="foxeye-token-base-item-title">{this.red_items_count} risky item</span>
+                                    <span className="foxeye-token-base-item-title">{iLocal('risky_item', [this.red_items_count])}</span>
                                 )}
 
                                 <img className="foxeye-token-base-icon-warning foxeye-token-base-security-warning" src={ ic_warning } />
                                 {this.orange_items_count > 1 ? (
-                                    <span className="foxeye-token-base-item-title">{this.orange_items_count} attention items</span>
+                                    <span className="foxeye-token-base-item-title">{iLocal('attention_items', [this.orange_items_count])}</span>
                                 ) : (
-                                    <span className="foxeye-token-base-item-title">{this.orange_items_count} attention item</span>
+                                    <span className="foxeye-token-base-item-title">{iLocal('attention_item', [this.orange_items_count])}</span>
                                 )}
                             </div>
                         </div>
                         <div className="foxeye-token-base-other-detection">
                             <div className="foxeye-token-base-contract-security">
-                                <div className="foxeye-token-base-title">Contract Security</div>
+                                <div className="foxeye-token-base-title">{iLocal('Contract_Security')}</div>
                                 {this.is_open_source == 1 && (
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Contract source code verified</div>
-                                            <div className="foxeye-token-base-item-desc">This token contract is open source.
-                                                You can check the contract code for details. Unsourced token contracts are likely to have malicious functions to defraud their users of their assets.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Contract_source_code_verified')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('contract_is_open_source')}
                                             </div>
                                         </div>
                                     </div>
@@ -296,8 +297,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-attention" src={ic_attention}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Contract source code not verified</div>
-                                            <div className="foxeye-token-base-item-desc">This token contract has not been verified. We cannot check the contract code for details. Unsourced token contracts are likely to have malicious functions to defraud users of their assets.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Contract_source_code_not_verified')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('contract_has_not_been_verified')}
                                             </div>
                                         </div>
                                     </div>
@@ -307,12 +309,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-is-proxy foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Proxy contract</div>
-                                            <div className="foxeye-token-base-item-desc">This contract is an Admin Upgradeability Proxy.
-                                                The proxy contract means the contract owner can modify the function of
-                                                the token and could possibly effect the price.There is possibly a way
-                                                for the team to Rug or Scam. Please confirm the details with the project
-                                                team before buying.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Proxy_contract')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('contract_is_Admin_Upgradeability')}
                                             </div>
                                         </div>
                                     </div>
@@ -322,10 +321,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-no-proxy foxeye-token-base-flex" >
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">No proxy</div>
-                                            <div className="foxeye-token-base-item-desc">There is no proxy in the contract. The proxy
-                                                contract means contract owner can modify the function of the token and
-                                                possibly effect the price.
+                                            <div className="foxeye-token-base-item-title">{iLocal('No_proxy')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('no_proxy_in_contract')}
                                             </div>
                                         </div>
                                     </div>
@@ -335,12 +333,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-mint-function foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Mint function</div>
-                                            <div className="foxeye-token-base-item-desc">The contract may contain additional issuance
-                                                functions, which could maybe generate a large number of tokens,
-                                                resulting in significant fluctuations in token prices. It is recommended
-                                                to confirm with the project team whether it complies with the token
-                                                issuance instructions.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Mint_function')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('contain_additional_issuance_functions')}
                                             </div>
                                         </div>
                                     </div>
@@ -350,10 +345,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-no-mint-function foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">No mint function</div>
-                                            <div className="foxeye-token-base-item-desc">Mint function is transparent or non-existent.
-                                                Hidden mint functions may increase the amount of tokens in circulation
-                                                and effect the price of the token.
+                                            <div className="foxeye-token-base-item-title">{iLocal('No_mint_function')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Mint_function_is_transparent')}
                                             </div>
                                         </div>
                                     </div>
@@ -370,11 +364,11 @@ export default class TokenView extends Component {
                                                 <div className="foxeye-token-base-flex">
                                                     {(this.owner_address == '0x0000000000000000000000000000000000000000' || this.owner_address == '0x000000000000000000000000000000000000dEaD') ? (
                                                         <div
-                                                            className="foxeye-token-base-item-title foxeye-token-base-address-title">Owner Address： <span
+                                                            className="foxeye-token-base-item-title foxeye-token-base-address-title">{iLocal('Owner_Address')}： <span
                                                             className="foxeye-token-base-text-green-500">{this.owner_address}</span>
                                                         </div>
                                                     ) : (
-                                                        <div className="foxeye-token-base-item-title foxeye-token-base-address-title">Owner Address：
+                                                        <div className="foxeye-token-base-item-title foxeye-token-base-address-title">{iLocal('Owner Address')}：
                                                             {this.owner_address}</div>
                                                     )}
 
@@ -386,9 +380,8 @@ export default class TokenView extends Component {
                                                     </div>
                                                 </div>
 
-                                                <div className="foxeye-token-base-item-desc">The owner address can modify the parameters
-                                                    of the token contract. If it is a EOA address, the project party can
-                                                    modify the parameters at will, resulting in token risk.
+                                                <div className="foxeye-token-base-item-desc">
+                                                    {iLocal('owner_address_can_modify')}
                                                 </div>
                                             </div>
                                         </div>
@@ -397,12 +390,11 @@ export default class TokenView extends Component {
                                             <div className="foxeye-token-base-detect-item foxeye-token-base-retrievable-ownership foxeye-token-base-flex">
                                                 <img className="foxeye-token-base-icon-warning" src={ic_warning} />
                                                 <div>
-                                                    <div className="foxeye-token-base-item-title">Functions with retrievable
-                                                        ownership
+                                                    <div className="foxeye-token-base-item-title">
+                                                        {iLocal('Functions_with_retrievable_ownership')}
                                                     </div>
-                                                    <div className="foxeye-token-base-item-desc">If this function exists, it is
-                                                        possible for the project owner to regain ownership even
-                                                        after relinquishing it.
+                                                    <div className="foxeye-token-base-item-desc">
+                                                        {iLocal('regain_ownership_even')}
                                                     </div>
                                                 </div>
                                             </div>
@@ -412,12 +404,11 @@ export default class TokenView extends Component {
                                             <div className="foxeye-token-base-detect-item foxeye-token-base-no-retrievable-ownership foxeye-token-base-flex">
                                                 <img className="foxeye-token-base-icon-safe" src={ic_safe} />
                                                 <div>
-                                                    <div className="foxeye-token-base-item-title">No function found that retrieves
-                                                        ownership
+                                                    <div className="foxeye-token-base-item-title">
+                                                        {iLocal('No_found_retrieves_ownership')}
                                                     </div>
-                                                    <div className="foxeye-token-base-item-desc">If this function exists, it is
-                                                        possible for the project owner to regain ownership even
-                                                        after relinquishing it.
+                                                    <div className="foxeye-token-base-item-desc">
+                                                        {iLocal('regain_ownership_even')}
                                                     </div>
                                                 </div>
                                             </div>
@@ -427,10 +418,9 @@ export default class TokenView extends Component {
                                             <div className="foxeye-token-base-detect-item foxeye-token-base-owner-can-change-balance foxeye-token-base-flex">
                                                 <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                                 <div>
-                                                    <div className="foxeye-token-base-item-title">Owner can change balance</div>
-                                                    <div className="foxeye-token-base-item-desc">The contract owner has the authority to
-                                                        modify the balance of tokens at other addresses, which may
-                                                        result in a loss of assets.
+                                                    <div className="foxeye-token-base-item-title">{iLocal('Owner_can_change_balance')}</div>
+                                                    <div className="foxeye-token-base-item-desc">
+                                                        {iLocal('has_authority_to_modify')}
                                                     </div>
                                                 </div>
                                             </div>
@@ -440,10 +430,9 @@ export default class TokenView extends Component {
                                             <div className="foxeye-token-base-detect-item foxeye-token-base-owner-cant-change-balance foxeye-token-base-flex">
                                                 <img className="foxeye-token-base-icon-safe" src={ic_safe} />
                                                 <div>
-                                                    <div className="foxeye-token-base-item-title">Owner cann't change balance</div>
-                                                    <div className="foxeye-token-base-item-desc">The contract owner is not found to
-                                                        have the authority to modify the balance of tokens at other
-                                                        addresses.
+                                                    <div className="foxeye-token-base-item-title">{iLocal('Owner_cann_not_change_balance')}</div>
+                                                    <div className="foxeye-token-base-item-desc">
+                                                        {iLocal('not_found_to_have_authority_to_modify')}
                                                     </div>
                                                 </div>
                                             </div>
@@ -452,14 +441,13 @@ export default class TokenView extends Component {
                                         <div className="foxeye-token-base-flex foxeye-token-base-detect-item">
                                             {this.creator_address.substr(0, 27) == '0x0000000000000000000000000' && (
                                                 <div
-                                                    className="foxeye-token-base-item-title">Creator Address: <span
+                                                    className="foxeye-token-base-item-title">{iLocal('Creator_Address')}: <span
                                                     className="foxeye-token-base-text-green-500">{this.creator_address}</span>
                                                 </div>
                                             )}
 
                                             {this.creator_address && this.creator_address.substr(0, 27) != '0x0000000000000000000000000' && (
-                                                <div className="foxeye-token-base-item-title">Creator
-                                                    Address: <span>{this.creator_address}</span>
+                                                <div className="foxeye-token-base-item-title">{iLocal('Creator_Address')}: <span>{this.creator_address}</span>
                                                 </div>
                                             )}
                                             <div onClick={() => {this.copyToClipboard(this.creator_address)}} data-title="copied" className="foxeye-token-base-ic-copy ml-2-5 mt-1.5 inline-block">
@@ -471,69 +459,69 @@ export default class TokenView extends Component {
                             </div>
 
                             <div className="foxeye-token-base-transaction-security">
-                                <div className="foxeye-token-base-title">Transcation Security</div>
+                                <div className="foxeye-token-base-title">{iLocal('Transcation_Security')}</div>
                                 {(this.buy_tax || this.sell_tax) ? (
                                     <div className="foxeye-token-base-tax">
                                         <div className="foxeye-token-base-flex foxeye-token-base-flex-full" >
                                             {(this.buy_tax * 100).toFixed(2) < 10 && (
-                                                <div className="foxeye-token-base-item-title">Buy Tax:&nbsp;<span
+                                                <div className="foxeye-token-base-item-title">{iLocal('Buy_Tax')}:&nbsp;<span
                                                     className="foxeye-token-base-buy-tax foxeye-token-base-text-green-500">{(this.buy_tax * 100).toFixed(2)}%</span>
                                                 </div>
                                             )}
 
                                             {(this.buy_tax * 100).toFixed(2) >= 10 && (this.buy_tax * 100).toFixed(2) < 50 && (
                                                 <div
-                                                    className="foxeye-token-base-item-title">Buy Tax:&nbsp;<span
+                                                    className="foxeye-token-base-item-title">{iLocal('Buy_Tax')}:&nbsp;<span
                                                     className="foxeye-token-base-buy-tax foxeye-token-base-text-orange">{(this.buy_tax * 100).toFixed(2)}%</span>
                                                 </div>
                                             )}
 
                                             {(this.buy_tax * 100).toFixed(2) >= 50 && (
-                                                <div className="foxeye-token-base-item-title">Buy Tax:&nbsp;<span
+                                                <div className="foxeye-token-base-item-title">{iLocal('Buy_Tax')}:&nbsp;<span
                                                     className="foxeye-token-base-buy-tax foxeye-token-base-text-red">{(this.buy_tax * 100).toFixed(2)}%</span>
                                                 </div>
                                             )}
 
                                             {(this.sell_tax * 100).toFixed(2) < 10 && (
-                                                <div className="foxeye-token-base-item-title foxeye-token-base-sell-tax-title">Sell Tax:&nbsp;<span
+                                                <div className="foxeye-token-base-item-title foxeye-token-base-sell-tax-title">{iLocal('Sell_Tax')}:&nbsp;<span
                                                     className="foxeye-token-base-sell-tax foxeye-token-base-text-green-500">{(this.sell_tax * 100).toFixed(2)}%</span>
                                                 </div>
                                             )}
 
                                             {(this.sell_tax * 100).toFixed(2) >= 10 && (this.sell_tax * 100).toFixed(2) < 50 && (
-                                                <div className="foxeye-token-base-item-title foxeye-token-base-sell-tax-title">Sell Tax:&nbsp;<span
+                                                <div className="foxeye-token-base-item-title foxeye-token-base-sell-tax-title">{iLocal('Sell_Tax')}:&nbsp;<span
                                                     className="foxeye-token-base-sell-tax foxeye-token-base-text-orange">{(this.sell_tax * 100).toFixed(2)}%</span>
                                                 </div>
                                             )}
 
                                             {(this.sell_tax * 100).toFixed(2) >= 50 && (
-                                                <div className="foxeye-token-base-item-title foxeye-token-base-sell-tax-title">Sell Tax:&nbsp;<span
+                                                <div className="foxeye-token-base-item-title foxeye-token-base-sell-tax-title">{iLocal('Sell_Tax')}:&nbsp;<span
                                                     className="foxeye-token-base-sell-tax foxeye-token-base-text-red">{(this.sell_tax * 100).toFixed(2)}%</span>
                                                 </div>
                                             )}
                                         </div>
-                                        <div className="foxeye-token-base-item-desc">Above 10% may be considered a high tax rate. More
-                                            than 50% tax rate means may not be tradable.
+                                        <div className="foxeye-token-base-item-desc">
+                                            {iLocal('Above_may_be_considered')}
                                         </div>
                                     </div>
                                 ) : (
                                     <div className="foxeye-token-base-tax foxeye-token-base-tax-empty foxeye-token-base-flex foxeye-token-base-justify-center foxeye-token-base-items-center">
                                         <img className="foxeye-token-base-icon-empty-small" src={icon_empty} />
-                                        <span>No items</span>
+                                        <span>{iLocal('No_items')}</span>
                                     </div>
                                 )}
                             </div>
 
                             <div className="foxeye-token-base-honeypot-risk">
-                                <div className="foxeye-token-base-title">Honeypot Risk</div>
+                                <div className="foxeye-token-base-title">{iLocal('Honeypot_Risk')}</div>
 
                                 {this.is_honeypot == 1 && (
                                     <div className="foxeye-token-base-detect-item honeypot foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-attention" src={ic_attention}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">May the token is a honeypot</div>
-                                            <div className="foxeye-token-base-item-desc">This token contract has a code that states that
-                                                it cannot be sold. Maybe this is a honeypot.
+                                            <div className="foxeye-token-base-item-title">{iLocal('May_token_is_honeypot')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('May_token_is_honeypot_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -543,9 +531,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-not-honeypot foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">This does not appear to be a honeypot.</div>
-                                            <div className="foxeye-token-base-item-desc">We are not aware of any code that prevents the
-                                                sale of tokens.
+                                            <div className="foxeye-token-base-item-title">{iLocal('appear_to_be_honeypot')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('appear_to_be_honeypot_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -555,9 +543,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-pausable foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Functions that can suspend trading</div>
-                                            <div className="foxeye-token-base-item-desc">If a suspendable code is included, the token
-                                                maybe neither be bought nor sold (honeypot risk).
+                                            <div className="foxeye-token-base-item-title">{iLocal('can_suspend_trading')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('can_suspend_trading_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -567,9 +555,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-not-pausable foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">No codes found to suspend trading</div>
-                                            <div className="foxeye-token-base-item-desc">If a suspendable code is included, the token
-                                                maybe neither be bought nor sold (honeypot risk).
+                                            <div className="foxeye-token-base-item-title">{iLocal('No_codes_suspend_trading')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('No_codes_suspend_trading_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -579,9 +567,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-pausable foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Holders cannot sell all of the tokens</div>
-                                            <div className="foxeye-token-base-item-desc">Holders cannot sell all of the tokens and can
-                                                only sell up to the percentage specified in the contract.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Holders_cannot_sell_tokens')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Holders_cannot_sell_tokens_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -591,9 +579,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-not-pausable foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Holders can sell all of the token</div>
-                                            <div className="foxeye-token-base-item-desc">Holders can sell all of the token.Some token
-                                                contracts will have a maximum sell ratio.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Holders_can_sell_token')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Holders_can_sell_token_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -603,10 +591,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-pausable foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Trading cooldown function</div>
-                                            <div className="foxeye-token-base-item-desc">The token contract has the trading cooldown
-                                                function. Within a certain time or block after buying, the user will not
-                                                be able to sell the token.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Trading_cooldown_function')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Trading_cooldown_function_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -616,10 +603,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-not-pausable foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">No trading cooldown function</div>
-                                            <div className="foxeye-token-base-item-desc">The token contract has no trading cooldown
-                                                function.If there is a trading cooldown function, the user will not be
-                                                able to sell the token within a certain time or block after buying.
+                                            <div className="foxeye-token-base-item-title">{iLocal('No_trading_cooldown_function')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('No_trading_cooldown_function_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -629,9 +615,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-anti-whale foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Anti_whale(Limited number of transactions)</div>
-                                            <div className="foxeye-token-base-item-desc">The number of token transactions is limited. The
-                                                number of scam token transactions may be limited (honeypot risk).
+                                            <div className="foxeye-token-base-item-title">{iLocal('Anti_whale')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Anti_whale_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -641,12 +627,11 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-not-pausable foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">No anti_whale(Unlimited number of
-                                                transactions)
+                                            <div className="foxeye-token-base-item-title">
+                                                {iLocal('No_anti_whale')}
                                             </div>
-                                            <div className="foxeye-token-base-item-desc">There is no limit to the number of token
-                                                transactions. The number of scam token transactions may be limited
-                                                (honeypot risk).
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('No_anti_whale_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -656,10 +641,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-slippage-modifiable foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Tax can be modified</div>
-                                            <div className="foxeye-token-base-item-desc">The contract owner may contain the authority to
-                                                modify the transaction tax. If the transaction tax is increased to more
-                                                than 49%, the tokens will not be able to be traded (honeypot risk).
+                                            <div className="foxeye-token-base-item-title">{iLocal('Tax_can_be_modified')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Tax_can_be_modified_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -669,10 +653,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-slippage-not-modifiable foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Tax cannot be modified</div>
-                                            <div className="foxeye-token-base-item-desc">The contract owner may not contain the authority
-                                                to modify the transaction tax. If the transaction tax is increased to
-                                                more than 49%, the tokens will not be able to be traded (honeypot risk).
+                                            <div className="foxeye-token-base-item-title">{iLocal('Tax_cannot_be_modified')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Tax_cannot_be_modified_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -682,9 +665,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-black-listed foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Blacklist function</div>
-                                            <div className="foxeye-token-base-item-desc">The blacklist function is included. Some
-                                                addresses may not be able to trade normally (honeypot risk).
+                                            <div className="foxeye-token-base-item-title">{iLocal('Blacklist_function')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Blacklist_function_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -694,10 +677,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-not-black-listed foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">No blacklist</div>
-                                            <div className="foxeye-token-base-item-desc">The blacklist function is not included. If there
-                                                is a blacklist, some addresses may not be able to trade normally
-                                                (honeypot risk).
+                                            <div className="foxeye-token-base-item-title">{iLocal('No_blacklist')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('No_blacklist_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -707,9 +689,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-white-listed foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Whitelist function</div>
-                                            <div className="foxeye-token-base-item-desc">The whitelist function is included. Some
-                                                addresses may not be able to trade normally (honeypot risk).
+                                            <div className="foxeye-token-base-item-title">{iLocal('Whitelist_function')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Whitelist_function_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -719,10 +701,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-not-white-listed foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">No whitelist</div>
-                                            <div className="foxeye-token-base-item-desc">The whitelist function is not included. If there
-                                                is a whitelist, some addresses may not be able to trade normally
-                                                (honeypot risk).
+                                            <div className="foxeye-token-base-item-title">{iLocal('No_whitelist')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('No_whitelist_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -732,19 +713,19 @@ export default class TokenView extends Component {
 
                             {this.is_in_dex == 1 && (
                                 <div className="foxeye-token-base-liquidity">
-                                    <div className="foxeye-token-base-title">Liquidity</div>
+                                    <div className="foxeye-token-base-title">{iLocal('Liquidity')}</div>
                                     <div className="foxeye-token-base-dex">
                                         <div className="foxeye-token-base-flex foxeye-token-base-flex-col foxeye-token-base-mb-1">
                                             {this.dex_names.map((name, index) => (
                                                 <div className="foxeye-token-base-dex-item" key={'dex_name-' + index} >
                                                     {this.dex_index == index && (
                                                         <div  className="foxeye-token-base-dex-item-inner foxeye-token-base-active">
-                                                            Dex{index +1}: {name}
+                                                            {iLocal('Dex')}{index +1}: {name}
                                                         </div>
                                                     )}
                                                     {this.dex_index != index && (
                                                         <div  className="foxeye-token-base-dex-item-inner">
-                                                            Dex{index +1}: {name}
+                                                            {iLocal('Dex')}{index +1}: {name}
                                                         </div>
                                                     )}
                                                 </div>
@@ -775,10 +756,10 @@ export default class TokenView extends Component {
                                                             }
                                                             this.linkTo(linkUrl + item.pair);
                                                         }}>
-                                                            Pool{index +1}：{item['pair'].substr(0, 4)}...{item['pair'].substr(-4)}
+                                                            {iLocal('Pool')}{index +1}：{item['pair'].substr(0, 4)}...{item['pair'].substr(-4)}
                                                         </div>
 
-                                                        <div className="foxeye-token-base-dex-liquidity">Liquidity：${
+                                                        <div className="foxeye-token-base-dex-liquidity">{iLocal('Liquidity')}：${
                                                             parseFloat(item['liquidity']).toFixed(2)}</div>
                                                     </div>
                                                 ))}
@@ -786,7 +767,7 @@ export default class TokenView extends Component {
                                         ) : (
                                             <div className="foxeye-token-base-dex-detail foxeye-token-base-dex-empty foxeye-token-base-flex foxeye-token-base-justify-center foxeye-token-base-items-center">
                                                 <img className="foxeye-token-base-icon-empty-small" src={icon_empty}/>
-                                                <span>No items</span>
+                                                <span>{iLocal('No_items')}</span>
                                             </div>
                                         )}
                                     </div>
@@ -795,23 +776,23 @@ export default class TokenView extends Component {
 
                             {(this.holders || this.lp_holders) && (
                                 <div className="foxeye-token-base-info-security">
-                                    <div className="foxeye-token-base-title">Info Security</div>
+                                    <div className="foxeye-token-base-title">{iLocal('Info_Security')}</div>
 
                                     <div className="foxeye-token-base-holders-block">
-                                        <div className="foxeye-token-base-item-title holders-info">Holders Info</div>
+                                        <div className="foxeye-token-base-item-title holders-info">{iLocal('Holders_Info')}</div>
                                         {this.holders ? (
                                             <div>
                                                 <div className="foxeye-token-base-item-title foxeye-token-base-flex foxeye-token-base-flex-col foxeye-token-base-mt-1">
                                                     {this.holder_count > 1 ? (
-                                                        <span>Holders：{this.holder_count} addresses</span>
+                                                        <span>{iLocal('Holders_addressed', [this.holder_count])}</span>
                                                     ) : (
-                                                        <span>Holders：{this.holder_count} address</span>
+                                                        <span>{iLocal('Holders_address', [this.holder_count])}</span>
                                                     )}
-                                                    <span className="foxeye-token-base-total-supply">Total Supply：{this.total_supply}</span>
+                                                    <span className="foxeye-token-base-total-supply">{iLocal('Total_Supply')}：{this.total_supply}</span>
                                                 </div>
 
                                                 <div className="foxeye-token-base-top10-holders">
-                                                    <div className="foxeye-token-base-item-title foxeye-token-base-top-10-title">Top10 Holders</div>
+                                                    <div className="foxeye-token-base-item-title foxeye-token-base-top-10-title">{iLocal('Top10_Holders')}</div>
                                                     <div className="foxeye-token-base-rank-chart foxeye-token-base-flex foxeye-token-base-justify-between">
                                                         <div className="rank">
                                                             {this.holders.map((item, index) => (
@@ -821,14 +802,14 @@ export default class TokenView extends Component {
                                                                         {!!item.is_contract && (
                                                                             <div className="foxeye-token-base-tooltip">
                                                                                 <img className="foxeye-token-base-ic-contract" src={ic_contract}/>
-                                                                                <span className="foxeye-token-base-tooltip-text">Contract</span>
+                                                                                <span className="foxeye-token-base-tooltip-text">{iLocal('Contract')}</span>
                                                                             </div>
                                                                         )}
 
                                                                         {!!item.is_locked && (
                                                                             <div className="foxeye-token-base-tooltip">
                                                                                 <img className="foxeye-token-base-ic-lock" src={ic_lock}/>
-                                                                                <span className="foxeye-token-base-tooltip-text foxeye-token-base-locked-address">Locked Address</span>
+                                                                                <span className="foxeye-token-base-tooltip-text foxeye-token-base-locked-address">{iLocal('Locked_Address')}</span>
                                                                             </div>
                                                                         )}
 
@@ -860,8 +841,8 @@ export default class TokenView extends Component {
                                                                                     </div>
                                                                                 </div>
                                                                                 <span className="foxeye-token-base-tooltip-text foxeye-token-base-tag">
-                                                                                    <span>Public Tag：{item.tag}</span><br/>
-                                                                                    <span>Address： {item.address}</span>
+                                                                                    <span>{iLocal('Public_Tag', [item.tag])}</span><br/>
+                                                                                    <span>{iLocal('Address')}： {item.address}</span>
                                                                                 </span>
                                                                             </div>
                                                                         ) : (
@@ -908,12 +889,12 @@ export default class TokenView extends Component {
                                                                                                 No{idx +1}:
                                                                                                 {parseFloat(detail.amount).toFixed(2)} {this.token_name}</div>
                                                                                             <div className="foxeye-token-base-detail-intro foxeye-token-base-flex foxeye-token-base-flex-col foxeye-token-base-mt-1">
-                                                                                            <span className="foxeye-token-base-flex foxeye-token-base-flex-col "><span>Start/Update Time:</span> <span>{
+                                                                                            <span className="foxeye-token-base-flex foxeye-token-base-flex-col "><span>{iLocal('Start_or_Update_Time')}</span> <span>{
                                                                                                 detail.opt_time.substr(0, 19).replace('T', ' ')
                                                                                             }(UTC)</span>
                                                                                             </span>
                                                                                                 <span
-                                                                                                    className="foxeye-token-base-mt-1  foxeye-token-base-flex foxeye-token-base-flex-col "><span>End Time:</span> <span>{
+                                                                                                    className="foxeye-token-base-mt-1  foxeye-token-base-flex foxeye-token-base-flex-col "><span>{iLocal('End_Time')}</span> <span>{
                                                                                                     detail
                                                                                                         .end_time.substr(0, 19).replace('T', ' ')
                                                                                                 }(UTC)</span>
@@ -931,32 +912,32 @@ export default class TokenView extends Component {
 
                                                             <div className="foxeye-token-base-owners-holding foxeye-token-base-mt-5">
                                                             <div className="foxeye-token-base-flex foxeye-token-base-flex-col">
-                                                                <div className="foxeye-token-base-holding-title"><span className="foxeye-token-base-font-bold">Owner's Holdings:</span> {
+                                                                <div className="foxeye-token-base-holding-title"><span className="foxeye-token-base-font-bold">{iLocal('Owner_s_Holdings')}</span> {
                                                                     parseFloat(this.owner_balance)
                                                                     .toFixed(2)
                                                                 }</div>
-                                                                <div className="foxeye-token-base-holding-desc">Percent:
+                                                                <div className="foxeye-token-base-holding-desc">{iLocal('Percent')}:
                                                                     {(this.owner_percent * 100).toFixed(2)}%
                                                                 </div>
                                                             </div>
                                                             <div className="foxeye-token-base-mt-2 foxeye-token-base-flex foxeye-token-base-flex-col">
-                                                                <div className="foxeye-token-base-holding-title"><span className="foxeye-token-base-font-bold">Creator's Holdings:</span> {
+                                                                <div className="foxeye-token-base-holding-title"><span className="foxeye-token-base-font-bold">{iLocal('Creator_s_Holdings')}</span> {
                                                                     parseFloat(this.creator_balance)
                                                                     .toFixed(2)
                                                                 }</div>
-                                                                <div className="foxeye-token-base-holding-desc ">Percent:
+                                                                <div className="foxeye-token-base-holding-desc ">{iLocal('Percent')}:
                                                                     {(this.creator_percent * 100).toFixed(2)}%
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         </div>
                                                         <div className="foxeye-token-base-chart">
-                                                            <div className="foxeye-token-base-item-title foxeye-token-base-chart-title">Top10 Holders</div>
+                                                            <div className="foxeye-token-base-item-title foxeye-token-base-chart-title">{iLocal('Top10_Holders')}</div>
                                                             {this.holders_percent >= 50 ? (
                                                                 <div className="foxeye-token-base-pie-chart foxeye-token-base-convex">
                                                                     <div className="foxeye-token-base-before"
                                                                          style={{transform: 'translate(-50%, -50%) rotate(' + this.holders_percent / 100 + 'turn)'}}></div>
-                                                                    <div className="foxeye-token-base-percent">Top10<br/>{
+                                                                    <div className="foxeye-token-base-percent">{iLocal('Top10')}<br/>{
                                                                         this.holders_percent
                                                                             .toFixed(2)
                                                                     }%</div>
@@ -965,7 +946,7 @@ export default class TokenView extends Component {
                                                                 <div className="foxeye-token-base-pie-chart">
                                                                     <div className="foxeye-token-base-before"
                                                                          style={{transform: 'translate(-50%, -50%) rotate(' + this.holders_percent / 100 + 'turn)'}}></div>
-                                                                    <div className="foxeye-token-base-percent">Top10<br/>{
+                                                                    <div className="foxeye-token-base-percent">{iLocal('Top10')}<br/>{
                                                                         this.holders_percent
                                                                             .toFixed(2)
                                                                     }%</div>
@@ -979,25 +960,25 @@ export default class TokenView extends Component {
                                         ) : (
                                             <div className="foxeye-token-base-holders-empty foxeye-token-base-flex foxeye-token-base-flex-col foxeye-token-base-items-center">
                                                 <img className="foxeye-token-base-icon-empty-big" src={icon_empty}/>
-                                                <span>No items</span>
+                                                <span>{iLocal('No_items')}</span>
                                             </div>
                                         )}
                                     </div>
                                     <div className="foxeye-token-base-lp-holders-block">
-                                        <div className="foxeye-token-base-item-title foxeye-token-base-holders-info foxeye-token-base-lp-holders">LP Holders Info</div>
+                                        <div className="foxeye-token-base-item-title foxeye-token-base-holders-info foxeye-token-base-lp-holders">{iLocal('LP_Holders_Info')}</div>
 
                                         {(this.lp_holders && this.lp_holder_count > 0) ? (
                                             <div>
                                                 <div className="foxeye-token-base-item-title foxeye-token-base-flex foxeye-token-base-flex-col foxeye-token-base-mt-1">
                                                     {this.lp_holder_count > 1 ? (
-                                                        <span>LP Holders：{this.lp_holder_count} addresses</span>
+                                                        <span>{iLocal('LP_Holders_addresses', [this.lp_holder_count])}</span>
                                                     ) : (
-                                                        <span>LP Holders：{this.lp_holder_count} address</span>
-                                                    )} <span className="foxeye-token-base-total-supply">Total Supply：{this.lp_total_supply}</span>
+                                                        <span>{iLocal('LP_Holders_address', [this.lp_holder_count])}</span>
+                                                    )} <span className="foxeye-token-base-total-supply">{iLocal('Total_Supply')}：{this.lp_total_supply}</span>
                                                 </div>
 
                                                 <div className="foxeye-token-base-top10-holders">
-                                                    <div className="foxeye-token-base-item-title foxeye-token-base-top-10-title">Top10 LP Holders</div>
+                                                    <div className="foxeye-token-base-item-title foxeye-token-base-top-10-title">{iLocal('Top10_LP_Holders')}</div>
                                                     <div className="foxeye-token-base-rank-chart foxeye-token-base-flex foxeye-token-base-justify-between">
                                                         <div className="foxeye-token-base-rank">
                                                             {this.lp_holders.map((item, index) => (
@@ -1007,14 +988,14 @@ export default class TokenView extends Component {
                                                                         {!!item.is_contract && (
                                                                             <div className="foxeye-token-base-tooltip">
                                                                                 <img className="foxeye-token-base-ic-contract" src={ic_contract}/>
-                                                                                <span className="foxeye-token-base-tooltip-text">Contract</span>
+                                                                                <span className="foxeye-token-base-tooltip-text">{iLocal('Contract')}</span>
                                                                             </div>
                                                                         )}
                                                                         {!!item.is_locked && (
                                                                             <div className="foxeye-token-base-tooltip">
                                                                                 <img className="foxeye-token-base-ic-lock" src={ic_lock}/>
                                                                                 <span
-                                                                                    className="foxeye-token-base-tooltip-text foxeye-token-base-locked-address">Locked Address</span>
+                                                                                    className="foxeye-token-base-tooltip-text foxeye-token-base-locked-address">{iLocal('Locked_Address')}</span>
                                                                             </div>
                                                                         )}
 
@@ -1046,8 +1027,8 @@ export default class TokenView extends Component {
                                                                                     </div>
                                                                                 </div>
                                                                                 <span className="foxeye-token-base-tooltip-text foxeye-token-base-tag">
-                                                                            <span>Public Tag：{item.tag}</span><br/>
-                                                                            <span>Address： {item.address}</span>
+                                                                            <span>{iLocal('Public_Tag', [item.tag])}</span><br/>
+                                                                            <span>{iLocal('Address')}： {item.address}</span>
                                                                         </span>
                                                                             </div>
                                                                         ) : (
@@ -1085,7 +1066,7 @@ export default class TokenView extends Component {
                                                                     </div>
                                                                     {!!item.locked_detail && (
                                                                         <div className="foxeye-token-base-locked-details">
-                                                                            <div className="foxeye-token-base-item-title-detail">Locked Details</div>
+                                                                            <div className="foxeye-token-base-item-title-detail">{iLocal('Locked_Details')}</div>
                                                                             {item.locked_detail.map((detail, idx) => {
                                                                                 if (idx < 3) {
                                                                                     return (
@@ -1095,8 +1076,8 @@ export default class TokenView extends Component {
                                                                                                 {parseFloat(detail.amount).toFixed(2)} {token_name}</div>
                                                                                             <div
                                                                                                 className="foxeye-token-base-detail-intro foxeye-token-base-flex foxeye-token-base-flex-col  foxeye-token-base-mt-1">
-                                                                                                <span className="foxeye-token-base-flex foxeye-token-base-flex-col "><span>Start/Update Time:</span> <span>{detail.opt_time.substr(0, 19).replace('T', ' ')}(UTC)</span></span>
-                                                                                                <span className="foxeye-token-base-mt-1  foxeye-token-base-foxeye-token-base-flex foxeye-token-base-flex-col "><span>End Time:</span> <span>{detail.end_time.substr(0, 19).replace('T', ' ')}(UTC)</span></span>
+                                                                                                <span className="foxeye-token-base-flex foxeye-token-base-flex-col "><span>{iLocal('Start_or_Update_Time')}</span> <span>{detail.opt_time.substr(0, 19).replace('T', ' ')}(UTC)</span></span>
+                                                                                                <span className="foxeye-token-base-mt-1  foxeye-token-base-foxeye-token-base-flex foxeye-token-base-flex-col "><span>{iLocal('End_Time')}</span> <span>{detail.end_time.substr(0, 19).replace('T', ' ')}(UTC)</span></span>
                                                                                             </div>
                                                                                         </div>
                                                                                     )
@@ -1108,20 +1089,20 @@ export default class TokenView extends Component {
                                                             ))}
                                                         </div>
                                                         <div className="foxeye-token-base-chart">
-                                                            <div className="foxeye-token-base-item-title foxeye-token-base-chart-title">Top10 LP Holders</div>
+                                                            <div className="foxeye-token-base-item-title foxeye-token-base-chart-title">{iLocal('Top10_LP_Holders')}</div>
                                                             {this.lp_holders_percent >= 50 ? (
                                                                 <div className="foxeye-token-base-pie-chart foxeye-token-base-convex">
                                                                     <div className="foxeye-token-base-before"
                                                                          style={{transform: 'translate(-50%, -50%) rotate(' + this.lp_holders_percent / 100 + 'turn)'}}>
 
                                                                     </div>
-                                                                    <div className="foxeye-token-base-percent">Top10<br/>{this.lp_holders_percent.toFixed(2)}%
+                                                                    <div className="foxeye-token-base-percent">{iLocal('Top10')}<br/>{this.lp_holders_percent.toFixed(2)}%
                                                                     </div>
                                                                 </div>
                                                             ) : (
                                                                 <div className="foxeye-token-base-pie-chart">
                                                                     <div className="foxeye-token-base-before" style={{transform: 'translate(-50%, -50%) rotate(' + this.lp_holders_percent / 100 + 'turn)'}}></div>
-                                                                    <div className="foxeye-token-base-percent">Top10<br/>{this.lp_holders_percent.toFixed(2)}%</div>
+                                                                    <div className="foxeye-token-base-percent">{iLocal('Top10')}<br/>{this.lp_holders_percent.toFixed(2)}%</div>
                                                                 </div>
                                                             )}
                                                         </div>
@@ -1131,7 +1112,7 @@ export default class TokenView extends Component {
                                         ) : (
                                             <div className="foxeye-token-base-holders-empty foxeye-token-base-flex foxeye-token-base-flex-col foxeye-token-base-items-center">
                                                 <img className="foxeye-token-base-icon-empty-big" src={icon_empty}/>
-                                                <span>No items</span>
+                                                <span>{iLocal('No_items')}</span>
                                             </div>
                                         )}
                                     </div>
@@ -1143,10 +1124,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-first-item foxeye-token-base-true-token foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">True token</div>
-                                            <div className="foxeye-token-base-item-desc">This token is issued by its declared team. Some scams
-                                                will create a well-known token with the same name to defraud their users of
-                                                their assets.
+                                            <div className="foxeye-token-base-item-title">{iLocal('True_token')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('True_token_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -1156,10 +1136,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-fake-token foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-attention" src={ic_attention}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Fake token</div>
-                                            <div className="foxeye-token-base-item-desc">This token is not issued by its declared team. Some scams
-                                                will create a well-known token with the same name to defraud their users of
-                                                their assets.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Fake_token')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Fake_token_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -1169,9 +1148,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-verifiable-team foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Verifiable team</div>
-                                            <div className="foxeye-token-base-item-desc">The team information is verifiable. Some scam teams will
-                                                have fake information on the team in order to attract users to invest.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Verifiable_team')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Verifiable_team_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -1181,9 +1160,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-not-verifiable-team foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-warning" src={ic_warning}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Team information in doubt</div>
-                                            <div className="foxeye-token-base-item-desc">The team information is in doubt or fake. Please confirm
-                                                the credibility of team information to the project team.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Team_information_in_doubt')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Team_information_in_doubt_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -1193,9 +1172,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-airdrop-scam foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-attention" src={ic_attention}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Airdrop scam</div>
-                                            <div className="foxeye-token-base-item-desc">You may lose your assets if giving approval to the
-                                                website of this token.
+                                            <div className="foxeye-token-base-item-title">{iLocal('Airdrop_scam')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('Airdrop_scam_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -1205,9 +1184,9 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-not-airdrop-scam foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">No airdrop scam</div>
-                                            <div className="foxeye-token-base-item-desc">This is not an airdrop scam. Many scams attract users
-                                                through airdrops.
+                                            <div className="foxeye-token-base-item-title">{iLocal('No_airdrop_scam')}</div>
+                                            <div className="foxeye-token-base-item-desc">
+                                                {iLocal('No_airdrop_scam_desc')}
                                             </div>
                                         </div>
                                     </div>
@@ -1217,8 +1196,8 @@ export default class TokenView extends Component {
                                     <div className="foxeye-token-base-detect-item foxeye-token-base-trust-list foxeye-token-base-flex">
                                         <img className="foxeye-token-base-icon-safe" src={ic_safe}/>
                                         <div>
-                                            <div className="foxeye-token-base-item-title">Trusted Token</div>
-                                            <div className="foxeye-token-base-item-desc">This token is a famous and trustworthy one.</div>
+                                            <div className="foxeye-token-base-item-title">{iLocal('Trusted_Token')}</div>
+                                            <div className="foxeye-token-base-item-desc">{iLocal('Trusted_Token_desc')}</div>
                                         </div>
                                     </div>
                                 )}

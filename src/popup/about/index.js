@@ -9,6 +9,7 @@ import aboutLogo from "../../images/img_about_logo.png"
 import icAboutGuide from "../../images/ic_about_guide.png"
 import icAboutWebsite from "../../images/ic_about_website.png"
 import icArrow from "../../images/ic_arrow.png"
+import {iLocal} from "../../common/utils";
 
 function About() {
     const navigate = useNavigate();
@@ -33,11 +34,11 @@ function About() {
             </div>
             <div className="token-detection-title flex-row align-center">
                 <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/' + state.from, { state })}}/>
-                <span className="detection-text">About</span>
+                <span className="detection-text">{iLocal('About')}</span>
             </div>
             <img src={aboutLogo} className='about-logo-img'/>
             <div className='about-protector'>
-                Metamask Protector
+                {iLocal('Metamask_Protector')}
             </div>
             <div className='about-version-name'>
                 {version}
@@ -49,7 +50,7 @@ function About() {
             }}>
                 <img className='about-item-img' src={icAboutWebsite}/>
                 <div className='about-item-title'>
-                    Official website
+                    {iLocal('Official_Website')}
                 </div>
                 <img className='about-item-arrow' src={icArrow}/>
             </div>
@@ -57,7 +58,7 @@ function About() {
             <div className='about-item' onClick={()=>{navigate('/guide', {state: {...state, from: 'about', to: state.from}})}}>
                 <img className='about-item-img' src={icAboutGuide}/>
                 <div className='about-item-title'>
-                    User Guide
+                    {iLocal('User_guide')}
                 </div>
                 <img className='about-item-arrow' src={icArrow}/>
             </div>

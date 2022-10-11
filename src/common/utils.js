@@ -116,3 +116,7 @@ export const AesEncrypt = (text, key = configKey) => {
     var content = CryptoJS.AES.encrypt(text, key);
     return content.toString();
 }
+
+export const iLocal = (str, array = undefined) => {
+    return chrome.i18n.getMessage(str, array);
+}

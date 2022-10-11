@@ -7,14 +7,14 @@ import aboutHoverIcon from "../../images/ic_about_hover.png";
 import {useNavigate} from "react-router-dom";
 import backIcon from "../../images/ic_back.png";
 import backHoverIcon from "../../images/ic_back_hover.png";
-import {SWITCH_ALERT_ID} from "../../common/utils";
+import {iLocal, SWITCH_ALERT_ID} from "../../common/utils";
 
 function Setting() {
     const navigate = useNavigate()
     const [switchValue, setSwitchValue] = useState(undefined);
 
-    const SETTING_ITEM_TITLE = ['Phishing Websites', 'Malicious Contract', 'Token Safety', 'Target Correctness', 'Approve Reminder'];
-    const SETTING_ITEM_DESC = ['Detect and intercept phishing websites.', 'Show alert if the contract you interacting with is malicious.', 'Check token security before purchase.Show alert if the token is malicious.', 'Intercept transactions with improper target address.', 'Alert for all approve actions.']
+    const SETTING_ITEM_TITLE = [iLocal('Phishing_Websites'), iLocal('Malicious_Contract'), iLocal('Token_Safety'), iLocal('Target_Correctness'), iLocal('Approve_Reminder')];
+    const SETTING_ITEM_DESC = [iLocal('Detect_and_intercept'), iLocal('Show_alert'), iLocal('Check_token_security'), iLocal('Intercept_transactions'), iLocal('Alert_for_all')]
 
     useEffect(() => {
         chrome.storage.local.get(SWITCH_ALERT_ID, function(items){
@@ -57,7 +57,7 @@ function Setting() {
             </div>
             <div className="token-detection-title flex-row align-center">
                 <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/home')}}/>
-                <span className="detection-text">Settings</span>
+                <span className="detection-text">{iLocal('Settings')}</span>
             </div>
             <div className='flex-full'/>
             <span className="setting-risk-alert">Risk Alerts</span>
