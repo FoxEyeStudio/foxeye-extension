@@ -128,6 +128,7 @@
   "FoxEye_intercepts_malicious_activities": { "message": "FoxEye intercepts malicious activities for you" },
   "Open_FoxEye": { "message": "Open FoxEye" },
   "Unlimited": { "message": "Unlimited" },
+  "Enter_token_contract_address": { "message": "Enter token contract address" },
 
 
   "risky_items": { "message": "$1 risky items" },

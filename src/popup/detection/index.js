@@ -109,7 +109,7 @@ function Detection() {
                     <div className="search-inpurt-wrap flex-row align-center justify-center" id='inputWrap'>
                         <form onSubmit={handleSubmit}>
                             <input
-                                placeholder='Enter token contract address'
+                                placeholder={iLocal('Enter_token_contract_address')}
                                 className='edit-text'
                                 type="text"
                                 value={inputValue}

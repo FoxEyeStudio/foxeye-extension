@@ -128,6 +128,7 @@
   "FoxEye_intercepts_malicious_activities": { "message": "FoxEye会为你拦截恶意活动" },
   "Open_FoxEye": { "message": "启动FoxEye" },
   "Unlimited": { "message": "无限" },
+  "Enter_token_contract_address": { "message": "输入代币合约地址" },
 
 
   "risky_items": { "message": "$1风险项" },
