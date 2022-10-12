@@ -48,6 +48,10 @@ export default class AlertView extends Component {
     }
 
     clickContinue = () => {
+        if (window.location?.href?.includes('https://foxeye.io/risk-demo')) {
+            this.clickAbort();
+            return;
+        }
         this.props.hideContainer && this.props.hideContainer();
         postMessage({foxeye_extension_action: 'foxeye_alert_callback', action: 'continue'});
     }
