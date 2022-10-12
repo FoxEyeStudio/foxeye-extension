@@ -58,7 +58,7 @@ function Approval() {
 
     const amountFormat = amount => {
         if (amount == 'Unlimited') {
-            return amount;
+            return iLocal('Unlimited');
         }
         try {
             let b = new BigNumber(amount);
@@ -67,7 +67,6 @@ function Approval() {
         } catch (e) {
             return amount;
         }
-        vv.approved_amount == 'Unlimited' ? 'Unlimited' : new BigNumber()
     };
 
     const tokens = approvals.length;

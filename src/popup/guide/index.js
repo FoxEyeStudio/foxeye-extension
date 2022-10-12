@@ -68,8 +68,8 @@ function Guide() {
 
     const stepThree = () => {
         const icons = [icGuidePhishing, icGuideMalicious, icGuideToken, icGuideReminder];
-        const titles  = ['Phishing Websites', 'Malicious Contract', 'Buying a Risky Token', 'Approval Reminder'];
-        const descs = ['Intercept phshing websites', 'Identify malicious contracts', 'Every token you buy will be checked before swap happens', 'Explicit alert for approvals'];
+        const titles  = [iLocal('Phishing_Websites'), iLocal('Malicious_Contract'), iLocal('Buying_Risky_Token'), iLocal('Approval_Reminder')];
+        const descs = [iLocal('Intercept_phshing_websites'), iLocal('Identify_malicious_contracts'), iLocal('Every_token_will_be_checked'), iLocal('Explicit_alert_for_approvals')];
         return (
             <div className='guide-step2-wrap'>
                 <div className='flex-col flex-full align-center'>
@@ -105,8 +105,8 @@ function Guide() {
 
     const stepFour = () => {
         const icons = [icGuideApproval, icGuideReport];
-        const titles  = ['Approval Management', 'Token Safety Report'];
-        const descs = ['Tool for revoking approvals', 'Search the safety report for any token'];
+        const titles  = [iLocal('Approval_Management'), iLocal('Token_Safety_Report')];
+        const descs = [iLocal('Tool_for_revoking_approvals'), iLocal('Search_the_safety_report')];
         return (
             <div className='guide-step2-wrap'>
                 <div className='flex-col flex-full align-center'>
@@ -142,7 +142,7 @@ function Guide() {
 
     const stepFive = () => {
         const icons = [icGuideSafety, icGuideManage, icGuideIntercepts, icGuideFoxeye];
-        const titles  = ['Check Token Safety Report', 'Manage approvals', 'FoxEye intercepts malicious activities for you', 'Open FoxEye'];
+        const titles  = [iLocal('Check_Token_Safety_Report'), iLocal('Manage_approvals'), iLocal('FoxEye_intercepts_malicious_activities'), iLocal('Open_FoxEye')];
         return (
             <div className='guide-step2-wrap'>
                 <div className='flex-col flex-full align-center'>

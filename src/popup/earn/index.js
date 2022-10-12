@@ -16,7 +16,7 @@ import icFord from '../../images/ic_fold.png'
 import icTips from '../../images/ic_earnings_tips.png'
 import icUnFord from '../../images/ic_unfold.png'
 import {Task_ExperienceDemo} from "../../background/RiskCenter";
-import {iLocal} from "../../common/utils";
+import {iLocal, isCN} from "../../common/utils";
 
 function Earn() {
     const navigate = useNavigate()
@@ -78,9 +78,16 @@ function Earn() {
                 </div>
                 {showDetection && (
                     <div className='flex-col'>
-                        <div className='earn-claimable-item-desc'>
-                            Use<em className='earn-claimable-item-clickable-desc' onClick={()=>{navigate('/detection', { state: { account, from: 'earn' }})}}> token detection</em> feature to get a safety report of any token.
-                        </div>
+                        {isCN() ? (
+                            <div className='earn-claimable-item-desc'>
+                                使用<em className='earn-claimable-item-clickable-desc' onClick={()=>{navigate('/detection', { state: { account, from: 'earn' }})}}>代币检测</em>功能获取任意代币的安全报告。
+                            </div>
+                        ) : (
+                            <div className='earn-claimable-item-desc'>
+                                Use<em className='earn-claimable-item-clickable-desc' onClick={()=>{navigate('/detection', { state: { account, from: 'earn' }})}}> token detection</em> feature to get a safety report of any token.
+                            </div>
+                        )}
+
                         <div className='flex-row align-center'>
                             <img src={icTips} className='earn-claimable-tip-icon'/>
                             <div className='earn-claimable-tip-content'>
@@ -150,14 +157,25 @@ function Earn() {
                 </div>
                 {showDemo && (
                     <div className='flex-col'>
-                        <div className='earn-claimable-item-desc'>
-                            <em className='earn-claimable-item-clickable-desc' onClick={() => {
-                                chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_taskstat", account, type: Task_ExperienceDemo, content: ''}, result => {
+                        {isCN() ? (
+                            <div className='earn-claimable-item-desc'>
+                                <em className='earn-claimable-item-clickable-desc' onClick={() => {
+                                    chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_taskstat", account, type: Task_ExperienceDemo, content: ''}, result => {
 
-                                    linkTo('https://foxeye.io/risk-demo');
-                                });
-                            }}>Risk Demo</em> is a demo for risk alerts. When you haven't met any risk alert yet, you can experience risk demo to see how FoxEye will behave when encountering risks.
-                        </div>
+                                        linkTo('https://foxeye.io/risk-demo');
+                                    });
+                                }}>风险Demo</em>展示的是遭遇风险时FoxEye的处理方式。在尚未遇到任何风险时可以先通过Demo体验一下。
+                            </div>
+                        ) : (
+                            <div className='earn-claimable-item-desc'>
+                                <em className='earn-claimable-item-clickable-desc' onClick={() => {
+                                    chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_taskstat", account, type: Task_ExperienceDemo, content: ''}, result => {
+
+                                        linkTo('https://foxeye.io/risk-demo');
+                                    });
+                                }}>Risk Demo</em> is a demo for risk alerts. When you haven't met any risk alert yet, you can experience risk demo to see how FoxEye will behave when encountering risks.
+                            </div>
+                        )}
                         <div className='flex-row align-center'>
                             <img src={icTips} className='earn-claimable-tip-icon'/>
                             <div className='earn-claimable-tip-content'>
@@ -189,12 +207,21 @@ function Earn() {
                 </div>
                 {showRevoke && (
                     <div className='flex-col'>
-                        <div className='earn-claimable-item-desc'>
-                            <em className='earn-claimable-item-clickable-desc' onClick={()=>{
-                                navigate('/approval', { state: { account: account, from: 'earn' }})
-                            }}
-                            >Approval Management</em>  is a tool for checking and revoking approvals. Regularly revoking unnecessary and unknown approvals can increase your safety significantly.
-                        </div>
+                        {isCN() ? (
+                            <div className='earn-claimable-item-desc'>
+                                <em className='earn-claimable-item-clickable-desc' onClick={()=>{
+                                    navigate('/approval', { state: { account: account, from: 'earn' }})
+                                }}
+                                >授权管理</em>是用来查看和取消授权的。定期检查并撤销未知授权可以提升账户的安全性。
+                            </div>
+                        ) : (
+                            <div className='earn-claimable-item-desc'>
+                                <em className='earn-claimable-item-clickable-desc' onClick={()=>{
+                                    navigate('/approval', { state: { account: account, from: 'earn' }})
+                                }}
+                                >Approval Management</em>  is a tool for checking and revoking approvals. Regularly revoking unnecessary and unknown approvals can increase your safety significantly.
+                            </div>
+                        )}
                         <div className='flex-row align-center'>
                             <img src={icTips} className='earn-claimable-tip-icon'/>
                             <div className='earn-claimable-tip-content'>
@@ -322,9 +349,15 @@ function Earn() {
                             <div className='earn-dividends-item-title'>{iLocal('My_FOX_Tokens')}</div>
                             <div className='earn-dividends-item-amount'>{balance}</div>
                         </div>
-                        <div className='earn-dividends-item-desc'>
-                            You can collect FOX tokens from <em className='earn-dividends-item-desc-clickable' onClick={() => setAirdropTab(true)}>airdrops</em>
-                        </div>
+                        {isCN() ? (
+                            <div className='earn-dividends-item-desc'>
+                                You can collect FOX tokens from <em className='earn-dividends-item-desc-clickable' onClick={() => setAirdropTab(true)}>airdrops</em>
+                            </div>
+                        ) : (
+                            <div className='earn-dividends-item-desc'>
+                                你可以通过<em className='earn-dividends-item-desc-clickable' onClick={() => setAirdropTab(true)}>空投</em>获取Fox代币
+                            </div>
+                        )}
                     </div>
                     <div className='earn-dividends-btn-wrap'>
                         <div className='earn-dividends-btn' onClick={() => {
@@ -333,9 +366,15 @@ function Earn() {
                             {iLocal('Buy_lottery_to_dividends')}
                         </div>
                     </div>
-                    <div className='earn-dividends-learnmore-desc'>
-                        The lottery system is operated in a decentralised way.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => {}}>Learn More</em>
-                    </div>
+                    {isCN() ? (
+                        <div className='earn-dividends-learnmore-desc'>
+                            The lottery system is operated in a decentralised way.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => {}}>Learn More</em>
+                        </div>
+                    ) : (
+                        <div className='earn-dividends-learnmore-desc'>
+                            抽奖系统是去中心化运作的.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => {}}>了解更多</em>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

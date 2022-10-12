@@ -23,9 +23,10 @@ import imgAdTag from '../../images/img_ad_tag.png'
 import riskCenter from "../../background/RiskCenter";
 import {
     iLocal,
+    isCN,
     STORAGE_INTERCEPTED_AMOUNT,
     STORAGE_RECENT_ACCOUTS,
-    STORAGE_SECURITY_STATISTIC_AMOUNT, STORAGE_SELECTED_ACCOUT
+    STORAGE_SECURITY_STATISTIC_AMOUNT, STORAGE_SELECTED_ACCOUT, SWITCH_ALERT_ID
 } from "../../common/utils";
 import BannerView from "../../common/BannerView";
 
@@ -41,7 +42,8 @@ function Home() {
     const [contractAmount, setContractAmount] = useState(0);
     const [syncTime, setSyncTime] = useState();
     const [recentAccount, setRecentAccount] = useState();
-    const [adList, setAdList] = useState(undefined);
+    const [adList, setAdList] = useState(undefined)
+    const [strategiesNum, setStrategiesNum] = useState(0);
 
     useEffect(() => {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
@@ -75,7 +77,6 @@ function Home() {
             if (result && result[STORAGE_INTERCEPTED_AMOUNT]) {
                 const interceptedAmount = result[STORAGE_INTERCEPTED_AMOUNT];
                 setInterceptedAmount(interceptedAmount);
-                document.getElementById("threats_intercepted_id").innerHTML = iLocal("threats_intercepted", [interceptedAmount.toString().fontcolor("#027DD5")]);
             }
         });
 
@@ -111,7 +112,19 @@ function Home() {
             }
         });
 
-        document.getElementById("threats_intercepted_id").innerHTML = iLocal("threats_intercepted", [interceptedAmount.toString().fontcolor("#027DD5")]);
+        chrome.storage.local.get(SWITCH_ALERT_ID, function(items){
+            if (items) {
+                let num = 0;
+                for (let i = 0; i < SWITCH_ALERT_ID.length; i++) {
+                    if (items[SWITCH_ALERT_ID[i]] !== false) {
+                        num++;
+                    }
+                }
+                setStrategiesNum(num)
+            } else {
+                setStrategiesNum(SWITCH_ALERT_ID.length)
+            }
+        });
     }, []);
 
     const updateAccount = account => {
@@ -185,8 +198,15 @@ function Home() {
             <div className='home-top-wrap'>
                 <div className='intercepted-and-account-wrap'>
                     <div className='intercepted-wrap'>
-                        <div className='intercepted-desc' id='threats_intercepted_id'>
-                        </div>
+                        {isCN() ? (
+                            <div className='intercepted-desc'>
+                                已为您拦截<font color='#027DD5'>{interceptedAmount}</font>个威胁
+                            </div>
+                        ) : (
+                            <div className='intercepted-desc'>
+                                <font color='#027DD5'>{interceptedAmount}</font> threats intercepted for you
+                            </div>
+                        )}
                     </div>
                     {!!account ? (
                         <div className='account-wrap'>
@@ -221,7 +241,7 @@ function Home() {
                     <div className='flex-full'/>
                     <img className='state-web-security' src={lowRisk ? ic_web_safe : ic_web_danger}/>
                     <div className='state-desc'>
-                        {lowRisk ? 'No threat detected' : 'Malicious website'}
+                        {lowRisk ? iLocal('No_threat_detected') : iLocal('Malicious_website')}
                     </div>
                 </div>
                 <div className='state-wrap'>
@@ -242,7 +262,7 @@ function Home() {
                             {tokenAmount}
                         </div>
                         <div className='security-check-item-desc'>
-                            Tokens
+                            {iLocal('Tokens')}
                         </div>
                     </div>
                     <div className='security-check-item-line'/>
@@ -260,7 +280,7 @@ function Home() {
                             {contractAmount}
                         </div>
                         <div className='security-check-item-desc'>
-                            Contracts
+                            {iLocal('Contracts')}
                         </div>
                     </div>
                 </div>
@@ -292,7 +312,7 @@ function Home() {
                     <img src={settingIcon} className='detection-img'/>
                     <div className="item-wrapper flex-col justify-between">
                         <div className="home-item-title">{iLocal('Risk_Alerts')}</div>
-                        <div className="home-item-desc">{iLocal('five_strategies_on')}</div>
+                        <div className="home-item-desc">{iLocal('five_strategies_on', [strategiesNum])}</div>
                     </div>
                     <div className={'flex-full'}/>
                     <img src={arrowIcon} className={'arrow-img'}/>

@@ -368,7 +368,7 @@ export default class TokenView extends Component {
                                                             className="foxeye-token-base-text-green-500">{this.owner_address}</span>
                                                         </div>
                                                     ) : (
-                                                        <div className="foxeye-token-base-item-title foxeye-token-base-address-title">{iLocal('Owner Address')}：
+                                                        <div className="foxeye-token-base-item-title foxeye-token-base-address-title">{iLocal('Owner_Address')}：
                                                             {this.owner_address}</div>
                                                     )}
 
