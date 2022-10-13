@@ -208,8 +208,8 @@ function Approval() {
             {approvalPopup && (
                 <div className='approval-popup-wrap'>
                     <div className='approval-popup-content-wrap'>
-                        <div className='approval-popup-content-title'>Token Approval Limit</div>
-                        <div className='approval-popup-content-content'>Approval sets maximum token amount for certain smart contracts to utilize. Malicious contract usually set this amount to "UNLIMITED".   (Note: Unlimited amount does not neccessarily mean that the contract is malicious, many normal contracts also set the token quota as unlimited.)</div>
+                        <div className='approval-popup-content-title'>{iLocal('Token_Approval_Limit')}</div>
+                        <div className='approval-popup-content-content'>{iLocal('Token_Approval_Limit_desc')}</div>
                         <div className='approval-popup-content-ok' onClick={() => {
                             setApprovalPopup(false);
                         }}>OK</div>

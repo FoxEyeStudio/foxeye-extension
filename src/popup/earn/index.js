@@ -277,13 +277,17 @@ function Earn() {
                         <div className='earn-account-wrap'>
                             <img src={icAccount} className='earn-account-icon'/>
                             <div className='earn-account-address'>
-                                {account?.substr(0, 8) + '...' + account?.substr(-6)}
+                                {account ? account?.substr(0, 8) + '...' + account?.substr(-6) : 'undefided'}
                             </div>
                             <div className='flex-full'/>
-                            <div className='earn-eligible-icon' />
-                            <div className='earn-eligible-text'>
-                                {iLocal('Eligible')}
-                            </div>
+                            {!!account && (
+                                <div className='earn-eligible-icon' />
+                            )}
+                            {!!account && (
+                                <div className='earn-eligible-text'>
+                                    {iLocal('Eligible')}
+                                </div>
+                            )}
                         </div>
                         <div className='earn-eligible-desc'>
                             {iLocal('FOX_token_distributed')}
@@ -351,11 +355,11 @@ function Earn() {
                         </div>
                         {isCN() ? (
                             <div className='earn-dividends-item-desc'>
-                                You can collect FOX tokens from <em className='earn-dividends-item-desc-clickable' onClick={() => setAirdropTab(true)}>airdrops</em>
+                                你可以通过<em className='earn-dividends-item-desc-clickable' onClick={() => setAirdropTab(true)}>空投</em>获取Fox代币
                             </div>
                         ) : (
                             <div className='earn-dividends-item-desc'>
-                                你可以通过<em className='earn-dividends-item-desc-clickable' onClick={() => setAirdropTab(true)}>空投</em>获取Fox代币
+                                You can collect FOX tokens from <em className='earn-dividends-item-desc-clickable' onClick={() => setAirdropTab(true)}>airdrops</em>
                             </div>
                         )}
                     </div>
@@ -368,11 +372,12 @@ function Earn() {
                     </div>
                     {isCN() ? (
                         <div className='earn-dividends-learnmore-desc'>
-                            The lottery system is operated in a decentralised way.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => {}}>Learn More</em>
+                            抽奖系统是去中心化运作的.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => {}}>了解更多</em>
                         </div>
+
                     ) : (
                         <div className='earn-dividends-learnmore-desc'>
-                            抽奖系统是去中心化运作的.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => {}}>了解更多</em>
+                            The lottery system is operated in a decentralised way.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => {}}>Learn More</em>
                         </div>
                     )}
                 </div>

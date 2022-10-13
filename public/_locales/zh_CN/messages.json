@@ -97,7 +97,7 @@
   "Manage_approval_regularly": { "message": "定期检查授权" },
   "Have_a_check": { "message": "购买前检查代币" },
   "Risk_Alerts": { "message": "风险警报" },
-  "five_strategies_on": { "message": "已开启策略$1个策略" },
+  "five_strategies_on": { "message": "已开启$1个策略" },
   "Phishing_Websites": { "message": "钓鱼网站" },
   "Token_Safety": { "message": "代币安全" },
   "Target_Correctness": { "message": "目标正确性" },
@@ -129,6 +129,8 @@
   "Open_FoxEye": { "message": "启动FoxEye" },
   "Unlimited": { "message": "无限" },
   "Enter_token_contract_address": { "message": "输入代币合约地址" },
+  "Token_Approval_Limit": { "message": "代币授权限额" },
+  "Token_Approval_Limit_desc": { "message": "授权会对特定合约设置可用额度。恶意合约经常将此值设置为无限（不过，无限并不意味着该合约一定是恶意的，很多正常合约也会这么做）" },
 
 
   "risky_items": { "message": "$1风险项" },
