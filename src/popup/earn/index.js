@@ -272,7 +272,7 @@ function Earn() {
                     <div className='earn-account-wrap'>
                         <img src={icAccount} className='earn-account-icon'/>
                         <div className='earn-account-address'>
-                            {account ? account?.substr(0, 8) + '...' + account?.substr(-6) : 'undefided'}
+                            {account ? account?.substr(0, 8) + '...' + account?.substr(-6) : iLocal('Not_connected')}
                         </div>
                         <div className='flex-full'/>
                         {!!account && (
@@ -310,13 +310,23 @@ function Earn() {
                             {iLocal('Claim_Airdrops')}
                         </div>
                     </div>
+                    {isCN() ? (
+                        <div className='earn-dividends-learnmore-desc'>
+                            空投每半个月发放一次<br/><em className='earn-dividends-item-desc-clickable' onClick={() => {}}>了解详情</em>
+                        </div>
+
+                    ) : (
+                        <div className='earn-dividends-learnmore-desc'>
+                            Airdrops are distributed every half a month.<br/><em className='earn-dividends-item-desc-clickable' onClick={() => {}}>Learn More</em>
+                        </div>
+                    )}
                 </div>
             ) : (
                 <div className='earn-scroll-div' style={{marginTop: 0}}>
                     <div className='earn-account-wrap' style={{ marginTop: 8, marginBottom: 8 }}>
                         <img src={icAccount} className='earn-account-icon'/>
                         <div className='earn-account-address'>
-                            {account ? account?.substr(0, 8) + '...' + account?.substr(-6) : 'undefided'}
+                            {account ? account?.substr(0, 8) + '...' + account?.substr(-6) : iLocal('Not_connected')}
                         </div>
                         <div className='flex-full'/>
                         {!!account && (
@@ -368,12 +378,12 @@ function Earn() {
                     </div>
                     {isCN() ? (
                         <div className='earn-dividends-learnmore-desc'>
-                            抽奖系统是去中心化运作的.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => {}}>了解更多</em>
+                            抽奖系统是去中心化运作的.<br/><em className='earn-dividends-item-desc-clickable' onClick={() => {}}>了解详情</em>
                         </div>
 
                     ) : (
                         <div className='earn-dividends-learnmore-desc'>
-                            The lottery system is operated in a decentralised way.&emsp;<em className='earn-dividends-item-desc-clickable' onClick={() => {}}>Learn More</em>
+                            The lottery system is operated in a decentralised way.<br/><em className='earn-dividends-item-desc-clickable' onClick={() => {}}>Learn More</em>
                         </div>
                     )}
                 </div>

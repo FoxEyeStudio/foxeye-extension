@@ -131,8 +131,9 @@
   "Enter_token_contract_address": { "message": "Enter token contract address" },
   "Token_Approval_Limit": { "message": "Token Approval Limit" },
   "Token_Approval_Limit_desc": { "message": "Approval sets maximum token amount for certain smart contracts to utilize. Malicious contract usually set this amount to \"UNLIMITED\".   (Note: Unlimited amount does not neccessarily mean that the contract is malicious, many normal contracts also set the token quota as unlimited.)" },
+  "Not_connected": { "message": "Not connected" },
 
-  
+
   "risky_items": { "message": "$1 risky items" },
   "risky_item": { "message": "$1 risky item" },
   "Security_Detection": { "message": "Security Detection" },
