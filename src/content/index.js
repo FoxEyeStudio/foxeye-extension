@@ -109,7 +109,10 @@ class Content {
 						theThis.getRoot().render(<AlertView info={backMsg} hideContainer={theThis.hideContainer}/>);
 						theThis.addInterceptedAccount();
 					} else {
-						theThis.hideContainer();
+						theThis.getRoot().render(<AlertView toast success/>);
+						setTimeout(() => {
+							theThis.hideContainer();
+						}, 1500);
 					}
 				});
 			}

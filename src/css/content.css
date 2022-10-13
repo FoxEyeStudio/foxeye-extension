@@ -3,24 +3,14 @@
 }
 
 .foxeye-alert-toast {
-    background-color: rgba(0, 0, 0, 0.6);
     z-index: 999999999;
     position: fixed;
     bottom: 3.75%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 0px 12px 0px;
-    font-size: 16px;
-    font-weight: 400;
-    color: #FFFFFF;
-    line-height: 20px;
-    border-radius: 10px;
-    align-self: center;
     margin:0 auto;
     left: 0;
     right: 0;
-    width: 162px;
+    width: 243px;
+    height: 44px
 }
 
 .foxeye-content-body {

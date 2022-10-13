@@ -20,7 +20,7 @@ import backIcon from "../images/ic_back.png";
 import backHoverIcon from "../images/ic_back_hover.png";
 import icArrowTop from "../images/ic_arrow_top.png";
 import icArrowBottom from "../images/ic_arrow_bottom.png";
-import {iLocal, LoadingJson} from "../common/utils";
+import {iLocal, isCN, LoadingJson} from "../common/utils";
 import {number} from "prop-types";
 
 export default class AlertView extends Component {
@@ -85,10 +85,12 @@ export default class AlertView extends Component {
 
     render() {
         if (this.props.toast) {
+            let imgUrl = this.props.success ? '/images/success.gif' : '/images/detecting.gif'
+            if (isCN()) {
+                imgUrl = this.props.success ? '/images/success_cn.gif' : '/images/detecting_cn.gif'
+            }
             return (
-                <div className='foxeye-alert-toast'>
-                    {iLocal('FoxEye_starting')}
-                </div>
+                <img className='foxeye-alert-toast' src={chrome.runtime.getURL(imgUrl)} />
             )
         }
         const {type, address, symbol, url, sub_type, name, token_id, amount} = this.props.info;
