@@ -48,7 +48,6 @@
     font-weight: 400;
     color: #535A61;
     line-height: 16px;
-    margin-bottom: 8px;
 }
 
 .earn-scroll-div {
@@ -100,8 +99,9 @@
     flex-direction: row;
     justify-content: space-between;
     margin-top: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     align-items: center;
+    width: 100%;
 }
 
 .earn-account-icon {
@@ -363,4 +363,17 @@
     margin-top: 8px;
     margin-bottom: 8px;
     text-align: center;
+}
+
+.earn-account-switch {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    background-image: var(--ic-account-switch-normal);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.earn-account-switch:hover {
+    background-image: var(--ic-account-switch-hover);
 }

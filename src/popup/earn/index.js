@@ -15,8 +15,12 @@ import icEarningsRevoke from '../../images/ic_earnings_revoke.png'
 import icFord from '../../images/ic_fold.png'
 import icTips from '../../images/ic_earnings_tips.png'
 import icUnFord from '../../images/ic_unfold.png'
+import icAccountSwitch from '../../images/ic_account_switch.png'
+import icAccountSwitchHover from '../../images/ic_account_switch_hover.png'
 import {Task_ExperienceDemo} from "../../background/RiskCenter";
 import {iLocal, isCN} from "../../common/utils";
+import ic_link from "../../images/ic_link.png";
+import ic_link_hover from "../../images/ic_link_hover.png";
 
 function Earn() {
     const navigate = useNavigate()
@@ -265,33 +269,15 @@ function Earn() {
                     <div className='earn-airdrops-desc'>
                         {iLocal('FOX_token_allows')}
                     </div>
-                    <div className='earn-airdrops-qualification-wrap'>
-                        <div className='earn-qualification-title-wrap'>
-                            <div className='earn-qualification-title'>
-                                {iLocal('Airdrop_Qualification')}
-                            </div>
-                            <div className='earn-qualification-detail'>
-                                {iLocal('Details')}
-                            </div>
+                    <div className='earn-account-wrap'>
+                        <img src={icAccount} className='earn-account-icon'/>
+                        <div className='earn-account-address'>
+                            {account ? account?.substr(0, 8) + '...' + account?.substr(-6) : 'undefided'}
                         </div>
-                        <div className='earn-account-wrap'>
-                            <img src={icAccount} className='earn-account-icon'/>
-                            <div className='earn-account-address'>
-                                {account ? account?.substr(0, 8) + '...' + account?.substr(-6) : 'undefided'}
-                            </div>
-                            <div className='flex-full'/>
-                            {!!account && (
-                                <div className='earn-eligible-icon' />
-                            )}
-                            {!!account && (
-                                <div className='earn-eligible-text'>
-                                    {iLocal('Eligible')}
-                                </div>
-                            )}
-                        </div>
-                        <div className='earn-eligible-desc'>
-                            {iLocal('FOX_token_distributed')}
-                        </div>
+                        <div className='flex-full'/>
+                        {!!account && (
+                            <div className='earn-account-switch' style={{ '--ic-account-switch-normal': 'url(' + icAccountSwitch + ')', '--ic-account-switch-hover': 'url(' + icAccountSwitchHover + ')'}} onClick={()=>{navigate('/account', {state: {from: 'earn'}})}}/>
+                        )}
                     </div>
 
                     <div className='earn-claimable-wrap'>
@@ -327,6 +313,16 @@ function Earn() {
                 </div>
             ) : (
                 <div className='earn-scroll-div' style={{marginTop: 0}}>
+                    <div className='earn-account-wrap' style={{ marginTop: 8, marginBottom: 8 }}>
+                        <img src={icAccount} className='earn-account-icon'/>
+                        <div className='earn-account-address'>
+                            {account ? account?.substr(0, 8) + '...' + account?.substr(-6) : 'undefided'}
+                        </div>
+                        <div className='flex-full'/>
+                        {!!account && (
+                            <div className='earn-account-switch' style={{ '--ic-account-switch-normal': 'url(' + icAccountSwitch + ')', '--ic-account-switch-hover': 'url(' + icAccountSwitchHover + ')'}} onClick={()=>{navigate('/account', {state: {from: 'earn'}})}}/>
+                        )}
+                    </div>
                     <div className='earn-dividends-item-wrap'>
                         <div className='earn-dividends-item-title-wrap'>
                             <div className='earn-dividends-item-title'>{iLocal('Current_Ad_Pool')}</div>

@@ -4,7 +4,7 @@ import '../../css/account.css'
 import titleLogo from "../../images/title_logo.png";
 import aboutIcon from "../../images/ic_about.png";
 import aboutHoverIcon from "../../images/ic_about_hover.png";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import backIcon from "../../images/ic_back.png";
 import backHoverIcon from "../../images/ic_back_hover.png";
 import imgCheckboxDefault from "../../images/img_checkbox_default.png";
@@ -15,6 +15,7 @@ function Account() {
     const navigate = useNavigate()
     const [accountList, setAccountList] = useState([]);
     const [selectedAccount, setSelectedAccount] = useState();
+    const { state } = useLocation();
 
     useEffect(() => {
         chrome.storage.local.get(STORAGE_RECENT_ACCOUTS, function (result) {
@@ -63,10 +64,27 @@ function Account() {
         <div className='flex-col' style={{height: '100%'}}>
             <div className='title-wrap'>
                 <img src={titleLogo} className='title-logo' />
-                <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'account'}})}}/>
+                <div style={{ '--ic-about-normal': 'url(' + aboutIcon + ')', '--ic-about-hover': 'url(' + aboutHoverIcon + ')'}} className='title-about' onClick={()=>{navigate('/about', {state: {from: 'account', to: state?.from}})}}/>
             </div>
             <div className="token-detection-title flex-row align-center">
-                <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{navigate('/home')}}/>
+                <div className="back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{
+                    if (state) {
+                        const stateNext = state.to || state.from;
+                        if (stateNext === 'account') {
+                            navigate('/home')
+                        } else {
+                            navigate('/' + stateNext, {state: { account: selectedAccount }})
+                        }
+                    } else {
+                        navigate('/home')
+                    }
+
+                    if (state && state.to) {
+
+                    } else if (state && state.from && state.from){
+
+                    }
+                }}/>
                 <span className="detection-text">{iLocal('Recent_Accounts')}</span>
             </div>
             <div className='recent-account-desc'>
