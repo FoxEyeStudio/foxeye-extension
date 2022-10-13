@@ -73,16 +73,10 @@ function Account() {
                         if (stateNext === 'account') {
                             navigate('/home')
                         } else {
-                            navigate('/' + stateNext, {state: { account: selectedAccount }})
+                            navigate('/' + stateNext, {state: { account: selectedAccount, isAirdropTab: state.isAirdropTab }})
                         }
                     } else {
                         navigate('/home')
-                    }
-
-                    if (state && state.to) {
-
-                    } else if (state && state.from && state.from){
-
                     }
                 }}/>
                 <span className="detection-text">{iLocal('Recent_Accounts')}</span>

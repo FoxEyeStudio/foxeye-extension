@@ -24,7 +24,7 @@ import ic_link_hover from "../../images/ic_link_hover.png";
 
 function Earn() {
     const navigate = useNavigate()
-    const { state: { account } } = useLocation();
+    const { state: { account, isAirdropTab } } = useLocation();
     const [showDetection, setShowDetection] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [showDemo, setShowDemo] = useState(false);
@@ -61,6 +61,10 @@ function Earn() {
                 }
             }
         });
+
+        if (isAirdropTab === false) {
+            setAirdropTab(false);
+        }
     }, []);
 
     const detectionItem = () => {
@@ -276,7 +280,7 @@ function Earn() {
                         </div>
                         <div className='flex-full'/>
                         {!!account && (
-                            <div className='earn-account-switch' style={{ '--ic-account-switch-normal': 'url(' + icAccountSwitch + ')', '--ic-account-switch-hover': 'url(' + icAccountSwitchHover + ')'}} onClick={()=>{navigate('/account', {state: {from: 'earn'}})}}/>
+                            <div className='earn-account-switch' style={{ '--ic-account-switch-normal': 'url(' + icAccountSwitch + ')', '--ic-account-switch-hover': 'url(' + icAccountSwitchHover + ')'}} onClick={()=>{navigate('/account', {state: {from: 'earn', isAirdropTab: airdropTab}})}}/>
                         )}
                     </div>
 
@@ -330,7 +334,7 @@ function Earn() {
                         </div>
                         <div className='flex-full'/>
                         {!!account && (
-                            <div className='earn-account-switch' style={{ '--ic-account-switch-normal': 'url(' + icAccountSwitch + ')', '--ic-account-switch-hover': 'url(' + icAccountSwitchHover + ')'}} onClick={()=>{navigate('/account', {state: {from: 'earn'}})}}/>
+                            <div className='earn-account-switch' style={{ '--ic-account-switch-normal': 'url(' + icAccountSwitch + ')', '--ic-account-switch-hover': 'url(' + icAccountSwitchHover + ')'}} onClick={()=>{navigate('/account', {state: {from: 'earn', isAirdropTab: airdropTab}})}}/>
                         )}
                     </div>
                     <div className='earn-dividends-item-wrap'>
