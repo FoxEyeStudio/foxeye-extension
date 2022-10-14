@@ -82,5 +82,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         return true;
     }
 
+    if (request.foxeye_extension_action === 'foxeye_connected_account') {
+        const { account } = request;
+        riskCenter.fetchConnected(account).then(result => sendResponse(result));
+        return true;
+    }
+
     return false;
 });

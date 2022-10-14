@@ -33,6 +33,8 @@ function Earn() {
     const [claimAmount, setCliamAmount] = useState(0);
     const [poolValue, setPoolValue] = useState(0);
     const [balance, setBalance] = useState(0);
+    const [isHardcore, setIsHardcore] = useState(0);
+    const [reward, setReward] = useState(0);
 
     const formatNumber = num => {
         if (!num) {
@@ -58,6 +60,8 @@ function Earn() {
                     setCliamAmount(formatNumber(result.amount))
                     setPoolValue(formatNumber(result.pool))
                     setBalance(formatNumber(result.balance))
+                    setIsHardcore(result.is_hardcore)
+                    setReward(formatNumber(result.reward))
                 }
             }
         });
@@ -156,7 +160,7 @@ function Earn() {
                     </div>
                     <div className='flex-full'/>
                     <div className='earn-claimable-per-action'>
-                        1000
+                        {isHardcore === 1 ? 1000 : 80}
                     </div>
                     <img className='earn-claimable-fold-icon' src={showDemo ? icFord : icUnFord} onClick={() => {
                         setShowDemo(!showDemo);
@@ -347,14 +351,14 @@ function Earn() {
                     <div className='earn-dividends-item-wrap'>
                         <div className='earn-dividends-item-title-wrap'>
                             <div className='earn-dividends-item-title'>{iLocal('Lottery_Cost')}</div>
-                            <div className='earn-dividends-item-amount'>100 FOX</div>
+                            <div className='earn-dividends-item-amount'>30 FOX</div>
                         </div>
                         <div className='earn-dividends-item-desc'>{iLocal('There_no_limitation')}</div>
                     </div>
                     <div className='earn-dividends-item-wrap'>
                         <div className='earn-dividends-item-title-wrap'>
                             <div className='earn-dividends-item-title'>{iLocal('Ten_Thousand_FOX_Dividends')}</div>
-                            <div className='earn-dividends-item-amount'>$10</div>
+                            <div className='earn-dividends-item-amount'>${reward}</div>
                         </div>
                         <div className='earn-dividends-item-desc'>{iLocal('Dividends_for_holding')}</div>
                     </div>

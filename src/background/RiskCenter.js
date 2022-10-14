@@ -38,6 +38,7 @@ const phishing_website_url = 'https://api.gopluslabs.io/api/v1/phishing_site?url
 const security_statistic_url = 'http://open-api.gopluslabs.io/api/v1/public/statistic/count?types=TOKEN,DAPP,WEBSITE';
 const get_airdrop_amount_url = 'https://api.foxeye.io/v1/get_amount/';
 const banner_ad_config_url = 'https://api.foxeye.io/v1/get_config';
+const connected_url = 'https://api.foxeye.io/v1/connected/';
 
 const tag = 'RiskCenter: ';
 
@@ -258,6 +259,27 @@ class RiskCenter {
         };
 
         let result = await fetch(banner_ad_config_url, options).then(ret => ret.json()).catch(err => {
+            return undefined;
+        });
+
+        if (result && result.status == 1) {
+            return result.result;
+        }
+        return undefined;
+    }
+
+    async fetchConnected(address) {
+        const url = connected_url + address;
+        const options = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Connection': 'keep-alive'
+            }
+        };
+
+        let result = await fetch(url, options).then(ret => ret.json()).catch(err => {
             return undefined;
         });
 

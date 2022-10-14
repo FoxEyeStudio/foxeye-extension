@@ -127,6 +127,10 @@ function Home() {
         });
     }, []);
 
+    const fetchConnected = (account) => {
+        chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_connected_account", account}, null);
+    }
+
     const updateAccount = account => {
         chrome.storage.local.get(STORAGE_RECENT_ACCOUTS, function (result) {
             let accountData;
@@ -139,9 +143,11 @@ function Home() {
                     if (accountlist[accountlist.length - 1] != account) {
                         accountData += ',' + account;
                         chrome.storage.local.set({ [STORAGE_RECENT_ACCOUTS]: accountData });
+                        fetchConnected(account);
                     }
                 } else {
                     chrome.storage.local.set({ [STORAGE_RECENT_ACCOUTS]: account });
+                    fetchConnected(account);
                 }
                 chrome.storage.local.set({ [STORAGE_SELECTED_ACCOUT]: account });
             } else if (accountData) {
