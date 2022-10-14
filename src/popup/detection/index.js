@@ -13,6 +13,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import titleLogo from "../../images/title_logo.png";
 import aboutIcon from "../../images/ic_about.png";
 import aboutHoverIcon from "../../images/ic_about_hover.png";
+import goplusImg from "../../images/img_goplus.png"
 import {iLocal, LoadingJson} from "../../common/utils";
 import TokenView from "../../common/TokenView";
 import '../../css/token.css'
@@ -127,11 +128,19 @@ function Detection() {
                 )}
 
                 {!!tokenInfo && !loading && (
-                    <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: "relative"}}>
-                        <div style={{width: '100%', height: 360, paddingLeft: 16, paddingRight: 16, overflowY: "auto", overflowX: 'hidden' }}>
+                    <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', marginTop: 24, position: "relative", flexDirection: 'row'}}>
+                        <div style={{width: '100%', height: 340, paddingLeft: 16, paddingRight: 16, overflowY: "auto", overflowX: 'hidden'}}>
                             <TokenView token_info={tokenInfo} />
                         </div>
                         <div className='token-view-border'>
+                        </div>
+                        <div className='token-powered-wrap' onClick={() => {
+                            chrome.tabs.create({url: 'https://gopluslabs.io'});
+                        }}>
+                            <div className='token-powered-text'>
+                                Powered by
+                            </div>
+                            <img src={goplusImg} className='token-powered-icon'/>
                         </div>
                     </div>
                 )}
