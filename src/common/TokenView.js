@@ -1073,7 +1073,7 @@ export default class TokenView extends Component {
                                                                                         <div key={'detail-2-' + idx}>
                                                                                             <div
                                                                                                 className="foxeye-token-base-detail-title foxeye-token-base-mt-2 foxeye-token-base-whitespace-nowrap">No{idx +1}:
-                                                                                                {parseFloat(detail.amount).toFixed(2)} {token_name}</div>
+                                                                                                {parseFloat(detail.amount).toFixed(2)} {this.token_name}</div>
                                                                                             <div
                                                                                                 className="foxeye-token-base-detail-intro foxeye-token-base-flex foxeye-token-base-flex-col  foxeye-token-base-mt-1">
                                                                                                 <span className="foxeye-token-base-flex foxeye-token-base-flex-col "><span>{iLocal('Start_or_Update_Time')}</span> <span>{detail.opt_time.substr(0, 19).replace('T', ' ')}(UTC)</span></span>
