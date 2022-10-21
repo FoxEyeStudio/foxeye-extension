@@ -241,6 +241,7 @@
 .earn-claimable-item-clickable-desc {
     color: #027DD5;
     cursor: pointer;
+    font-style: normal;
 }
 
 .earn-claimable-item-clickable-desc:hover {
@@ -326,6 +327,7 @@
 .earn-dividends-item-desc-clickable {
     color: #027DD5;
     cursor: pointer;
+    font-style: normal;
 }
 
 .earn-dividends-item-desc-clickable:hover {
