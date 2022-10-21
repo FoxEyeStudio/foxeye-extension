@@ -36,7 +36,6 @@ function Home() {
     const [domain, setDomain] = useState();
     const [lowRisk, setLowRisk] = useState(true);
     const [favIconUrl, setFavIconUrl] = useState();
-    const [interceptedAmount, setInterceptedAmount] = useState(0);
     const [tokenAmount, setTokenAmount] = useState(0);
     const [phishingAmount, setPhishingAmount] = useState(0);
     const [contractAmount, setContractAmount] = useState(0);
@@ -71,13 +70,6 @@ function Home() {
                 updateAccount(account);
             }
             return false;
-        });
-
-        chrome.storage.local.get(STORAGE_INTERCEPTED_AMOUNT, function (result) {
-            if (result && result[STORAGE_INTERCEPTED_AMOUNT]) {
-                const interceptedAmount = result[STORAGE_INTERCEPTED_AMOUNT];
-                setInterceptedAmount(interceptedAmount);
-            }
         });
 
         chrome.storage.local.get(STORAGE_SECURITY_STATISTIC_AMOUNT, function (result) {
@@ -203,17 +195,6 @@ function Home() {
             </div>
             <div className='home-top-wrap'>
                 <div className='intercepted-and-account-wrap'>
-                    <div className='intercepted-wrap'>
-                        {isCN() ? (
-                            <div className='intercepted-desc'>
-                                已为您拦截<font color='#027DD5'>{interceptedAmount}</font>个威胁
-                            </div>
-                        ) : (
-                            <div className='intercepted-desc'>
-                                <font color='#027DD5'>{interceptedAmount}</font> threats intercepted for you
-                            </div>
-                        )}
-                    </div>
                     {!!account ? (
                         <div className='account-wrap'>
                             <img src={ic_connected} className='account-icon'/>
@@ -232,7 +213,7 @@ function Home() {
                     ) : (
                         <div className='account-wrap'>
                             <img src={ic_inactive} className='account-icon'/>
-                            <div className='state-desc'>
+                            <div className='account-inactive-text'>
                                 {iLocal('Wallet_is_Inactive')}
                             </div>
                         </div>
@@ -246,7 +227,7 @@ function Home() {
                     </div>
                     <div className='flex-full'/>
                     <img className='state-web-security' src={lowRisk ? ic_web_safe : ic_web_danger}/>
-                    <div className='state-desc'>
+                    <div className='no-risk-desc'>
                         {lowRisk ? iLocal('No_threat_detected') : iLocal('Malicious_website')}
                     </div>
                 </div>

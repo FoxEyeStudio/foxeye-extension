@@ -204,8 +204,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 28px;
-    width: 129px;
+    height: 34px;
+    width: 184px;
     border-radius: 16px;
     margin-top: 8px;
 }
@@ -215,8 +215,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 28px;
-    width: 129px;
+    height: 34px;
+    width: 184px;
     border-radius: 16px;
     margin-top: 8px;
     cursor: pointer;
@@ -226,12 +226,28 @@
     background: #F2F4F6;
 }
 
+.account-inactive-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #24272A;
+    line-height: 34px;
+    margin-left: 6px;
+}
+
+.no-risk-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: #535A61;
+    line-height: 14px;
+}
+
+
 .intercepted-and-account-wrap {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2px;
+    margin-bottom: 15px;
 }
 
 .intercepted-wrap {
@@ -269,8 +285,8 @@
 }
 
 .account-icon {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
 }
 
 .state-title {
@@ -291,11 +307,13 @@
 }
 
 .state-desc {
-    font-size: 12px;
-    font-weight: 400;
-    color: #535A61;
-    line-height: 14px;
-    margin-left: 4px;
+    width: 118px;
+    height: 34px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #24272A;
+    line-height: 34px;
+    margin-left: 6px;
 }
 
 .state-synced {
