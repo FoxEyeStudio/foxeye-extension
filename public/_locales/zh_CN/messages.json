@@ -126,7 +126,7 @@
   "Check_Token_Safety_Report": { "message": "查看代币安全报告" },
   "Manage_approvals": { "message": "管理授权" },
   "FoxEye_intercepts_malicious_activities": { "message": "FoxEye会为你拦截恶意活动" },
-  "Open_FoxEye": { "message": "启动FoxEye" },
+  "Open_FoxEye": { "message": "体验风险Demo" },
   "Unlimited": { "message": "无限" },
   "Enter_token_contract_address": { "message": "输入代币合约地址" },
   "Token_Approval_Limit": { "message": "代币授权限额" },
