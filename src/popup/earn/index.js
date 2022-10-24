@@ -313,7 +313,7 @@ function Earn() {
 
                     <div className='earn-claim-btn-wrap'>
                         <div className='earn-claim-btn' onClick={() => {
-
+                            chrome.tabs.create({url: 'https://foxeye.io/airdrop'});
                         }}>
                             {iLocal('Claim_Airdrops')}
                         </div>
@@ -379,7 +379,7 @@ function Earn() {
                     </div>
                     <div className='earn-dividends-btn-wrap'>
                         <div className='earn-dividends-btn' onClick={() => {
-
+                            chrome.tabs.create({url: 'https://foxeye.io/dividends'});
                         }}>
                             {iLocal('Buy_lottery_to_dividends')}
                         </div>
