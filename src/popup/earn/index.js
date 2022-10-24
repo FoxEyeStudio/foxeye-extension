@@ -320,12 +320,12 @@ function Earn() {
                     </div>
                     {isCN() ? (
                         <div className='earn-dividends-learnmore-desc'>
-                            空投每半个月发放一次<br/><em className='earn-dividends-item-desc-clickable' onClick={() => {}}>了解详情</em>
+                            空投每半个月发放一次<br/><em className='earn-dividends-item-desc-clickable' onClick={() => { chrome.tabs.create({url: 'https://foxeye.io/airdrop#faq'}); }}>了解详情</em>
                         </div>
 
                     ) : (
                         <div className='earn-dividends-learnmore-desc'>
-                            Airdrops are distributed every half a month.<br/><em className='earn-dividends-item-desc-clickable' onClick={() => {}}>Learn More</em>
+                            Airdrops are distributed every half a month.<br/><em className='earn-dividends-item-desc-clickable' onClick={() => { chrome.tabs.create({url: 'https://foxeye.io/airdrop#faq'}); }}>Learn More</em>
                         </div>
                     )}
                 </div>
@@ -386,12 +386,12 @@ function Earn() {
                     </div>
                     {isCN() ? (
                         <div className='earn-dividends-learnmore-desc'>
-                            抽奖系统是去中心化运作的.<br/><em className='earn-dividends-item-desc-clickable' onClick={() => {}}>了解详情</em>
+                            抽奖系统是去中心化运作的.<br/><em className='earn-dividends-item-desc-clickable' onClick={() => { chrome.tabs.create({url: 'https://foxeye.io/dividends#faq'}); }}>了解详情</em>
                         </div>
 
                     ) : (
                         <div className='earn-dividends-learnmore-desc'>
-                            The lottery system is operated in a decentralised way.<br/><em className='earn-dividends-item-desc-clickable' onClick={() => {}}>Learn More</em>
+                            The lottery system is operated in a decentralised way.<br/><em className='earn-dividends-item-desc-clickable' onClick={() => { chrome.tabs.create({url: 'https://foxeye.io/dividends#faq'}); }}>Learn More</em>
                         </div>
                     )}
                 </div>
