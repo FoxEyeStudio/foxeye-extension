@@ -365,10 +365,10 @@ export default class TokenView extends Component {
                                                     {(this.owner_address == '0x0000000000000000000000000000000000000000' || this.owner_address == '0x000000000000000000000000000000000000dEaD') ? (
                                                         <div
                                                             className="foxeye-token-base-item-title foxeye-token-base-address-title">{iLocal('Owner_Address')}： <span
-                                                            className="foxeye-token-base-text-green-500">{this.owner_address}</span>
+                                                            className="foxeye-token-base-text-green-500" style={{lineBreak: "anywhere"}}>{this.owner_address}</span>
                                                         </div>
                                                     ) : (
-                                                        <div className="foxeye-token-base-item-title foxeye-token-base-address-title">{iLocal('Owner_Address')}：
+                                                        <div className="foxeye-token-base-item-title foxeye-token-base-address-title" style={{lineBreak: "anywhere"}}>{iLocal('Owner_Address')}：
                                                             {this.owner_address}</div>
                                                     )}
 
@@ -442,12 +442,12 @@ export default class TokenView extends Component {
                                             {this.creator_address.substr(0, 27) == '0x0000000000000000000000000' && (
                                                 <div
                                                     className="foxeye-token-base-item-title">{iLocal('Creator_Address')}: <span
-                                                    className="foxeye-token-base-text-green-500">{this.creator_address}</span>
+                                                    className="foxeye-token-base-text-green-500" style={{lineBreak: "anywhere"}}>{this.creator_address}</span>
                                                 </div>
                                             )}
 
                                             {this.creator_address && this.creator_address.substr(0, 27) != '0x0000000000000000000000000' && (
-                                                <div className="foxeye-token-base-item-title">{iLocal('Creator_Address')}: <span>{this.creator_address}</span>
+                                                <div className="foxeye-token-base-item-title">{iLocal('Creator_Address')}: <span style={{lineBreak: "anywhere"}}>{this.creator_address}</span>
                                                 </div>
                                             )}
                                             <div onClick={() => {this.copyToClipboard(this.creator_address)}} data-title="copied" className="foxeye-token-base-ic-copy ml-2-5 mt-1.5 inline-block">
