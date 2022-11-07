@@ -439,7 +439,7 @@ export default class TokenView extends Component {
                                         )}
 
                                         <div className="foxeye-token-base-flex foxeye-token-base-detect-item">
-                                            {this.creator_address.substr(0, 27) == '0x0000000000000000000000000' && (
+                                            {this.creator_address && this.creator_address.substr(0, 27) == '0x0000000000000000000000000' && (
                                                 <div
                                                     className="foxeye-token-base-item-title">{iLocal('Creator_Address')}: <span
                                                     className="foxeye-token-base-text-green-500" style={{lineBreak: "anywhere"}}>{this.creator_address}</span>
