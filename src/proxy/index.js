@@ -71,6 +71,14 @@ class FoxeyeProxy {
                             return null;
                         }
                     }
+                } else if (method == 'eth_sign') {
+                    postMessage({foxeye_extension_action: 'foxeye_ethSign', params: transaction.params.length > 0 ? transaction.params[transaction.params.length - 1] : 'eth-sign'})
+                    const callback = await listenMessage('foxeye_alert_callback')
+                    if (callback.action === 'continue') {
+                        return target(...argArray);
+                    } else {
+                        return null;
+                    }
                 }
                 return target(...argArray);
             }

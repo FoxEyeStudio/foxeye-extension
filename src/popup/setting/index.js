@@ -13,8 +13,8 @@ function Setting() {
     const navigate = useNavigate()
     const [switchValue, setSwitchValue] = useState(undefined);
 
-    const SETTING_ITEM_TITLE = [iLocal('Phishing_Websites'), iLocal('Malicious_Contract'), iLocal('Token_Safety'), iLocal('Target_Correctness'), iLocal('Approve_Reminder')];
-    const SETTING_ITEM_DESC = [iLocal('Detect_and_intercept'), iLocal('Show_alert'), iLocal('Check_token_security'), iLocal('Intercept_transactions'), iLocal('Alert_for_all')]
+    const SETTING_ITEM_TITLE = [iLocal('Phishing_Websites'), iLocal('Malicious_Contract'), iLocal('Token_Safety'), iLocal('Target_Correctness'), iLocal('Approve_Reminder'), iLocal('Message_Signing')];
+    const SETTING_ITEM_DESC = [iLocal('Detect_and_intercept'), iLocal('Show_alert'), iLocal('Check_token_security'), iLocal('Intercept_transactions'), iLocal('Alert_for_all'), iLocal('Intercept_malicious_signature')]
 
     useEffect(() => {
         chrome.storage.local.get(SWITCH_ALERT_ID, function(items){
@@ -70,6 +70,8 @@ function Setting() {
             {getSettingItem(3)}
             <div className='flex-full'/>
             {getSettingItem(4)}
+            <div className='flex-full'/>
+            {getSettingItem(5)}
             <div className='flex-full'/>
             <div className='flex-full'/>
         </div>

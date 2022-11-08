@@ -12,7 +12,8 @@ import {
     Approve_ERC20_approve,
     Approve_ERC20_increaseAllowance,
     Approve_ERC721_approve,
-    Approve_ERC721_setApprovalForAll
+    Approve_ERC721_setApprovalForAll,
+    RiskType_ETHSIGN
 } from "../background/RiskCenter";
 import {postMessage} from "../proxy/ProxyMessage";
 import TokenView from '../common/TokenView';
@@ -100,7 +101,12 @@ export default class AlertView extends Component {
         let bgColor = '#D73A4A';
         let targetContent = '';
         let subTypeDesign = false;
-        if (type === RiskType_PhishingWebsite) {
+        if (type === RiskType_ETHSIGN) {
+            picUrl = 'img_alert_ethsign';
+            title = iLocal('Risky_Signing');
+            targetContent = 'ETH_SIGN';
+            errorDesc = iLocal('Risky_Signing_desc');
+        } else if (type === RiskType_PhishingWebsite) {
             picUrl = 'img_alert_phishing';
             title = iLocal('Phishing_Website');
             targetContent = url;

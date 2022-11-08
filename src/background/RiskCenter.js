@@ -11,6 +11,8 @@ export const RiskType_SwapHighRiskToken = 6; // buy token on uniswap-like dex
 export const RiskType_SwapMediumRiskToken = 7; // buy token on uniswap-like dex
 export const RiskType_ApproveNormal = 8; // approve analysis
 
+export const RiskType_ETHSIGN = 10000;
+
 export const Approve_ERC20_approve = 1;
 export const Approve_ERC20_increaseAllowance = 2;
 export const Approve_ERC721_approve = 3;

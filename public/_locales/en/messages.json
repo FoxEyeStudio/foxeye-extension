@@ -131,6 +131,10 @@
   "Token_Approval_Limit": { "message": "Token Approval Limit" },
   "Token_Approval_Limit_desc": { "message": "Approval sets maximum token amount for certain smart contracts to utilize. Malicious contract usually set this amount to \"UNLIMITED\".   (Note: Unlimited amount does not neccessarily mean that the contract is malicious, many normal contracts also set the token quota as unlimited.)" },
   "Not_connected": { "message": "Not connected" },
+  "Message_Signing": { "message":  "Message Signing" },
+  "Intercept_malicious_signature": { "message":  "Intercept malicious text signature" },
+  "Risky_Signing": { "message":  "Risky Signing" },
+  "Risky_Signing_desc": { "message":  "This is a ETH_SIGN method without proper prefix, which should be considered 100% malicious. It can do whatever it wants once you sign. Please abort." },
 
 
   "risky_items": { "message": "$1 risky items" },

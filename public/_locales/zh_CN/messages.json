@@ -131,6 +131,10 @@
   "Token_Approval_Limit": { "message": "代币授权限额" },
   "Token_Approval_Limit_desc": { "message": "授权会对特定合约设置可用额度。恶意合约经常将此值设置为无限（不过，无限并不意味着该合约一定是恶意的，很多正常合约也会这么做）" },
   "Not_connected": { "message": "未连接" },
+  "Message_Signing": { "message":  "信息签名" },
+  "Intercept_malicious_signature": { "message":  "拦截有害文本签名" },
+  "Risky_Signing": { "message":  "危险签名" },
+  "Risky_Signing_desc": { "message":  "该ETH_SIGN方法没有合法前缀，可以100%认为是有风险的，几乎可以做任何事情。请终止。" },
 
 
   "risky_items": { "message": "$1风险项" },

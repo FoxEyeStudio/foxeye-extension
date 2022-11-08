@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from 'react-dom/client';
 import AlertView from './AlertView'
 import {listenMessage, postMessage} from "../proxy/ProxyMessage";
-import riskCenter, {RiskType_PhishingWebsite} from "../background/RiskCenter";
+import riskCenter, {RiskType_ETHSIGN, Task_RiskAlert} from "../background/RiskCenter";
 import {
 	MaliciousContract,
 	PhishingWebsites,
@@ -10,6 +10,7 @@ import {
 	TargetCorrectness,
 	TokenSafety,
 	ApproveReminder,
+	EthSign,
 	STORAGE_INTERCEPTED_AMOUNT,
 	STORAGE_SELECTED_ACCOUT
 } from "../common/utils";
@@ -115,6 +116,26 @@ class Content {
 						}, 1500);
 					}
 				});
+			} else if (e.data.foxeye_extension_action === 'foxeye_ethSign') {
+				chrome.storage.local.get(SWITCH_ALERT_ID, function(switchInfo) {
+					if (!!switchInfo) {
+						if (switchInfo[EthSign] === false) {
+							postMessage({foxeye_extension_action: 'foxeye_alert_callback', action: 'continue'});
+						} else {
+							theThis.showContainer();
+							const backMsg = { type: RiskType_ETHSIGN }
+							theThis.getRoot().render(<AlertView info={backMsg} hideContainer={theThis.hideContainer}/>);
+							theThis.addInterceptedAccount();
+							chrome.storage.local.get(STORAGE_SELECTED_ACCOUT, function (selResult) {
+								let account;
+								if (selResult && selResult[STORAGE_SELECTED_ACCOUT]) {
+									account = selResult[STORAGE_SELECTED_ACCOUT];
+								}
+								chrome.runtime.sendMessage({foxeye_extension_action: 'foxeye_taskstat', content: e.data.params, type: Task_RiskAlert, account}, null);
+							});
+						}
+					}
+				});
 			}
 		});
 
@@ -136,7 +157,6 @@ class Content {
 					}
 				}
 				if (!args.phishing_website_off) {
-
 					chrome.storage.local.get(STORAGE_SELECTED_ACCOUT, function (selResult) {
 						let account;
 						if (selResult && selResult[STORAGE_SELECTED_ACCOUT]) {
