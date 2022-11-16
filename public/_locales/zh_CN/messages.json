@@ -135,6 +135,8 @@
   "Intercept_malicious_signature": { "message":  "拦截有害文本签名" },
   "Risky_Signing": { "message":  "危险签名" },
   "Risky_Signing_desc": { "message":  "该ETH_SIGN方法没有合法前缀，可以100%认为是有风险的，几乎可以做任何事情。请终止。" },
+  "season_end": { "message": "已结束" },
+  "season_ongoing": { "message": "进行中" },
 
 
   "risky_items": { "message": "$1风险项" },

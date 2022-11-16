@@ -180,7 +180,7 @@
     font-weight: 400;
     color: #535A61;
     line-height: 17px;
-    margin: 8px 16px 16px 16px;
+    margin: 16px;
 }
 
 .earn-claimable-line {
@@ -378,4 +378,44 @@
 
 .earn-account-switch:hover {
     background-image: var(--ic-account-switch-hover);
+}
+
+.earn-season-wrap {
+    display: flex;
+    flex-direction: row;
+    margin: 16px 16px 0px 16px;
+    align-items: center;
+}
+
+.earn-season-icon {
+    width: 18px;
+    height: 18px
+}
+
+.earn-season-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #24272A;
+    line-height: 16px;
+    margin-left: 8px;
+}
+
+.earn-season-end {
+    background: #B5B9BD;
+    border-radius: 4px;
+    padding: 2px 6px 2px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 14px;
+}
+
+.earn-season-ongoing {
+    background: #00C16F;
+    border-radius: 4px;
+    padding: 2px 6px 2px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 14px;
 }

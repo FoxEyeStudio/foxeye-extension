@@ -71,8 +71,8 @@ export default class AlertView extends Component {
         if (p >= 0) {
             let length = 0;
             if (String(num).indexOf('.') !== -1) {
-                const dotIndex = String(num).indexOf('.') + 1;   //小数点的位置
-                length = String(num).length - dotIndex;  //小数的位数
+                const dotIndex = String(num).indexOf('.') + 1;
+                length = String(num).length - dotIndex;
             }
             let mon = num.toFixed(length)
             if (length > 5) {

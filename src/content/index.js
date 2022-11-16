@@ -75,8 +75,8 @@ class Content {
 	initListener() {
 		theThis = this;
 
-		window.addEventListener('message', async (e) => { // 监听 message 事件
-			if (e.origin !== window.location.origin) { // 验证消息来源地址
+		window.addEventListener('message', async (e) => { //add message event listener
+			if (e.origin !== window.location.origin) {
 				return;
 			}
 			if (typeof e.data.foxeye_extension_action === 'undefined') {

@@ -19,8 +19,7 @@ import icAccountSwitch from '../../images/ic_account_switch.png'
 import icAccountSwitchHover from '../../images/ic_account_switch_hover.png'
 import {Task_ExperienceDemo} from "../../background/RiskCenter";
 import {iLocal, isCN} from "../../common/utils";
-import ic_link from "../../images/ic_link.png";
-import ic_link_hover from "../../images/ic_link_hover.png";
+import ic_season from "../../images/ic_season.png";
 
 function Earn() {
     const navigate = useNavigate()
@@ -35,6 +34,8 @@ function Earn() {
     const [balance, setBalance] = useState(0);
     const [isHardcore, setIsHardcore] = useState(0);
     const [reward, setReward] = useState(0);
+    const [seasonId, setSeasonId] = useState(1);
+    const [isSeasonEnd, setIsSeasonEnd] = useState(false);
 
     const formatNumber = num => {
         if (!num) {
@@ -62,6 +63,8 @@ function Earn() {
                     setBalance(formatNumber(result.balance))
                     setIsHardcore(result.is_hardcore)
                     setReward(formatNumber(result.reward))
+                    setSeasonId(result.season_id + 1);
+                    setIsSeasonEnd(result.season_ended === 1)
                 }
             }
         });
@@ -297,6 +300,20 @@ function Earn() {
                             <div className='earn-claimable-number'>
                                 {claimAmount}
                             </div>
+                        </div>
+                        <div className='earn-season-wrap'>
+                            <img className='earn-season-icon' src={ic_season}/>
+                            <div className='earn-season-text'>Season {seasonId}</div>
+                            <div className='flex-full'/>
+                            {isSeasonEnd ? (
+                                <div className='earn-season-end'>
+                                    {iLocal('season_end')}
+                                </div>
+                            ) : (
+                                <div className='earn-season-ongoing'>
+                                    {iLocal('season_ongoing')}
+                                </div>
+                            )}
                         </div>
                         <div className='earn-claimable-desc'>
                             {iLocal('Increase_your_airdrop')}
