@@ -10,6 +10,8 @@
   "User_Guide": { "message": "用户说明" },
   "Phishing_Website": { "message": "钓鱼网站" },
   "Phishing_Website_desc": { "message": "该网站已被FoxEye列入黑名单，继续浏览可能导致资产损失。" },
+  "Impersonator_URL": { "message": "仿冒URL警报" },
+  "Impersonator_URL_desc": { "message": "该URL包含非标准字符，可能用来仿冒官方网址。" },
   "Malicious_Contract": { "message": "恶意合约" },
   "Malicious_Contract_desc": { "message": "该合约包含恶意代码，可能导致资产损失，应避免任何交互。" },
   "Malicious_Address": { "message": "恶意地址" },

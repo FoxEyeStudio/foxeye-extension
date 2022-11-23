@@ -13,7 +13,9 @@ import {
     Approve_ERC20_increaseAllowance,
     Approve_ERC721_approve,
     Approve_ERC721_setApprovalForAll,
-    RiskType_ETHSIGN
+    RiskType_ETHSIGN,
+    RiskType_ImpersonatorURL,
+    isAsciiValid
 } from "../background/RiskCenter";
 import {postMessage} from "../proxy/ProxyMessage";
 import TokenView from '../common/TokenView';
@@ -84,6 +86,22 @@ export default class AlertView extends Component {
         return num;
     }
 
+    renderImpersonatorURL(domain) {
+        return (
+            <div className='address-and-host'>
+                {
+                    domain.split('').map(function(letter, index) {
+                        if (!isAsciiValid(letter)) {
+                            return <em key={'letter-' + index} className='foxeye-impersonator-url-text'>{letter}</em>
+                        } else {
+                            return <em  key={'letter-' + index}>{letter}</em>
+                        }
+                    })
+                }
+            </div>
+        )
+    }
+
     render() {
         if (this.props.toast) {
             let imgUrl = this.props.success ? '/images/success.gif' : '/images/detecting.gif'
@@ -94,7 +112,7 @@ export default class AlertView extends Component {
                 <img className='foxeye-alert-toast' src={chrome.runtime.getURL(imgUrl)} />
             )
         }
-        const {type, address, symbol, url, sub_type, name, token_id, amount} = this.props.info;
+        const {type, address, symbol, url, sub_type, name, token_id, amount, domain} = this.props.info;
         let picUrl = '';
         let title = '';
         let errorDesc = '';
@@ -111,6 +129,11 @@ export default class AlertView extends Component {
             title = iLocal('Phishing_Website');
             targetContent = url;
             errorDesc = iLocal('Phishing_Website_desc');
+        } else if (type === RiskType_ImpersonatorURL) {
+            picUrl = 'img_alert_wrong';
+            title = iLocal('Impersonator_URL');
+            targetContent = domain;
+            errorDesc = iLocal('Impersonator_URL_desc');
         } else if (type === RiskType_MaliciousContract) {
             picUrl = 'img_alert_malicious';
             title = iLocal('Malicious_Contract');
@@ -236,7 +259,7 @@ export default class AlertView extends Component {
                                     {title}
                                 </div>
                                 <div className='address-and-host'>
-                                    {targetContent}
+                                    {type === RiskType_ImpersonatorURL ? this.renderImpersonatorURL(targetContent) : targetContent}
                                 </div>
                                 <div className='alert-desc'>
                                     {errorDesc}

@@ -10,6 +10,8 @@
   "User_Guide": { "message": "User Guide" },
   "Phishing_Website": { "message": "Phishing Website" },
   "Phishing_Website_desc": { "message": "The website is blacklisted by FoxEye. Continuing browsing may cause asset loss." },
+  "Impersonator_URL": { "message": "Impersonator URL Alert" },
+  "Impersonator_URL_desc": { "message": "The URL contains non-standard characters, which could be abused to impersonate the official website’s URL." },
   "Malicious_Contract": { "message": "Malicious Contract" },
   "Malicious_Contract_desc": { "message": "This contract is a scam that will steal your funds. Any interaction should be avoided." },
   "Malicious_Address": { "message": "Malicious Address" },

@@ -1,4 +1,5 @@
 import {AesEncrypt, SWITCH_ALERT_ID} from "../common/utils";
+import punycode from 'punycode'
 
 export const RiskType_Safe = 0;
 export const RiskType_PhishingWebsite = 1;
@@ -10,6 +11,8 @@ export const RiskType_TransferToContract = 5;// erc20 transfer to
 export const RiskType_SwapHighRiskToken = 6; // buy token on uniswap-like dex
 export const RiskType_SwapMediumRiskToken = 7; // buy token on uniswap-like dex
 export const RiskType_ApproveNormal = 8; // approve analysis
+
+export const RiskType_ImpersonatorURL = 9;
 
 export const RiskType_ETHSIGN = 10000;
 
@@ -47,6 +50,10 @@ const tag = 'RiskCenter: ';
 const g_websites = {
 
 };
+
+export const isAsciiValid = (str) => {
+    return /^[\x00-\xFF]*$/.test(str);
+}
 
 class RiskCenter {
     /*
@@ -95,10 +102,17 @@ class RiskCenter {
         }
     }
 
+
     async parsePhishingWebsite(url, args) {
-        const domain = this.getDomain(url);
+        let domain = this.getDomain(url);
+        if (domain) {
+            domain = punycode.toUnicode(domain);
+        }
         console.log(tag, domain, url);
         if (!url?.startsWith('http')) {
+            if (domain && !isAsciiValid(domain)) {
+                return { url, domain, type: RiskType_ImpersonatorURL };
+            }
             return { url, type: RiskType_Safe };
         }
         if (domain && g_websites[domain]) {
@@ -127,6 +141,8 @@ class RiskCenter {
         if (result && result.code == 1) {
             if (result['result']['phishing_site'] == 1) {
                 res['type'] = RiskType_PhishingWebsite;
+            } else if (domain && !isAsciiValid(domain)) {
+                return { url, domain, type: RiskType_ImpersonatorURL };
             }
             g_websites[domain] = {
                 timestamp: Date.now(), type: res['type']
