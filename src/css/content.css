@@ -258,7 +258,8 @@ foxeye-content-body .foxeye-back-img:hover {
     border-top-right-radius: 16px;
     background-color: rgba(215, 58, 74, 1);
     flex-direction: column;
-    display: flex
+    display: flex;
+    position: relative;
 }
 
 .foxeye-content-body .modal-risk-token-symbol-wrap {
@@ -327,3 +328,12 @@ foxeye-content-body .foxeye-back-img:hover {
     display: flex;
     align-items: center;
 }
+
+.foxeye-content-body .modal-risk-token-pop-coin {
+    width: 135px;
+    height: 132px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+

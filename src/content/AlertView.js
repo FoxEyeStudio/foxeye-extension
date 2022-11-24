@@ -130,6 +130,7 @@ export default class AlertView extends Component {
                                 {address.substr(0, 6) + '...' + address.substr(-4)}
                             </div>
                         </div>
+                        <img src={chrome.runtime.getURL('/images/img_pop_coin.png')} className='modal-risk-token-pop-coin'/>
                     </div>
                     <div className='modal-bottom-risk-token-wrap'>
                         <div className='modal-risk-token-info'>
