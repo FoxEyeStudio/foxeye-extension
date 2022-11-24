@@ -226,39 +226,43 @@ export default class TokenView extends Component {
         return (
             <div style={{width: '100%', height: '100%'}} className="foxeye-base-scroll">
                 <div className="foxeye-token-base-result-cover">
-                    <div className='foxeye-token-base-token-banner'>
-                        <div className='foxeye-token-base-token-banner-logo-and-tag'>
-                            {this.state.tokenLogo == 'none' ? (
-                                <img className='foxeye-token-base-token-banner-logo'/>
-                            ) : (
-                                <img className='foxeye-token-base-token-banner-logo' src={this.state.tokenLogo || webFavicon}/>
-                            )}
-                            <img src={icTag} className='foxeye-token-base-token-banner-tag'/>
-                        </div>
-                        <div className='foxeye-token-base-flex-col foxeye-token-base-flex-full' style={{marginLeft: 20}}>
-                            <div className='foxeye-token-base-flex-row foxeye-token-base-justify-between foxeye-token-base-align-center foxeye-token-base-flex-full'>
-                                <div className='foxeye-token-base-token-banner-token-name'>
-                                    {this.token_name}
-                                </div>
-                                {!!this.state.coingeckoLink && (
-                                    <div className='foxeye-token-base-flex-row foxeye-token-base-align-center foxeye-token-base-token-link' onClick={() => {
-                                        this.linkTo(this.state.coingeckoLink);
-                                    }}>
-                                        <img src={ic_coingecko} className='foxeye-token-base-token-banner-coingecko'/>
-                                        <div className='foxeye-token-base-token-banner-coingecko-name'>
-                                            CoinGecko
-                                        </div>
-                                        <div className='foxeye-token-base-token-banner-link-icon' style={{ '--ic-link-normal': 'url(' + ic_link + ')', '--ic-link-hover': 'url(' + ic_link_hover + ')'}}/>
-                                    </div>
+                    {!this.props.fromAlert && (
+                        <div className='foxeye-token-base-token-banner'>
+                            <div className='foxeye-token-base-token-banner-logo-and-tag'>
+                                {this.state.tokenLogo == 'none' ? (
+                                    <img className='foxeye-token-base-token-banner-logo'/>
+                                ) : (
+                                    <img className='foxeye-token-base-token-banner-logo' src={this.state.tokenLogo || webFavicon}/>
                                 )}
+                                <img src={icTag} className='foxeye-token-base-token-banner-tag'/>
                             </div>
+                            <div className='foxeye-token-base-flex-col foxeye-token-base-flex-full' style={{marginLeft: 20}}>
+                                <div className='foxeye-token-base-flex-row foxeye-token-base-justify-between foxeye-token-base-align-center foxeye-token-base-flex-full'>
+                                    <div className='foxeye-token-base-token-banner-token-name'>
+                                        {this.token_name}
+                                    </div>
+                                    {!!this.state.coingeckoLink && (
+                                        <div className='foxeye-token-base-flex-row foxeye-token-base-align-center foxeye-token-base-token-link' onClick={() => {
+                                            this.linkTo(this.state.coingeckoLink);
+                                        }}>
+                                            <img src={ic_coingecko} className='foxeye-token-base-token-banner-coingecko'/>
+                                            <div className='foxeye-token-base-token-banner-coingecko-name'>
+                                                CoinGecko
+                                            </div>
+                                            <div className='foxeye-token-base-token-banner-link-icon' style={{ '--ic-link-normal': 'url(' + ic_link + ')', '--ic-link-hover': 'url(' + ic_link_hover + ')'}}/>
+                                        </div>
+                                    )}
+                                </div>
 
-                            <div className='foxeye-token-base-token-banner-address'>
-                                {this.token_address.substr(0, 14)}...{this.token_address.substr(-14)}
+                                <div className='foxeye-token-base-token-banner-address'>
+                                    {this.token_address.substr(0, 14)}...{this.token_address.substr(-14)}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className='foxeye-token-base-token-banner-line' />
+                    )}
+                    {!this.props.fromAlert && (
+                        <div className='foxeye-token-base-token-banner-line' />
+                    )}
                     <div className="foxeye-token-base-result foxeye-token-base-content">
                         <div className="foxeye-token-base-security-detection">
                             <div className="foxeye-token-base-title">{iLocal('Security_Detection')}</div>

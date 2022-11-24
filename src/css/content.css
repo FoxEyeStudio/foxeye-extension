@@ -249,3 +249,80 @@ foxeye-content-body .foxeye-back-img:hover {
 .foxeye-content-body .foxeye-impersonator-url-text {
     color: #D73A4A
 }
+
+.foxeye-content-body .modal-top-risk-token-wrap {
+    height: 139px;
+    width: 500px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    background-color: rgba(215, 58, 74, 1);
+    flex-direction: column;
+    display: flex
+}
+
+.foxeye-content-body .modal-risk-token-symbol-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.foxeye-content-body .modal-risk-token-symbol {
+    max-width: 120px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 19px;
+}
+
+.foxeye-content-body .modal-risk-token-address {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.85);
+    line-height: 19px;
+    margin-left: 10px;
+}
+
+.foxeye-content-body .modal-risk-token-level-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.foxeye-content-body .modal-risk-token-level-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.foxeye-content-body .modal-risk-token-level {
+    font-size: 30px;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 36px;
+    margin-left: 3px;
+}
+
+.foxeye-content-body .modal-risk-token-info {
+    height: 247px;
+    width: 100%;
+}
+
+.foxeye-content-body .modal-bottom-risk-token-wrap {
+    height: 360px;
+    width: 500px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    background-color: white;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}

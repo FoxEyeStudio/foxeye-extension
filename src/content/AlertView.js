@@ -19,30 +19,29 @@ import {
 } from "../background/RiskCenter";
 import {postMessage} from "../proxy/ProxyMessage";
 import TokenView from '../common/TokenView';
-import backIcon from "../images/ic_back.png";
-import backHoverIcon from "../images/ic_back_hover.png";
 import icArrowTop from "../images/ic_arrow_top.png";
 import icArrowBottom from "../images/ic_arrow_bottom.png";
 import {iLocal, isCN, LoadingJson} from "../common/utils";
-import {number} from "prop-types";
 
 export default class AlertView extends Component {
     state = {
-        showTokenView: false,
-        tokenInfo: '',
-        loading: false
+        tokenInfo: ''
     }
 
-    clickCheckReport = () => {
-        this.setState({ showTokenView: true, loading: !this.state.tokenInfo });
-
-        let { address, chain_id} = this.props.info;
-        chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_token_info", chainId: chain_id, tokenAddress: address}, result => {
-            if (result && result[address.toLowerCase()]) {
-                const tokenInfo = {...result[address.toLowerCase()], tokenAddress: address, token_id: chain_id}
-                this.setState({ tokenInfo, loading: false })
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.toast !== prevProps.toast) {
+            if (!this.props.toast && this.props.info) {
+                const {type, address, chain_id} = this.props.info;
+                if (type === RiskType_SwapHighRiskToken || type === RiskType_SwapMediumRiskToken) {
+                    chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_token_info", chainId: chain_id, tokenAddress: address}, result => {
+                        if (result && result[address.toLowerCase()]) {
+                            const tokenInfo = {...result[address.toLowerCase()], tokenAddress: address, token_id: chain_id}
+                            this.setState({ tokenInfo })
+                        }
+                    });
+                }
             }
-        });
+        }
     }
 
     clickAbort = () => {
@@ -86,7 +85,7 @@ export default class AlertView extends Component {
         return num;
     }
 
-    renderImpersonatorURL(domain) {
+    renderImpersonatorURL = (domain) => {
         return (
             <div className='address-and-host'>
                 {
@@ -102,6 +101,72 @@ export default class AlertView extends Component {
         )
     }
 
+    renderRiskToken = () => {
+        const {type, address, symbol} = this.props.info;
+        let title = '';
+        let bgColor = '#D73A4A';
+        if (type === RiskType_SwapHighRiskToken) {
+            title = iLocal('High_Risk_Token');
+        } else if (type === RiskType_SwapMediumRiskToken) {
+            title = iLocal('Mid_Risk_Token');
+            bgColor = '#FFA354';
+        }
+        return (
+            <div className='foxeye-content-body'>
+                <div className='modal-wrap'>
+                    <div className='modal-top-risk-token-wrap' style={{backgroundColor: bgColor}}>
+                        <img src={chrome.runtime.getURL('/images/img_alert_logo.png')} className='foxeye-logo'/>
+                        <div className='modal-risk-token-level-wrap'>
+                            <img className='modal-risk-token-level-icon' src={chrome.runtime.getURL(type === RiskType_SwapHighRiskToken ? '/images/img_hight-risk_white.png' : '/images/img_mid_risk_white.png')}/>
+                            <div className='modal-risk-token-level'>
+                                {title}
+                            </div>
+                        </div>
+                        <div className='modal-risk-token-symbol-wrap'>
+                            <div className='modal-risk-token-symbol'>
+                                {symbol}
+                            </div>
+                            <div className='modal-risk-token-address'>
+                                {address.substr(0, 6) + '...' + address.substr(-4)}
+                            </div>
+                        </div>
+                    </div>
+                    <div className='modal-bottom-risk-token-wrap'>
+                        <div className='modal-risk-token-info'>
+                            {this.state.tokenInfo && (
+                                <div style={{width: '100%', height: 247, overflowY: "hidden", overflowX: 'hidden', display: "flex", flexDirection: "column", position: 'relative' }}>
+                                    <TokenView token_info={this.state.tokenInfo} fromAlert={true} style={{height: 247}}/>
+                                </div>
+                            )}
+
+                            {!this.state.tokenInfo && (
+                                <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: "relative"}}>
+                                    <Lottie options={{
+                                        loop: true,
+                                        autoplay: true,
+                                        animationData: LoadingJson,
+                                        rendererSettings: {
+                                            preserveAspectRatio: 'xMidYMid slice'
+                                        }
+                                    }}
+                                            height={48}
+                                            width={48}
+                                    />
+                                </div>
+                            )}
+                        </div>
+                        <div className={'foxeye-content-abort'} style={{ marginTop: 16 }} onClick={this.clickAbort}>
+                            {iLocal('Abort')}
+                        </div>
+                        <div className='continue-btn' style={{ marginTop: 16, marginBottom: 16 }} onClick={this.clickContinue}>
+                            {iLocal('Continue')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     render() {
         if (this.props.toast) {
             let imgUrl = this.props.success ? '/images/success.gif' : '/images/detecting.gif'
@@ -113,6 +178,9 @@ export default class AlertView extends Component {
             )
         }
         const {type, address, symbol, url, sub_type, name, token_id, amount, domain} = this.props.info;
+        if (type === RiskType_SwapHighRiskToken || type === RiskType_SwapMediumRiskToken) {
+            return this.renderRiskToken();
+        }
         let picUrl = '';
         let title = '';
         let errorDesc = '';
@@ -146,15 +214,6 @@ export default class AlertView extends Component {
             // picUrl = '';
             // title = '';
             // errorDesc = '';
-        } else if (type === RiskType_SwapHighRiskToken) {
-            picUrl = 'img_alert_highrisk';
-            title = iLocal('High_Risk_Token');
-            errorDesc = iLocal('High_Risk_Token_Desc');
-        } else if (type === RiskType_SwapMediumRiskToken) {
-            picUrl = 'img_alert_midrisk';
-            title = iLocal('Mid_Risk_Token');
-            errorDesc = iLocal('Mid_Risk_Token_Desc');
-            bgColor = '#FFA354';
         } else if (type === RiskType_ApproveEOA) {
             picUrl = 'img_alert_wrong';
             title = iLocal('Wrong_Target');
@@ -264,11 +323,6 @@ export default class AlertView extends Component {
                                 <div className='alert-desc'>
                                     {errorDesc}
                                 </div>
-                                {(type === RiskType_SwapHighRiskToken || type === RiskType_SwapMediumRiskToken) && (
-                                    <div className='check-report' onClick={this.clickCheckReport}>
-                                        {iLocal('Check_Report')}
-                                    </div>
-                                )}
                             </div>
                         )}
                         <div className={'foxeye-content-abort'} onClick={this.clickAbort}>
@@ -278,35 +332,6 @@ export default class AlertView extends Component {
                             {iLocal('Continue')}
                         </div>
                     </div>
-                    {this.state.showTokenView && (
-                        <div style={{position: 'absolute', zIndex: 1, left: 0, right: 0, top: 0, bottom: 0, backgroundColor: "white", borderRadius: 16, paddingBottom: 16, display: "flex", flexDirection: "column" }}>
-                            <div className="foxeye-back-img" style={{ '--ic-back-normal': 'url(' + backIcon + ')', '--ic-back-hover': 'url(' + backHoverIcon + ')'}} onClick={()=>{
-                                this.setState({ showTokenView: false });
-                            }}/>
-
-                            {this.state.tokenInfo && !this.state.loading && (
-                                <div style={{width: '100%', height: '100%', overflowY: "hidden", overflowX: 'hidden' }}>
-                                    <TokenView token_info={this.state.tokenInfo} fromAlert={true}/>
-                                </div>
-                            )}
-
-                            {this.state.loading && (
-                                <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', position: "relative"}}>
-                                    <Lottie options={{
-                                        loop: true,
-                                        autoplay: true,
-                                        animationData: LoadingJson,
-                                        rendererSettings: {
-                                            preserveAspectRatio: 'xMidYMid slice'
-                                        }
-                                    }}
-                                            height={48}
-                                            width={48}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    )}
                 </div>
             </div>
         )
