@@ -55,9 +55,13 @@ function Earn() {
     }
 
     useEffect(() => {
-        chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_airdrop_amount", account}, result => {
+        let acc = account;
+        if (!acc) {
+            acc = '0x0000000000000000000000000000000000000000';
+        }
+        chrome.runtime.sendMessage({foxeye_extension_action: "foxeye_get_airdrop_amount", account: acc}, result => {
             if(result) {
-                if (result.address?.toUpperCase() === account?.toUpperCase()) {
+                if (!account || result.address?.toUpperCase() === account?.toUpperCase()) {
                     setCliamAmount(formatNumber(result.amount))
                     setPoolValue(formatNumber(result.pool))
                     setBalance(formatNumber(result.balance))
