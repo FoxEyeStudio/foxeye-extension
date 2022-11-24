@@ -247,7 +247,8 @@ foxeye-content-body .foxeye-back-img:hover {
 }
 
 .foxeye-content-body .foxeye-impersonator-url-text {
-    color: #D73A4A
+    color: #D73A4A;
+    font-style: normal;
 }
 
 .foxeye-content-body .modal-top-risk-token-wrap {

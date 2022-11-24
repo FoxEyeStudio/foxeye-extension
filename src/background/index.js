@@ -1,4 +1,9 @@
-import riskCenter, {RiskType_PhishingWebsite, Task_RiskAlert, Task_TokenDetection} from './RiskCenter'
+import riskCenter, {
+    RiskType_ImpersonatorURL,
+    RiskType_PhishingWebsite,
+    Task_RiskAlert,
+    Task_TokenDetection
+} from './RiskCenter'
 import {getCoingeckoInfo, getTokenInfo} from "../common/utils";
 import {ethers} from "ethers";
 
@@ -14,7 +19,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         riskCenter.parsePhishingWebsite(url, args).then(result => {
             sendResponse(result);
             if (ethers.utils.isAddress(account)) {
-                if (result.type == RiskType_PhishingWebsite) {
+                if (result.type == RiskType_PhishingWebsite || result.type == RiskType_ImpersonatorURL) {
                     const _content = riskCenter.getDomain(url);
                     riskCenter.taskStat(account, Task_RiskAlert, _content);
                 }

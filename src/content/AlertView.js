@@ -93,7 +93,7 @@ export default class AlertView extends Component {
                         if (!isAsciiValid(letter)) {
                             return <em key={'letter-' + index} className='foxeye-impersonator-url-text'>{letter}</em>
                         } else {
-                            return <em  key={'letter-' + index}>{letter}</em>
+                            return <em  key={'letter-' + index} style={{fontStyle: "normal"}}>{letter}</em>
                         }
                     })
                 }
