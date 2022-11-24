@@ -50,7 +50,7 @@ export default class TokenView extends Component {
             BScroll.use(ScrollBar)
             let bs = new BScroll('.foxeye-base-scroll', {
                 mouseWheel: {
-                    speed: 20,
+                    speed: 15,
                     invert: false,
                     easeTime: 300,
                     dampingFactor: 0
